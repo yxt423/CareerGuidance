@@ -2,7 +2,11 @@
 <resources>
 
     <string name="app_name">CareerGuidance</string>
-    <string name="hello_world">Hello Xintong!!</string>
+    <string name="hello_world">Hello world</string>
     <string name="action_settings">Settings</string>
+    <string name="match_career_button">Find your career match</string>
+    <string name="career_options_button">See career options</string>
+    <string name="title_activity_main_tab_host">MainTabHost</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
