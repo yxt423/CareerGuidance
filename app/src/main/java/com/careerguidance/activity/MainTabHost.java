@@ -1,5 +1,6 @@
 package com.careerguidance.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,21 +12,30 @@ import com.careerguidance.R;
 
 public class MainTabHost extends FragmentActivity implements
         SubTab.OnFragmentInteractionListener,
-        CareerListFragment.OnFragmentInteractionListener {
+        CareerListFragment.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentInteractionListener {
 
-    private FragmentTabHost mTabHost;
+    FragmentTabHost mTabHost = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab_host);
 
+        Intent intent = getIntent();
+        int currentTab = intent.getIntExtra("currentTab", 0);
+
         mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
         mTabHost.addTab(mTabHost.newTabSpec("Careers").setIndicator("Careers"), CareerListFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Find Match").setIndicator("Find Match"), SubTab.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Profile").setIndicator("Profile"), SubTab.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("Profile").setIndicator("Profile"), ProfileFragment.class, null);
+        mTabHost.setCurrentTab(currentTab);
+    }
+
+    public FragmentTabHost getFragmentTabHost() {
+        return mTabHost;
     }
 
 

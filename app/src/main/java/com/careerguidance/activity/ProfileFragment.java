@@ -1,14 +1,18 @@
 package com.careerguidance.activity;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Dialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.careerguidance.R;
@@ -17,22 +21,23 @@ import com.careerguidance.adapter.StableArrayAdapter;
 import java.util.ArrayList;
 
 /**
- * Show the list of all career options. (Tab1)
- *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CareerListFragment.OnFragmentInteractionListener} interface
+ * {@link ProfileFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CareerListFragment#newInstance} factory method to
+ * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class CareerListFragment extends Fragment {
+public class ProfileFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     private String mParam1;
     private String mParam2;
+
+    ImageView imageView = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -42,17 +47,17 @@ public class CareerListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CareerListFragment.
+     * @return A new instance of fragment ProfileFragment.
      */
-    public static CareerListFragment newInstance(String param1, String param2) {
-        CareerListFragment fragment = new CareerListFragment();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public CareerListFragment() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
@@ -69,13 +74,46 @@ public class CareerListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_career_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        imageView = (ImageView) v.findViewById(R.id.profile_photo);
+        imageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_change_photo);
+                dialog.setTitle("Change the photo");
+
+                Button takePhotoButton = (Button) dialog.findViewById(R.id.take_photo_button);
+                takePhotoButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                Button choosePhotoButton = (Button) dialog.findViewById(R.id.choose_photo_button);
+                choosePhotoButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
+                cancelButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
 
         final ListView listview = (ListView) v.findViewById(R.id.listview);
-        String[] values = new String[] { "Software Engineer", "Analyst", "Physician",
-                "Lawyer", "Nurse", "Civil Engineer", "Mechanical Engineer", "Marketer",
-                "career10", "career11", "career12", "career13", "career14", "career15",
-                "career16", "career17", "career18"};
+        String[] values = new String[] { "Location", "Grades", "Interests"};
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
@@ -89,16 +127,25 @@ public class CareerListFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CareerInfoActivity.class);
-                intent.putExtra("career name", list.get(position));
-                startActivity(intent);
+            }
+        });
+
+        Button findCareerMatchButton = (Button) v.findViewById(R.id.find_career_match_button);
+        findCareerMatchButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // call the matching function....
+
+                // switch tab 
+                MainTabHost activity = (MainTabHost) getActivity();
+                FragmentTabHost mTabHost = activity.getFragmentTabHost();
+                mTabHost.setCurrentTab(1);
             }
         });
 
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

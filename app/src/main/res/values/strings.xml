@@ -47,6 +47,11 @@
     <string name="university_location">University Location: \n Pittsburgh, Pennsylvania, United States</string>
 
 
+    <string name="user_name">Ellen Y.</string>
+    <string name="take_photo_button">Take a new photo</string>
+    <string name="choose_photo_button">Choose an existing photo</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="find_career_match_button">Find me a career</string>
 
     <string name="title_activity_main_tab_host">MainTabHost</string>
     <string name="title_activity_career_info">CareerInfoActivity</string>

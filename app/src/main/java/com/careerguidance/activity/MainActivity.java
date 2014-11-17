@@ -19,11 +19,14 @@ public class MainActivity extends Activity {
     }
 
     public void matchCareerButton(View v) {
-
+        Intent intent = new Intent(this, MainTabHost.class);
+        intent.putExtra("currentTab", 2);
+        startActivity(intent);
     }
 
     public void careerOptionsButton(View v) {
         Intent intent = new Intent(this, MainTabHost.class);
+        intent.putExtra("currentTab", 0);
         startActivity(intent);
     }
 
