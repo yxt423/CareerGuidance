@@ -15,28 +15,24 @@ import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Show the detailed information of a career.
- */
-public class CareerInfoActivity extends Activity {
+public class UniversityInfoActivity extends Activity {
 
-    TextView careerNameView = null;
-    String careerName = null;
+    TextView universityNameView = null;
+    String universityName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_career_info);
+        setContentView(R.layout.activity_university_info);
 
-        // set career name on page title
-        careerNameView = (TextView) findViewById(R.id.career_name);
+        // set university name on page title
+        universityNameView = (TextView) findViewById(R.id.university_name);
         Intent intent = getIntent();
-        careerName = intent.getStringExtra("career name");
-        careerNameView.setText(careerName);
+        universityName = intent.getStringExtra("university name");
+        universityNameView.setText(universityName);
 
         // create the listview
-        String[] values = new String[] {"Famous Universities",
-                "More Pictures", "Watch Videos", "More Resources"};
+        String[] values = new String[] {"More Pictures", "Watch Videos", "Official Website"};
         final ListView listview = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -54,15 +50,10 @@ public class CareerInfoActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(getBaseContext(), UniversityListActivity.class);
-                        intent.putExtra("career name", list.get(position));
-                        startActivity(intent);
                         break;
                     case 1:
                         break;
                     case 2:
-                        break;
-                    case 3:
                         break;
                     default:
                         break;
@@ -72,10 +63,11 @@ public class CareerInfoActivity extends Activity {
         Utility.setListViewFixedHeight(listview);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.career_info, menu);
+        getMenuInflater().inflate(R.menu.university_info, menu);
         return true;
     }
 

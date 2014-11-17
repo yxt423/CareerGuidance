@@ -5,10 +5,52 @@
     <string name="hello_world">Hello world</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main_tab_host">MainTabHost</string>
     <string name="match_career_button">Find your career match</string>
     <string name="career_options_button">See career options</string>
     <string name="careers">Careers</string>
+    <string name="career_description">Description: \n
+        A software engineer is responsible for the development, maintenance and operation of computer
+        software to enable businesses and organisations to function as efficiently as possible. \n
+        Software engineers work in a range of industries, from offices to manufacturing companies developing, operating and maintaining
+        specific software to allow the company’s work to be carried out with as few disruptions as possible. Typically, a software
+        engineer works with a business analyst or computer programmer to identify the needs of a company and to develop the
+        specifications of the engineering project. Working with a small team of IT professionals, the software engineer completes
+        the project following a particular development plan which covers each stage of the project, including testing, software analysis
+        and the installation of completed IT systems.</string>
+    <string name="career_salary">Average Salary: \n
+        Recent graduates and newly qualified employees typically earn between £19,500 and £24,000 a year. With experience this can rise to
+        between £25,000 and £38,000 depending on the size and nature of the company. Senior software engineers and those working in a
+        more managerial role usually earn up to £45,000 a year.</string>
+    <string name="skills_required">Skills Required: \n
+        A software engineer is a highly skilled job and requires expert knowledge in computer programming and software development. More specifically the job requires: \n
+        An excellent working knowledge of hardware, software and programming languages (e.g. Javascript)
+        The ability to develop and interpret technical plans
+        A creative approach to problem solving
+        An excellent understanding of CASE (Computer Aided Software Engineering) tools
+        Excellent communication skills, both written and verbal
+        A good understanding of customer care
+        Excellent interpersonal skills
+        Good team working abilities
+        The ability to explain complicated processes in non-technical language
+        Good project management skills</string>
+
+    <string name="universities_page_title">Famous Universities</string>
+    <string name="university_name">Carnegie Mellon University</string>
+    <string name="university_description">University Description: \n
+        Carnegie Mellon University (Carnegie Mellon or CMU) is a private research university in Pittsburgh, Pennsylvania. \n
+        The university began as the Carnegie Technical Schools founded by Andrew Carnegie in 1900. In 1912, the school became the
+        Carnegie Institute of Technology and began granting four-year degrees. In 1967, the Carnegie Institute of Technology merged
+        with the Mellon Institute of Industrial Research to form Carnegie Mellon University. The university\'s 140-acre (0.57 km2)
+        main campus is 3 miles (4.8 km) from Downtown Pittsburgh and abuts the Carnegie Museums of Pittsburgh, the main branch of
+        the Carnegie Library of Pittsburgh, Schenley Park, Phipps Conservatory and Botanical Gardens, and the campus of the University
+        of Pittsburgh in the city\'s Oakland and Squirrel Hill neighborhoods, partially extending into Shadyside. </string>
+    <string name="university_location">University Location: \n Pittsburgh, Pennsylvania, United States</string>
+
+
+
+    <string name="title_activity_main_tab_host">MainTabHost</string>
     <string name="title_activity_career_info">CareerInfoActivity</string>
+    <string name="title_activity_university_info">UniversityInfoActivity</string>
+    <string name="title_activity_university_list">UniversityListActivity</string>
 
 </resources>

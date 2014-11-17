@@ -1,7 +1,6 @@
 package com.careerguidance.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,16 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.careerguidance.R;
+import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
+ * Show the list of all career options. (Tab1)
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link CareerListFragment.OnFragmentInteractionListener} interface
@@ -36,7 +35,6 @@ public class CareerListFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
 
     /**
      * Use this factory method to create a new instance of
@@ -97,28 +95,6 @@ public class CareerListFragment extends Fragment {
         });
 
         return v;
-    }
-
-    private class StableArrayAdapter extends ArrayAdapter<String> {
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

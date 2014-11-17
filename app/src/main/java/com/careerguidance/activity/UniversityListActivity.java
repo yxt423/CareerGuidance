@@ -8,39 +8,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Show the detailed information of a career.
- */
-public class CareerInfoActivity extends Activity {
+public class UniversityListActivity extends Activity {
 
-    TextView careerNameView = null;
     String careerName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_career_info);
+        setContentView(R.layout.activity_university_list);
 
-        // set career name on page title
-        careerNameView = (TextView) findViewById(R.id.career_name);
-        Intent intent = getIntent();
-        careerName = intent.getStringExtra("career name");
-        careerNameView.setText(careerName);
-
-        // create the listview
-        String[] values = new String[] {"Famous Universities",
-                "More Pictures", "Watch Videos", "More Resources"};
         final ListView listview = (ListView) findViewById(R.id.listview);
-        final ArrayList<String> list = new ArrayList<String>();
+        String[] values = new String[] { "Massachusetts Institute of Technology", "Stanford University", "Carnegie Mellon University",
+                "University of California—​Berkeley", "University of Illinois—​Urbana-​Champaign", "University of Michigan—​Ann Arbor",
+                "Georgia Institute of Technology ", "Cornell University",
+                "Purdue University—​West Lafayette"};
 
-        int totalHeight = 0;
+        final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
         }
@@ -52,30 +41,18 @@ public class CareerInfoActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        Intent intent = new Intent(getBaseContext(), UniversityListActivity.class);
-                        intent.putExtra("career name", list.get(position));
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        break;
-                }
+                Intent intent = new Intent(getBaseContext(), UniversityInfoActivity.class);
+                intent.putExtra("university name", list.get(position));
+                startActivity(intent);
             }
         });
-        Utility.setListViewFixedHeight(listview);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.career_info, menu);
+        getMenuInflater().inflate(R.menu.university_list, menu);
         return true;
     }
 

@@ -34,6 +34,14 @@
             android:name=".activity.CareerInfoActivity"
             android:label="@string/title_activity_career_info" >
         </activity>
+        <activity
+            android:name=".activity.UniversityListActivity"
+            android:label="@string/title_activity_university_list" >
+        </activity>
+        <activity
+            android:name=".activity.UniversityInfoActivity"
+            android:label="@string/title_activity_university_info" >
+        </activity>
     </application>
 
 </manifest>

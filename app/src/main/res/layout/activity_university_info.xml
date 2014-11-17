@@ -7,63 +7,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.careerguidance.activity.CareerInfoActivity">
+    tools:context="com.careerguidance.activity.UniversityInfoActivity">
 
     <TextView
-        android:id="@+id/career_name"
+        android:id="@+id/university_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/line_space"
-        android:text="@string/careers"
+        android:text="@string/university_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/career_image"
+        android:id="@+id/university_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/career_name"
+        android:layout_below="@+id/university_name"
         android:layout_marginTop="@dimen/line_space"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/software_engineer"
-        android:contentDescription="software_engineer" />
+        android:src="@drawable/cmu"
+        android:contentDescription="university_image" />
 
     <TextView
-        android:id="@+id/career_description"
+        android:id="@+id/university_description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/career_image"
+        android:layout_below="@+id/university_image"
         android:layout_marginTop="@dimen/line_space"
-        android:text="@string/career_description"
+        android:text="@string/university_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/career_salary"
+        android:id="@+id/university_location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/career_description"
+        android:layout_below="@+id/university_description"
         android:layout_marginTop="@dimen/line_space"
-        android:text="@string/career_salary"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/skills_required"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/career_salary"
-        android:layout_marginTop="@dimen/line_space"
-        android:text="@string/skills_required"
+        android:text="@string/university_location"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ListView
         android:id="@+id/listview"
-        android:layout_below="@+id/skills_required"
+        android:layout_below="@+id/university_location"
         android:layout_marginTop="@dimen/line_space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
