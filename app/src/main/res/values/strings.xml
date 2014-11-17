@@ -33,7 +33,6 @@
         Good team working abilities
         The ability to explain complicated processes in non-technical language
         Good project management skills</string>
-
     <string name="universities_page_title">Famous Universities</string>
     <string name="university_name">Carnegie Mellon University</string>
     <string name="university_description">University Description: \n
@@ -45,17 +44,15 @@
         the Carnegie Library of Pittsburgh, Schenley Park, Phipps Conservatory and Botanical Gardens, and the campus of the University
         of Pittsburgh in the city\'s Oakland and Squirrel Hill neighborhoods, partially extending into Shadyside. </string>
     <string name="university_location">University Location: \n Pittsburgh, Pennsylvania, United States</string>
-
-
-    <string name="user_name">Ellen Y.</string>
+    <string name="user_name">Name</string>
     <string name="take_photo_button">Take a new photo</string>
     <string name="choose_photo_button">Choose an existing photo</string>
     <string name="cancel_button">Cancel</string>
     <string name="find_career_match_button">Find me a career</string>
-
     <string name="title_activity_main_tab_host">MainTabHost</string>
     <string name="title_activity_career_info">CareerInfoActivity</string>
     <string name="title_activity_university_info">UniversityInfoActivity</string>
     <string name="title_activity_university_list">UniversityListActivity</string>
+    <string name="title_activity_selection">SelectionActivity</string>
 
 </resources>

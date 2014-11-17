@@ -2,6 +2,7 @@ package com.careerguidance.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -113,7 +114,7 @@ public class ProfileFragment extends Fragment {
         });
 
         final ListView listview = (ListView) v.findViewById(R.id.listview);
-        String[] values = new String[] { "Location", "Grades", "Interests"};
+        String[] values = new String[] {"Gender", "Location", "Grades", "Interests"};
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
@@ -127,6 +128,9 @@ public class ProfileFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
+                intent.putExtra("pageTitle", list.get(position));
+                startActivity(intent);
             }
         });
 
@@ -136,7 +140,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 // call the matching function....
 
-                // switch tab 
+                // switch tab
                 MainTabHost activity = (MainTabHost) getActivity();
                 FragmentTabHost mTabHost = activity.getFragmentTabHost();
                 mTabHost.setCurrentTab(1);

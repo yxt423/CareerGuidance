@@ -42,6 +42,10 @@
             android:name=".activity.UniversityInfoActivity"
             android:label="@string/title_activity_university_info" >
         </activity>
+        <activity
+            android:name=".activity.SelectionActivity"
+            android:label="@string/title_activity_selection" >
+        </activity>
     </application>
 
 </manifest>
