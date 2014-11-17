@@ -6,15 +6,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context="com.careerguidance.activity.CareerInfoActivity">
 
-    <Button
-        android:id="@+id/match_career_button"
+    <TextView
+        android:id="@+id/career_name"
+        android:text="career info!!!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/line_space_large"
-        android:onClick="matchCareerButton"
-        android:text="@string/match_career_button" />
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

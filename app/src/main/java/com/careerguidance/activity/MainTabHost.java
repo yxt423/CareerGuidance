@@ -9,10 +9,11 @@ import android.view.MenuItem;
 
 import com.careerguidance.R;
 
-public class MainTabHost extends FragmentActivity implements SubTab.OnFragmentInteractionListener {
+public class MainTabHost extends FragmentActivity implements
+        SubTab.OnFragmentInteractionListener,
+        CareerListFragment.OnFragmentInteractionListener {
 
     private FragmentTabHost mTabHost;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainTabHost extends FragmentActivity implements SubTab.OnFragmentIn
         mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("Careers").setIndicator("Careers"), SubTab.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("Careers").setIndicator("Careers"), CareerListFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Find Match").setIndicator("Find Match"), SubTab.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Profile").setIndicator("Profile"), SubTab.class, null);
     }
