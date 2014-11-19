@@ -8,6 +8,8 @@ import java.util.Hashtable;
  * Created by yxt on 11/16/14.
  */
 public class Career {
+    int id;
+
     String name;
 
     String description;
@@ -40,6 +42,10 @@ public class Career {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

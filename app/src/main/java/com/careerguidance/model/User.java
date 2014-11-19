@@ -13,12 +13,13 @@ public class User {
     String firstName;
     Date birthDate;
     String gender;
+    String location;
 
     String photoFileName;
     String username;
     String password;
 
-    Hashtable<String, String> interests;
+    ArrayList<String> interests;
 
     Hashtable<String, Double> grades;
 
@@ -39,7 +40,7 @@ public class User {
 
         gender = "";
 
-        interests = new Hashtable<String, String>();
+        interests = new ArrayList<String>();
 
         grades = new Hashtable<String, Double>();
 
@@ -60,9 +61,9 @@ public class User {
     }
 
     //Getters
-    public String getId()
+    public int getId()
     {
-        return _id;
+        return id;
     }
 
     public String getLastName()
@@ -70,10 +71,12 @@ public class User {
         return lastName;
     }
 
-    public String getFirstName() {
-
-        return firstName;
+    public String getLocation()
+    {
+        return location;
     }
+
+    public String getFirstName() { return firstName; }
 
     public Date getBirthDate() {
         return birthDate;
@@ -108,13 +111,15 @@ public class User {
         lastName = lName;
     }
 
+    public void setLocation(String locn) {
+        location = locn;
+    }
+
     public void setFirstName(String fName) {
         firstName = fName;
     }
 
-    public void setBirthDate(Date bDate) {
-        birthDate = Date;
-    }
+    public void setBirthDate(Date bDate) { birthDate = bDate; }
 
     public void setGender(String gndr) {
        gender = gndr;
@@ -140,12 +145,12 @@ public class User {
         universityChoice = uni;
     }
 
-    public String [] getInterests()
+    public ArrayList<String> getInterests()
     {
         return interests;
     }
 
-    public String [] getGrades()
+    public Hashtable getGrades()
     {
         return grades;
     }

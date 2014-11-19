@@ -15,8 +15,9 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "careerguidance.db";
     private static final int DATABASE_VERSION = 1;
 
+    //User Table
     public static final String TABLE_USER = "user";
-    public static final String COLUMN_ID [] = {"_id", "integer primary key"};
+    public static final String COLUMN_USER_ID [] = {"_id", "integer primary key"};
     public static final String COLUMN_USER1 [] = {"firstname", "TEXT"};
     public static final String COLUMN_USER2 [] = {"lastname", "TEXT"};
     public static final String COLUMN_USER3 [] = {"gender", "TEXT"};
@@ -24,6 +25,55 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
     public static final String COLUMN_USER5 [] = {"location", "TEXT"};
     public static final String COLUMN_USER6 [] = {"username", "TEXT"};
     public static final String COLUMN_USER7 [] = {"password", "TEXT"};
+
+    private static final String TBL_USER_CREATE = "create table "
+            + TABLE_USER
+            + "("
+            + COLUMN_USER_ID[0] + " " + COLUMN_USER_ID[1] + ", "
+            + COLUMN_USER1[0] + " " + COLUMN_USER1[1] + ", "
+            + COLUMN_USER2[0] + " " + COLUMN_USER2[1] + ", "
+            + COLUMN_USER3[0] + " " + COLUMN_USER3[1] + ", "
+            + COLUMN_USER4[0] + " " + COLUMN_USER4[1] + ", "
+            + COLUMN_USER5[0] + " " + COLUMN_USER5[1] + ", "
+            + COLUMN_USER6[0] + " " + COLUMN_USER6[1] + ", "
+            + COLUMN_USER7[0] + " " + COLUMN_USER7[1]
+            + ");";
+
+    //Career Table
+    public static final String TABLE_CAREER = "user";
+    public static final String COLUMN_CAREER_ID [] = {"_id", "integer primary key"};
+    public static final String COLUMN_CAREER1 [] = {"name", "TEXT"};
+    public static final String COLUMN_CAREER2 [] = {"description", "TEXT"};
+    public static final String COLUMN_CAREER3 [] = {"salary", "REAL"};
+
+    private static final String TBL_CAREER_CREATE = "create table "
+            + TABLE_USER
+            + "("
+            + COLUMN_CAREER_ID[0] + " " + COLUMN_CAREER_ID[1] + ", "
+            + COLUMN_CAREER1[0] + " " + COLUMN_CAREER1[1] + ", "
+            + COLUMN_CAREER2[0] + " " + COLUMN_CAREER2[1] + ", "
+            + COLUMN_CAREER3[0] + " " + COLUMN_CAREER3[1]
+            + ");";
+
+    //University Table
+    public static final String TABLE_UNIVERSITY = "university";
+    public static final String COLUMN_UNIVERSITY_ID [] = {"_id", "integer primary key"};
+    public static final String COLUMN_UNIVERSITY1 [] = {"name", "TEXT"};
+    public static final String COLUMN_UNIVERSITY2 [] = {"description", "TEXT"};
+    public static final String COLUMN_UNIVERSITY3 [] = {"fees", "REAL"};
+    public static final String COLUMN_UNIVERSITY4 [] = {"url", "TEXT"};
+    public static final String COLUMN_UNIVERSITY5 [] = {"location", "TEXT"};
+
+    private static final String TBL_UNIVERSITY_CREATE = "create table "
+            + TABLE_USER
+            + "("
+            + COLUMN_UNIVERSITY_ID[0] + " " + COLUMN_CAREER_ID[1] + ", "
+            + COLUMN_UNIVERSITY1[0] + " " + COLUMN_UNIVERSITY1[1] + ", "
+            + COLUMN_UNIVERSITY2[0] + " " + COLUMN_UNIVERSITY2[1] + ", "
+            + COLUMN_UNIVERSITY3[0] + " " + COLUMN_UNIVERSITY3[1] + ", "
+            + COLUMN_UNIVERSITY4[0] + " " + COLUMN_UNIVERSITY4[1] + ", "
+            + COLUMN_UNIVERSITY5[0] + " " + COLUMN_UNIVERSITY5[1]
+            + ");";
 
 
     public SQLiteHelperClass(Context context) {
@@ -33,7 +83,11 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
 
-        TblUser.create(database);
+        database.execSQL(TBL_USER_CREATE);
+
+        database.execSQL(TBL_CAREER_CREATE);
+
+        database.execSQL(TBL_UNIVERSITY_CREATE);
 
     }
 
@@ -46,183 +100,6 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
 
         onCreate(db);
-    }
-
-    public class TblUser
-    {
-        SQLiteDatabase sqliteDB;
-
-
-        public static void create(SQLiteDatabase sqliteDB)
-        {
-            // Database creation sql statement
-            String TBL_USER_CREATE = "CREATE TABLE "
-                    + "user ( "
-                    + "_id integer primary key, "
-                    + "firstname text, "
-                    + "lastname text, "
-                    + "gender text, "
-                    + "dateofbirth date, "
-                    + "country text, "
-                    + "username text, "
-                    + "password text);";
-
-            sqliteDB.execSQL(TBL_USER_CREATE);
-        }
-
-        public String deleteUser(SQLiteDatabase sqliteDB, int userId){
-            String TBL_USER_DELETE = "DELETE FROM user WHERE _id = '" + userId + ";";
-
-            sqliteDB.execSQL(TBL_USER_DELETE);
-        }
-
-        public String deleteAll(SQLiteDatabase sqliteDB){
-            String TBL_USER_DELETE_ALL = "DELETE * FROM user;";
-
-            sqliteDB.execSQL(TBL_USER_DELETE_ALL);
-        }
-
-        public User getUser(SQLiteDatabase sqliteDB, int userId){
-            User user = new User();
-
-            String TBL_USER_SELECT= "SELECT * FROM user WHERE _id = " + userId + ";";
-
-            Cursor cursor = sqliteDB.rawQuery(TBL_USER_SELECT);
-
-            if (cursor.moveToFirst())
-            {
-                user.setFirstName(cursor.getColumnName("firstname"));
-                user.setLastName(cursor.getColumnName("lastname"));
-                user.setBirthDate(cursor.getColumnName("birthdate"));
-                user.setGender(cursor.getColumnName("gender"));
-                user.setCareerChoice(cursor.getColumnName("careerchoice"));
-                user.setUniversityChoice(cursor.getColumnName("universitychoice"));
-                user.setUsername(cursor.getColumnName("username"));
-                user.setPassword(cursor.getColumnName("password"));
-            }
-
-        }
-
-
-        public void updateUser(SQLiteDatabase sqliteDB, int userId, String field, Object value){
-            String TBL_USER_UPDATE = "UPDATE TABLE user SET " + field + " = " + (String)Object + " WHERE _id = '" + userId + ";";
-
-            sqliteDB.execSQL(TBL_USER_UPDATE);
-        }
-
-    }
-
-    public class TblCareer
-    {
-        SQLiteDatabase sqliteDB;
-
-
-        public static void create(SQLiteDatabase sqliteDB)
-        {
-            // Database creation sql statement
-            String TBL_CAREER_CREATE = "CREATE TABLE "
-                    + "career ( "
-                    + "_id integer PRIMARY KEY, "
-                    + "name TEXT, "
-                    + "description TEXT, "
-                    + "salary real");";
-
-            sqliteDB.execSQL(TBL_CAREER_CREATE);
-        }
-
-        public String deleteCareer(SQLiteDatabase sqliteDB, int careerId){
-            String TBL_CAREER_DELETE = "DELETE FROM career WHERE _id = '" + careerId + ";";
-
-            sqliteDB.execSQL(TBL_CAREER_DELETE);
-        }
-
-        public String deleteAll(SQLiteDatabase sqliteDB){
-            String TBL_CAREER_DELETE_ALL = "DELETE * FROM career;";
-
-            sqliteDB.execSQL(TBL_CAREER_DELETE_ALL);
-        }
-
-        public User getUser(SQLiteDatabase sqliteDB, int userId){
-            User user = new User();
-
-            String TBL_CAREER_SELECT= "SELECT * FROM career WHERE _id = " + userId + ";";
-
-            Cursor cursor = sqliteDB.rawQuery(TBL_CAREER_SELECT);
-
-            if (cursor.moveToFirst())
-            {
-                user.setFirstName(cursor.getColumnName("name"));
-                user.setLastName(cursor.getColumnName("description"));
-                user.setBirthDate(cursor.getColumnName("salary"));
-            }
-
-        }
-
-        public void updateCareer(SQLiteDatabase sqliteDB, int careerId, String field, Object value){
-            String TBL_CAREER_UPDATE = "UPDATE TABLE career SET " + field + " = " + (String)Object + " WHERE _id = " + careerId + ";";
-
-            sqliteDB.execSQL(TBL_CAREER_UPDATE);
-        }
-
-    }
-
-    public class TblUniversity
-    {
-        SQLiteDatabase sqliteDB;
-
-
-        public static void create(SQLiteDatabase sqliteDB)
-        {
-            // Database creation sql statement
-            String TBL_UNIVERSITY_CREATE = "CREATE TABLE "
-                    + "university ( "
-                    + "_id integer PRIMARY KEY, "
-                    + "name TEXT, "
-                    + "description TEXT,"
-                    + "fees REAL,"
-                    + "location TEXT,"
-                    + "url TEXT"
-                    +);";
-
-            sqliteDB.execSQL(TBL_UNIVERSITY_CREATE);
-        }
-
-        public String delete(SQLiteDatabase sqliteDB, int universityId){
-            String TBL_UNIVERSITY_DELETE = "DELETE * FROM university WHERE _id = '" + universityId + ";";
-
-            sqliteDB.execSQL(TBL_UNIVERSITY_DELETE);
-        }
-
-        public String deleteAll(SQLiteDatabase sqliteDB){
-            String TBL_UNIVERSITY_DELETE_ALL = "DELETE * FROM university;";
-
-            sqliteDB.execSQL(TBL_UNIVERSITY_DELETE_ALL);
-        }
-
-        public User get(SQLiteDatabase sqliteDB, int universityId){
-            University university = new University();
-
-            String TBL_UNIVERSITY_SELECT= "SELECT * FROM university WHERE _id = " + universityId + ";";
-
-            Cursor cursor = sqliteDB.rawQuery(TBL_UNIVERSITY_SELECT);
-
-            if (cursor.moveToFirst())
-            {
-                university.(cursor.getColumnName("name"));
-                university.setLastName(cursor.getColumnName("description"));
-                university.setBirthDate(cursor.getColumnName("fees"));
-                university.setGender(cursor.getColumnName("location"));
-                university.setGender(cursor.getColumnName("url"));
-            }
-
-        }
-
-        public void updateUser(SQLiteDatabase sqliteDB, int userId, String field, Object value){
-            String TBL_UNIVERSITY_UPDATE = "UPDATE TABLE user SET " + field + " = " + (String)Object + " WHERE _id = " + userId + ";";
-
-            sqliteDB.execSQL(TBL_UNIVERSITY_UPDATE);
-        }
-
     }
 }
 

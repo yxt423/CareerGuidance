@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 public class University {
 
+    int id;
+
     String name;
 
     String description;
@@ -18,7 +20,7 @@ public class University {
 
     URL url;
 
-    ArrayList<Career> careerList;
+    ArrayList<University> universityList;
 
     ArrayList<String> videoList;
 
@@ -27,6 +29,10 @@ public class University {
     }
 
     //Getters
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -47,8 +53,8 @@ public class University {
         return url;
     }
 
-    public ArrayList<Career> getCareerList() {
-        return careerList;
+    public ArrayList<University> getUniversityList() {
+        return universityList;
     }
 
     public ArrayList<String> getVideoList() {
@@ -76,8 +82,8 @@ public class University {
         url = theUrl;
     }
 
-    public void setCareerList(ArrayList<Career> lstCareer) {
-        careerList = lstCareer;
+    public void setCareerList(ArrayList<University> lstUniversity) {
+        universityList = lstUniversity;
     }
 
     public void setVideoList(ArrayList<String> vidList) {
