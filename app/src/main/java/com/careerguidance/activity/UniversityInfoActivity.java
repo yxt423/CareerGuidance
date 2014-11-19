@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
+import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.utility.Utility;
@@ -62,6 +63,9 @@ public class UniversityInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 2:
+                        intent = new Intent(getBaseContext(), SelectionActivity.class);
+                        intent.putExtra("pageTitle", "More Resources");
+                        startActivity(intent);
                         break;
                     default:
                         break;

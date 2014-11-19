@@ -64,6 +64,8 @@ public class SelectionActivity extends Activity {
             return new String[] {"Math", "Science", "Language Arts", "Social Studies", "History", "Add new one"};
         } else if (pageTitle.equals("Interests")) {
             return new String[] {"Reading", "Sports", "Add new one"};
+        } else if (pageTitle.equals("More Resources")) {
+            return new String[] {"Official Website", "Wiki page", "Search in Google"};
         } else {
             return new String[]{};
         }
