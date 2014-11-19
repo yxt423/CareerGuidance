@@ -4,7 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by yxt on 11/16/14.
+ * University class, define university instance and attributes of universities,
+ * and APIs for accessing university data.
  */
 public class University {
 

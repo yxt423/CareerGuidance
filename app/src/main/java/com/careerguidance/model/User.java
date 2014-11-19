@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.*;
 
 /**
- * Created by yxt on 11/16/14.
+ * User class, define the user instance, it is used to show the information on
+ * user profile page.
  */
-
 public class User {
     int id;
     String lastName;

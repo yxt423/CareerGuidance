@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:baselineAligned="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/line_space"
+        android:layout_marginBottom="@dimen/line_space"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/career_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Software Engineer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ImageView
+            android:id="@+id/career_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/career_name"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/software_engineer"
+            android:contentDescription="career_photo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/line_space"
+        android:layout_marginBottom="@dimen/line_space"
+        android:layout_weight="1" >
+        <TextView
+            android:id="@+id/university_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/university_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/university_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/university_name"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/cmu"
+            android:contentDescription="university_photo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/line_space"
+        android:layout_marginBottom="@dimen/line_space"
+        android:layout_weight="1" >
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/user_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ImageView
+            android:id="@+id/user_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/photo"
+            android:contentDescription="user_photo" />
+    </RelativeLayout>
+
+</LinearLayout>

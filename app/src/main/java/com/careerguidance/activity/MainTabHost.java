@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import com.careerguidance.R;
 
 public class MainTabHost extends FragmentActivity implements
-        SubTab.OnFragmentInteractionListener,
         CareerListFragment.OnFragmentInteractionListener,
-        ProfileFragment.OnFragmentInteractionListener {
+        ProfileFragment.OnFragmentInteractionListener,
+        FindCareerMatchFragment.OnFragmentInteractionListener {
 
     FragmentTabHost mTabHost = null;
 
@@ -29,7 +29,7 @@ public class MainTabHost extends FragmentActivity implements
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
         mTabHost.addTab(mTabHost.newTabSpec("Careers").setIndicator("Careers"), CareerListFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Find Match").setIndicator("Find Match"), SubTab.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("Find Match").setIndicator("Find Match"), FindCareerMatchFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Profile").setIndicator("Profile"), ProfileFragment.class, null);
         mTabHost.setCurrentTab(currentTab);
     }

@@ -1,16 +1,14 @@
 package com.careerguidance.DBLayout;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.careerguidance.model.*;
 
+/**
+ * Created by chris on 11/8/14.
+ */
 public class SQLiteHelperClass extends SQLiteOpenHelper {
-    /**
-     * Created by chris on 11/8/14.
-     */
 
     private static final String DATABASE_NAME = "careerguidance.db";
     private static final int DATABASE_VERSION = 1;
