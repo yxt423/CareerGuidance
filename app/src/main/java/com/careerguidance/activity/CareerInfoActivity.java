@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.adapter.StableArrayAdapter;
+import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
 

@@ -22,6 +22,9 @@ import com.careerguidance.adapter.StableArrayAdapter;
 import java.util.ArrayList;
 
 /**
+ * Show user profile for editing. The "find me a career" button will
+ * redirect user to tab 2.
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link ProfileFragment.OnFragmentInteractionListener} interface

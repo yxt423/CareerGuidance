@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by yxt on 11/16/14.
+ * StableArrayAdapter, to be used by multiple simple text lists in the app.
+ *
  */
 public class StableArrayAdapter extends ArrayAdapter<String> {
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

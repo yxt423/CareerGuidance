@@ -15,6 +15,10 @@ import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Show activities what only contains a list of options and a title.
+ * This activity is reused for location selection, gender selection, etc.
+ */
 public class SelectionActivity extends Activity {
 
     String pageTitle = null;

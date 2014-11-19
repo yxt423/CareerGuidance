@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import com.careerguidance.R;
 
 /**
+ * Show the "match career tab (tab 2 in main page)"
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link FindCareerMatchFragment.OnFragmentInteractionListener} interface

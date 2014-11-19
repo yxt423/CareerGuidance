@@ -17,7 +17,7 @@ import com.careerguidance.adapter.StableArrayAdapter;
 import java.util.ArrayList;
 
 /**
- * Show the list of all career options. (Tab1)
+ * Show the list of all career options. (Tab1 in main page)
  *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the

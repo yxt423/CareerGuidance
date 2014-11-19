@@ -14,6 +14,10 @@ import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * show a list of universities. clicking on one item of the list will lead
+ * to the university detail info page.
+ */
 public class UniversityListActivity extends Activity {
 
     String careerName = null;
