@@ -1,4 +1,4 @@
-package com.careerguidance.activity;
+package com.careerguidance.activity.helperActivity;
 
 import android.app.Activity;
 import android.content.Intent;

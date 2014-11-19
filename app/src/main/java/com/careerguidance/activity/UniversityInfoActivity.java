@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
+import com.careerguidance.activity.helperActivity.GalleryActivity;
+import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.utility.Utility;
 
@@ -33,7 +35,7 @@ public class UniversityInfoActivity extends Activity {
         universityNameView.setText(universityName);
 
         // create the listview
-        String[] values = new String[] {"More Pictures", "Watch Videos", "Official Website"};
+        String[] values = new String[] {"More Pictures", "Watch Videos", "More Resources"};
         final ListView listview = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -51,8 +53,13 @@ public class UniversityInfoActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Intent intent = new Intent(getBaseContext(), GalleryActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
+                        intent = new Intent(getBaseContext(), VideoActivity.class);
+                        intent.putExtra("videoNo", R.raw.qi_li_xiang);
+                        startActivity(intent);
                         break;
                     case 2:
                         break;

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.careerguidance.R;
+import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
