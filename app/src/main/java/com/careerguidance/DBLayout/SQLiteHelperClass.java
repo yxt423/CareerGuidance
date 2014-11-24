@@ -11,11 +11,10 @@ import android.database.MatrixCursor;
 
 import java.util.ArrayList;
 
-=======
 /**
  * Created by chris on 11/8/14.
  */
->>>>>>> d2706960cbf2a0a660ca48d67f33d513b6210150
+
 public class SQLiteHelperClass extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "careerguidance.db";
