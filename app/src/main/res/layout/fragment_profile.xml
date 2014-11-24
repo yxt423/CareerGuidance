@@ -24,13 +24,28 @@
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/profile_photo"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_toEndOf="@+id/profile_photo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/user_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/edit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_name"
+        android:layout_alignBottom="@+id/user_name"
+        android:layout_toEndOf="@+id/user_name"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_centerVertical="true"
+        android:src="@drawable/edit"
+        android:onClick="editUserName"
+        android:text="@string/user_name" />
 
     <ListView
         android:id="@+id/listview"
