@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- * Created by yxt on 11/16/14.
+ * Career class, define university instance and attributes of a career,
+ * and APIs for accessing career data.
  */
 public class Career {
     int id;

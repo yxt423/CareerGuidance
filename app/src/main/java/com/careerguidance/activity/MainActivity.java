@@ -13,6 +13,10 @@ import com.careerguidance.DBLayout.*;
 
 import com.careerguidance.R;
 
+/**
+ * The startup activity. show app cover with 2 buttons:
+ * find a career match / see all career options.
+ */
 public class MainActivity extends Activity {
 
     @Override

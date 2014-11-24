@@ -7,16 +7,16 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.careerguidance.model.*;
-
 import android.database.MatrixCursor;
 
 import java.util.ArrayList;
 
+=======
+/**
+ * Created by chris on 11/8/14.
+ */
+>>>>>>> d2706960cbf2a0a660ca48d67f33d513b6210150
 public class SQLiteHelperClass extends SQLiteOpenHelper {
-    /**
-     * Created by chris on 11/8/14.
-     */
 
     private static final String DATABASE_NAME = "careerguidance.db";
 

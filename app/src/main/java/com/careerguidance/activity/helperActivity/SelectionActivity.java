@@ -1,4 +1,4 @@
-package com.careerguidance.activity;
+package com.careerguidance.activity.helperActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,10 @@ import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Show activities what only contains a list of options and a title.
+ * This activity is reused for location selection, gender selection, etc.
+ */
 public class SelectionActivity extends Activity {
 
     String pageTitle = null;
@@ -60,6 +64,8 @@ public class SelectionActivity extends Activity {
             return new String[] {"Math", "Science", "Language Arts", "Social Studies", "History", "Add new one"};
         } else if (pageTitle.equals("Interests")) {
             return new String[] {"Reading", "Sports", "Add new one"};
+        } else if (pageTitle.equals("More Resources")) {
+            return new String[] {"Official Website", "Wiki page", "Search in Google"};
         } else {
             return new String[]{};
         }

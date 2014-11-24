@@ -11,7 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
+import com.careerguidance.activity.helperActivity.GalleryActivity;
+import com.careerguidance.activity.helperActivity.SelectionActivity;
+import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
+import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -52,17 +56,26 @@ public class CareerInfoActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = null;
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(getBaseContext(), UniversityListActivity.class);
+                        intent = new Intent(getBaseContext(), UniversityListActivity.class);
                         intent.putExtra("career name", list.get(position));
                         startActivity(intent);
                         break;
                     case 1:
+                        intent = new Intent(getBaseContext(), GalleryActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
+                        intent = new Intent(getBaseContext(), VideoActivity.class);
+                        intent.putExtra("videoNo", R.raw.qi_li_xiang);
+                        startActivity(intent);
                         break;
                     case 3:
+                        intent = new Intent(getBaseContext(), SelectionActivity.class);
+                        intent.putExtra("pageTitle", "More Resources");
+                        startActivity(intent);
                         break;
                     default:
                         break;

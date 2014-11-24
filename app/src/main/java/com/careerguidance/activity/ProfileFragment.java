@@ -1,7 +1,9 @@
 package com.careerguidance.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,15 +15,21 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.careerguidance.R;
+import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 
 /**
+ * Show user profile for editing. The "find me a career" button will
+ * redirect user to tab 2.
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link ProfileFragment.OnFragmentInteractionListener} interface
@@ -38,7 +46,9 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ImageView imageView = null;
+    ImageView profilePhoto = null;
+    ImageView editName = null;
+    TextView userName = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -77,8 +87,10 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        imageView = (ImageView) v.findViewById(R.id.profile_photo);
-        imageView.setOnClickListener(new OnClickListener() {
+        // profile photo on click: show dialog for editing the profile photo:
+        // take a new photo or choose an existing photo.
+        profilePhoto = (ImageView) v.findViewById(R.id.profile_photo);
+        profilePhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 final Dialog dialog = new Dialog(getActivity());
@@ -113,8 +125,20 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // the pencil picture on click: show the edit name dialog
+        editName = (ImageView) v.findViewById(R.id.edit_name);
+        userName = (TextView) v.findViewById(R.id.user_name);
+        editName.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                showEditNameDialog(null);
+            }
+        });
+
+
+        // the personal information list.
         final ListView listview = (ListView) v.findViewById(R.id.listview);
-        String[] values = new String[] {"Gender", "Location", "Grades", "Interests"};
+        String[] values = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
@@ -128,12 +152,19 @@ public class ProfileFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                intent.putExtra("pageTitle", list.get(position));
-                startActivity(intent);
+                switch (position) {
+                    case 0:
+                        break;
+                    default:
+                        Intent intent = new Intent(getActivity(), SelectionActivity.class);
+                        intent.putExtra("pageTitle", list.get(position));
+                        startActivity(intent);
+                        break;
+                }
             }
         });
 
+        // The "find me a career" button.
         Button findCareerMatchButton = (Button) v.findViewById(R.id.find_career_match_button);
         findCareerMatchButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -148,6 +179,37 @@ public class ProfileFragment extends Fragment {
         });
 
         return v;
+    }
+
+    // show the edit user name dialog once.
+    public void showEditNameDialog(String message) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setTitle("Name");
+        if (message != null) {
+            alert.setMessage(message);
+        }
+
+        final EditText input = new EditText(getActivity());
+        input.setWidth(250);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = input.getText().toString();
+                if (value == null || value.length() == 0) {
+                    showEditNameDialog("Name can not be empty.");
+                } else {
+                    userName.setText(value);
+                    // save user name in database.
+                }
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) { }
+        });
+
+        alert.show();
     }
 
     public void onButtonPressed(Uri uri) {

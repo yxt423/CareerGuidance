@@ -3,7 +3,6 @@ package com.careerguidance.DBLayout;
 /**
  * Created by chris on 11/8/14.
  */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.careerguidance.model.User;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

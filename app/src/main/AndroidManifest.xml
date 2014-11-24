@@ -43,10 +43,17 @@
             android:label="@string/title_activity_university_info" >
         </activity>
         <activity
-            android:name=".activity.SelectionActivity"
+            android:name=".activity.helperActivity.SelectionActivity"
             android:label="@string/title_activity_selection" >
         </activity>
-        <activity android:name="com.careerguidance.DBLayout.AndroidDatabaseManager" />
+        <activity
+            android:name=".activity.helperActivity.GalleryActivity"
+            android:label="@string/title_activity_gallery" >
+        </activity>
+        <activity
+            android:name=".activity.helperActivity.VideoActivity"
+            android:label="@string/title_activity_video" >
+        </activity>
     </application>
 
 </manifest>

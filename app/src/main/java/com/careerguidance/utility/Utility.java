@@ -1,4 +1,4 @@
-package com.careerguidance.activity;
+package com.careerguidance.utility;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,7 +6,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
- * Created by yxt on 11/16/14.
+ * Utility class, contain utility functions that help showing layouts
  */
 public class Utility {
 

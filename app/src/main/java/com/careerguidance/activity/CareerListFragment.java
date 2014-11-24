@@ -17,7 +17,7 @@ import com.careerguidance.adapter.StableArrayAdapter;
 import java.util.ArrayList;
 
 /**
- * Show the list of all career options. (Tab1)
+ * Show the list of all career options. (Tab1 in main page)
  *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -44,6 +44,7 @@ public class CareerListFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment CareerListFragment.
      */
+
     public static CareerListFragment newInstance(String param1, String param2) {
         CareerListFragment fragment = new CareerListFragment();
         Bundle args = new Bundle();
@@ -52,6 +53,7 @@ public class CareerListFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public CareerListFragment() {
         // Required empty public constructor
     }

@@ -1,21 +1,19 @@
 package com.careerguidance.DBLayout;
 
-/**
- * Created by chris on 11/8/14.
- */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.careerguidance.model.Career;
 import com.careerguidance.model.University;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by chris on 11/8/14.
+ */
 public class UniversityDataSource
 {
 
