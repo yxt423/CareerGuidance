@@ -24,9 +24,9 @@ public class UniversityDataSource
 
     private SQLiteHelperClass dbHelper;
 
-    private String[] allColumns = { SQLiteHelperClass.COLUMN_UNIVERSITY_ID[0],
-            SQLiteHelperClass.COLUMN_UNIVERSITY1[0], SQLiteHelperClass.COLUMN_UNIVERSITY2[0],
-            SQLiteHelperClass.COLUMN_UNIVERSITY3[0]};
+    private String[] allColumns = { SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[1][0],
+            SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[3][0],
+            SQLiteHelperClass.TBL_UNIVERSITY_COLS[4][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[5][0]};
 
     public UniversityDataSource(Context context)
     {
@@ -43,19 +43,21 @@ public class UniversityDataSource
         dbHelper.close();
     }
 
-    public University createUniversity(String name, String description, double salary)
+    public University createUniversity(String name, String description, double fees, String url, String location)
     {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelperClass.COLUMN_UNIVERSITY1[0], name);
-        values.put(SQLiteHelperClass.COLUMN_UNIVERSITY2[0], description);
-        values.put(SQLiteHelperClass.COLUMN_UNIVERSITY3[0], salary);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[1][0], name);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], description);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[3][0], fees);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[4][0], url);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[5][0], location);
 
 
-        long insertId = database.insert(SQLiteHelperClass.TABLE_UNIVERSITY, null,
+        long insertId = database.insert(SQLiteHelperClass.TBL_USER, null,
                 values);
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_UNIVERSITY,
-                allColumns, SQLiteHelperClass.COLUMN_UNIVERSITY_ID + " = " + insertId, null,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0] + " = " + insertId, null,
                 null, null, null);
 
         cursor.moveToFirst();
@@ -71,31 +73,51 @@ public class UniversityDataSource
     {
         long id = university.getId();
 
-        database.delete(SQLiteHelperClass.TABLE_UNIVERSITY, SQLiteHelperClass.COLUMN_UNIVERSITY_ID
+        database.delete(SQLiteHelperClass.TBL_UNIVERSITY, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0]
                 + " = " + id, null);
     }
 
-    public List<University> getAllUniversitys()
+    public List<University> getAllUniversity()
     {
-        List<University> universitys = new ArrayList<University>();
+        List<University> universityList = new ArrayList<University>();
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_UNIVERSITY,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast())
         {
             University university = cursorToUniversity(cursor);
-            universitys.add(university);
+            universityList.add(university);
             cursor.moveToNext();
         }
 
         // make sure to close the cursor
         cursor.close();
 
-        return universitys;
+        return universityList;
     }
 
+    public List<String> getAllUniversityNames()
+    {
+        List<String> universityNameList = new ArrayList<String>();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            University university = cursorToUniversity(cursor);
+            universityNameList.add(university.getName());
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return universityNameList;
+    }
     private University cursorToUniversity(Cursor cursor) {
         University university = new University();
 

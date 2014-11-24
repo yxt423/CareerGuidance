@@ -46,6 +46,7 @@
             android:name=".activity.SelectionActivity"
             android:label="@string/title_activity_selection" >
         </activity>
+        <activity android:name="com.careerguidance.DBLayout.AndroidDatabaseManager" />
     </application>
 
 </manifest>

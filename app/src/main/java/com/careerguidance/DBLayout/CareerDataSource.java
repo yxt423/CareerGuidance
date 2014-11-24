@@ -18,15 +18,14 @@ import java.util.List;
 
 public class CareerDataSource
 {
-
     // Database fields
     private SQLiteDatabase database;
 
     private SQLiteHelperClass dbHelper;
 
-    private String[] allColumns = { SQLiteHelperClass.COLUMN_CAREER_ID[0],
-            SQLiteHelperClass.COLUMN_CAREER1[0], SQLiteHelperClass.COLUMN_CAREER2[0],
-            SQLiteHelperClass.COLUMN_CAREER3[0]};
+    private String[] allColumns = { SQLiteHelperClass.TBL_CAREER_COLS[0][0],
+            SQLiteHelperClass.TBL_CAREER_COLS[1][0], SQLiteHelperClass.TBL_CAREER_COLS[2][0],
+            SQLiteHelperClass.TBL_CAREER_COLS[3][0]};
 
     public CareerDataSource(Context context)
     {
@@ -46,16 +45,16 @@ public class CareerDataSource
     public Career createCareer(String name, String description, double salary)
     {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelperClass.COLUMN_CAREER1[0], name);
-        values.put(SQLiteHelperClass.COLUMN_CAREER2[0], description);
-        values.put(SQLiteHelperClass.COLUMN_CAREER3[0], salary);
+        values.put(SQLiteHelperClass.TBL_CAREER_COLS[1][0], name);
+        values.put(SQLiteHelperClass.TBL_CAREER_COLS[2][0], description);
+        values.put(SQLiteHelperClass.TBL_CAREER_COLS[3][0], salary);
 
 
-        long insertId = database.insert(SQLiteHelperClass.TABLE_CAREER, null,
+        long insertId = database.insert(SQLiteHelperClass.TBL_CAREER, null,
                 values);
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_CAREER,
-                allColumns, SQLiteHelperClass.COLUMN_CAREER_ID + " = " + insertId, null,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
+                allColumns, SQLiteHelperClass.TBL_CAREER_COLS[0][0] + " = " + insertId, null,
                 null, null, null);
 
         cursor.moveToFirst();
@@ -71,7 +70,7 @@ public class CareerDataSource
     {
         long id = career.getId();
 
-        database.delete(SQLiteHelperClass.TABLE_CAREER, SQLiteHelperClass.COLUMN_CAREER_ID
+        database.delete(SQLiteHelperClass.TBL_CAREER, SQLiteHelperClass.TBL_CAREER_COLS[0][0]
                 + " = " + id, null);
     }
 
@@ -79,7 +78,7 @@ public class CareerDataSource
     {
         List<Career> careers = new ArrayList<Career>();
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_CAREER,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
@@ -94,6 +93,27 @@ public class CareerDataSource
         cursor.close();
 
         return careers;
+    }
+
+    public List<String> getAllCareerNames()
+    {
+        List<String> careerNames = new ArrayList<String>();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Career career = cursorToCareer(cursor);
+            careerNames.add(career.getName());
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return careerNames;
     }
 
     private Career cursorToCareer(Cursor cursor) {
