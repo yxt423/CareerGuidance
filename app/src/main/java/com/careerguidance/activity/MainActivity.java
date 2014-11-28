@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import com.careerguidance.DBLayout.*;
 
 import com.careerguidance.R;
 
@@ -49,6 +51,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void dbBtn(View v) {
+        Intent intent = new Intent(this, AndroidDatabaseManager.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,6 +73,7 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

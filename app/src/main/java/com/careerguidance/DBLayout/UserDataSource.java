@@ -22,11 +22,11 @@ public class UserDataSource
 
     private SQLiteHelperClass dbHelper;
 
-    private String[] allColumns = { SQLiteHelperClass.COLUMN_USER_ID[0],
-            SQLiteHelperClass.COLUMN_USER1[0], SQLiteHelperClass.COLUMN_USER2[0],
-            SQLiteHelperClass.COLUMN_USER3[0], SQLiteHelperClass.COLUMN_USER4[0],
-            SQLiteHelperClass.COLUMN_USER5[0], SQLiteHelperClass.COLUMN_USER6[0],
-            SQLiteHelperClass.COLUMN_USER7[0]};
+    private String[] allColumns = { SQLiteHelperClass.TBL_USER_COLS[0][0],
+            SQLiteHelperClass.TBL_USER_COLS[1][0], SQLiteHelperClass.TBL_USER_COLS[2][0],
+            SQLiteHelperClass.TBL_USER_COLS[3][0], SQLiteHelperClass.TBL_USER_COLS[4][0],
+            SQLiteHelperClass.TBL_USER_COLS[5][0], SQLiteHelperClass.TBL_USER_COLS[6][0],
+            SQLiteHelperClass.TBL_USER_COLS[7][0]};
 
     public UserDataSource(Context context)
     {
@@ -46,19 +46,19 @@ public class UserDataSource
     public User createUser(String fName, String lName, String gndr, Date dob, String location, String username, String password)
     {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelperClass.COLUMN_USER1[0], fName);
-        values.put(SQLiteHelperClass.COLUMN_USER2[0], lName);
-        values.put(SQLiteHelperClass.COLUMN_USER3[0], gndr);
-        values.put(SQLiteHelperClass.COLUMN_USER4[0], dob.toString());
-        values.put(SQLiteHelperClass.COLUMN_USER5[0], location);
-        values.put(SQLiteHelperClass.COLUMN_USER6[0], username);
-        values.put(SQLiteHelperClass.COLUMN_USER7[0], password);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[1][0], fName);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[2][0], lName);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[3][0], gndr);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[4][0], dob.toString());
+        values.put(SQLiteHelperClass.TBL_USER_COLS[5][0], location);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[6][0], username);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[7][0], password);
 
-        long insertId = database.insert(SQLiteHelperClass.TABLE_USER, null,
+        long insertId = database.insert(SQLiteHelperClass.TBL_USER, null,
                 values);
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_USER,
-                allColumns, SQLiteHelperClass.COLUMN_USER_ID + " = " + insertId, null,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,
+                allColumns, SQLiteHelperClass.TBL_USER_COLS[0][0] + " = " + insertId, null,
                 null, null, null);
 
         cursor.moveToFirst();
@@ -74,7 +74,7 @@ public class UserDataSource
     {
         long id = user.getId();
 
-        database.delete(SQLiteHelperClass.TABLE_USER, SQLiteHelperClass.COLUMN_USER_ID
+        database.delete(SQLiteHelperClass.TBL_USER, SQLiteHelperClass.TBL_USER_COLS[0][0]
                 + " = " + id, null);
     }
 
@@ -82,7 +82,7 @@ public class UserDataSource
     {
         List<User> users = new ArrayList<User>();
 
-        Cursor cursor = database.query(SQLiteHelperClass.TABLE_USER,
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
