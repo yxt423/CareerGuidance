@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Show user profile for editing. The "find me a career" button will
@@ -49,6 +51,8 @@ public class ProfileFragment extends Fragment {
     ImageView profilePhoto = null;
     ImageView editName = null;
     TextView userName = null;
+
+    private String birthday = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -154,6 +158,8 @@ public class ProfileFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        showEditBirthdayDialog(list);
+                        adapter.notifyDataSetChanged();
                         break;
                     default:
                         Intent intent = new Intent(getActivity(), SelectionActivity.class);
@@ -209,6 +215,35 @@ public class ProfileFragment extends Fragment {
             public void onClick(DialogInterface dialog, int whichButton) { }
         });
 
+        alert.show();
+    }
+
+    // TODO: edit
+    public void showEditBirthdayDialog(final ArrayList<String> list) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setTitle("Birthday");
+
+        final Calendar c = Calendar.getInstance();
+        final DatePicker datePicker = new DatePicker(getActivity());
+        datePicker.setCalendarViewShown(false);
+        datePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                c.set(year, monthOfYear, dayOfMonth);
+            }
+        });
+        alert.setView(datePicker);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                birthday = String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
+                list.set(0, birthday);
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) { }
+        });
         alert.show();
     }
 
