@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- app related -->
     <string name="app_name">CareerGuidance</string>
     <string name="hello_world">Hello world</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- menu buttons -->
     <string name="action_settings">Settings</string>
+    <string name="action_admin_mode">Admin Mode</string>
+
+    <!-- cover page buttions -->
     <string name="match_career_button">Find your career match</string>
     <string name="career_options_button">See career options</string>
+
+    <!-- career -->
     <string name="careers">Careers</string>
     <string name="career_description">Description: \n
         A software engineer is responsible for the development, maintenance and operation of computer
@@ -33,6 +40,8 @@
         Good team working abilities
         The ability to explain complicated processes in non-technical language
         Good project management skills</string>
+
+    <!-- Universities -->
     <string name="universities_page_title">Famous Universities</string>
     <string name="university_name">Carnegie Mellon University</string>
     <string name="university_description">University Description: \n
@@ -44,11 +53,15 @@
         the Carnegie Library of Pittsburgh, Schenley Park, Phipps Conservatory and Botanical Gardens, and the campus of the University
         of Pittsburgh in the city\'s Oakland and Squirrel Hill neighborhoods, partially extending into Shadyside. </string>
     <string name="university_location">University Location: \n Pittsburgh, Pennsylvania, United States</string>
+
+    <!-- Profile page -->
     <string name="user_name">Your Name</string>
     <string name="take_photo_button">Take a new photo</string>
     <string name="choose_photo_button">Choose an existing photo</string>
     <string name="cancel_button">Cancel</string>
     <string name="find_career_match_button">Find me a career</string>
+
+    <!-- activity titles -->
     <string name="title_activity_main_tab_host">MainTabHost</string>
     <string name="title_activity_career_info">CareerInfoActivity</string>
     <string name="title_activity_university_info">UniversityInfoActivity</string>

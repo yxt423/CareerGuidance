@@ -1,11 +1,5 @@
 package com.careerguidance.model;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-
-/**
- * Created by yxt on 11/16/14.
- */
 public class Location {
     int id;
 

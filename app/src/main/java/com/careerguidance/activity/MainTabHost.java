@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.careerguidance.DBLayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 
 public class MainTabHost extends FragmentActivity implements
@@ -42,7 +43,7 @@ public class MainTabHost extends FragmentActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_tab_host, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -52,7 +53,10 @@ public class MainTabHost extends FragmentActivity implements
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+
+        if (id == R.id.action_admin_mode) {
+            Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
