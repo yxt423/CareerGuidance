@@ -22,6 +22,8 @@ import java.util.Collections;
  */
 public class SelectionActivity extends Activity {
 
+    // private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+
     ArrayAdapter<String> adapter = null;
     String pageTitle = null;
     String[] listValues = null;
@@ -36,7 +38,7 @@ public class SelectionActivity extends Activity {
         functionNo = extras.getInt("function_no");
         dataInit();
 
-        TextView pageTitleView = (TextView) findViewById(R.id.selection_title);
+        TextView pageTitleView = (TextView) findViewById(R.id.page_title);
         pageTitleView.setText(pageTitle);
 
         final ListView listview = (ListView) findViewById(R.id.listview);

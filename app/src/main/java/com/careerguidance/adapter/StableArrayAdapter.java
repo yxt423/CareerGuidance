@@ -10,6 +10,7 @@ import java.util.List;
  * StableArrayAdapter, to be used by multiple simple text lists in the app.
  *
  */
+
 public class StableArrayAdapter extends ArrayAdapter<String> {
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 

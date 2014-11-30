@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
+import com.careerguidance.activity.helperActivity.GradesActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
 
 import java.util.ArrayList;
@@ -54,11 +55,11 @@ public class ProfileFragment extends Fragment {
     ImageView editName = null;
     TextView userName = null;
 
-    String[] optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
+    String[] optionListStr = null;
     ArrayList<String> optionList = new ArrayList<String>();
     ArrayAdapter<String> adapter = null;
 
-    String birthday = "hi";
+    String birthday = null;
     Calendar calendar = Calendar.getInstance();
 
     private OnFragmentInteractionListener mListener;
@@ -90,6 +91,8 @@ public class ProfileFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
+        Collections.addAll(optionList, optionListStr);
     }
 
     // Inflate the layout for this fragment
@@ -149,23 +152,26 @@ public class ProfileFragment extends Fragment {
 
         // the personal information list.
         listView = (ListView) v.findViewById(R.id.listview);
-        Collections.addAll(optionList, optionListStr);
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, optionList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = null;
                 switch (position) {
                     case 0:
                         showEditBirthdayDialog();
                         break;
                     case 1:
                     case 2:
-                        Intent intent = new Intent(getActivity(), SelectionActivity.class);
+                        intent = new Intent(getActivity(), SelectionActivity.class);
                         intent.putExtra("function_no", position);
                         startActivityForResult(intent, position);
                         break;
+                    case 3:
+                        intent = new Intent(getActivity(), GradesActivity.class);
+                        startActivity(intent);
                     default:
                         break;
                 }
