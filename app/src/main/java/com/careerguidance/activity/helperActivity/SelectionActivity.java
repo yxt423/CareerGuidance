@@ -7,13 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
-import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Show activities what only contains a list of options and a title.
@@ -21,38 +22,53 @@ import java.util.ArrayList;
  */
 public class SelectionActivity extends Activity {
 
+    ArrayAdapter<String> adapter = null;
     String pageTitle = null;
+    String[] listValues = null;
+    int functionNo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
 
-        Intent intent = getIntent();
-        pageTitle = intent.getStringExtra("pageTitle");
+        Bundle extras = getIntent().getExtras();
+        functionNo = extras.getInt("function_no");
+        dataInit();
 
-        TextView textView = (TextView) findViewById(R.id.selection_title);
-        textView.setText(pageTitle);
-
+        TextView pageTitleView = (TextView) findViewById(R.id.selection_title);
+        pageTitleView.setText(pageTitle);
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = getSelectionValues();
-
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
-
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
+        Collections.addAll(list, listValues);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra("returnValue", pageTitle + ":   " + list.get(position));
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
+    }
+
+    public void dataInit() {
+        switch (functionNo) {
+            case 1:
+                pageTitle = "Gender";
+                listValues = new String[] {"Male", "Female"};
+                break;
+            case 2:
+                pageTitle = "Location";
+                listValues = new String[] {"Use current location", "United States", "Kenya", "China"};
+                break;
+            default:
+                break;
+        }
     }
 
     public String[] getSelectionValues() {
@@ -81,13 +97,7 @@ public class SelectionActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_admin_mode || super.onOptionsItemSelected(item);
     }
 }

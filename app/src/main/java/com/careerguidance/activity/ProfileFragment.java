@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,10 +24,10 @@ import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
-import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 /**
  * Show user profile for editing. The "find me a career" button will
@@ -48,11 +49,17 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    ListView listView = null;
     ImageView profilePhoto = null;
     ImageView editName = null;
     TextView userName = null;
 
-    private String birthday = null;
+    String[] optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
+    ArrayList<String> optionList = new ArrayList<String>();
+    ArrayAdapter<String> adapter = null;
+
+    String birthday = "hi";
+    Calendar calendar = Calendar.getInstance();
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,9 +79,8 @@ public class ProfileFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
+
+    public ProfileFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,7 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     // Inflate the layout for this fragment
@@ -141,30 +148,25 @@ public class ProfileFragment extends Fragment {
 
 
         // the personal information list.
-        final ListView listview = (ListView) v.findViewById(R.id.listview);
-        String[] values = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
+        listView = (ListView) v.findViewById(R.id.listview);
+        Collections.addAll(optionList, optionListStr);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, optionList);
+        listView.setAdapter(adapter);
 
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
-
-        final StableArrayAdapter adapter = new StableArrayAdapter(getActivity(),
-                android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        showEditBirthdayDialog(list);
-                        adapter.notifyDataSetChanged();
+                        showEditBirthdayDialog();
+                        break;
+                    case 1:
+                    case 2:
+                        Intent intent = new Intent(getActivity(), SelectionActivity.class);
+                        intent.putExtra("function_no", position);
+                        startActivityForResult(intent, position);
                         break;
                     default:
-                        Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                        intent.putExtra("pageTitle", list.get(position));
-                        startActivity(intent);
                         break;
                 }
             }
@@ -219,25 +221,27 @@ public class ProfileFragment extends Fragment {
     }
 
     // TODO: edit
-    public void showEditBirthdayDialog(final ArrayList<String> list) {
+    public void showEditBirthdayDialog() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Birthday");
 
-        final Calendar c = Calendar.getInstance();
         final DatePicker datePicker = new DatePicker(getActivity());
         datePicker.setCalendarViewShown(false);
-        datePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+                new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                c.set(year, monthOfYear, dayOfMonth);
+                calendar.set(year, monthOfYear, dayOfMonth);
             }
         });
         alert.setView(datePicker);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                birthday = String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
-                list.set(0, birthday);
+                birthday = String.valueOf(calendar.get(Calendar.MONTH) + 1) + "/" +
+                        calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+                optionList.set(0, "Birthday:   " + birthday);
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -250,6 +254,15 @@ public class ProfileFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == Activity.RESULT_OK) {
+            optionList.set(requestCode, intent.getStringExtra("returnValue"));
+            adapter.notifyDataSetChanged();
         }
     }
 
