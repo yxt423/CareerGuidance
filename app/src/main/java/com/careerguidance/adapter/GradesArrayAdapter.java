@@ -24,9 +24,6 @@ public class GradesArrayAdapter extends ArrayAdapter<String> {
         this.context = context;
         valuesLeft_ = valuesLeft;
         valuesRight_ = valuesRight;
-
-        valuesLeft_.add("Add new course");
-        valuesRight_.add("");
     }
 
     @Override
