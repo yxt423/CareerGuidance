@@ -71,5 +71,6 @@
     <string name="title_activity_video">VideoActivity</string>
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_grades">GradesActivity</string>
+    <string name="title_activity_test_db">TestDBActivity</string>
 
 </resources>

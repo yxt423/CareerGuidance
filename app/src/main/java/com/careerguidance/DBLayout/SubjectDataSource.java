@@ -23,8 +23,7 @@ public class SubjectDataSource
     private SQLiteHelperClass dbHelper;
 
     private String[] allColumns = { SQLiteHelperClass.TBL_SUBJECT_COLS[0][0],
-            SQLiteHelperClass.TBL_SUBJECT_COLS[1][0], SQLiteHelperClass.TBL_SUBJECT_COLS[2][0],
-            SQLiteHelperClass.TBL_SUBJECT_COLS[3][0]};
+            SQLiteHelperClass.TBL_SUBJECT_COLS[1][0], SQLiteHelperClass.TBL_SUBJECT_COLS[2][0]};
 
     public SubjectDataSource(Context context)
     {
@@ -41,13 +40,11 @@ public class SubjectDataSource
         dbHelper.close();
     }
 
-    public Subject createSubject(String name, String description, double salary)
+    public Subject createSubject(String name, String description)
     {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_SUBJECT_COLS[1][0], name);
         values.put(SQLiteHelperClass.TBL_SUBJECT_COLS[2][0], description);
-        values.put(SQLiteHelperClass.TBL_SUBJECT_COLS[3][0], salary);
-
 
         long insertId = database.insert(SQLiteHelperClass.TBL_SUBJECT, null,
                 values);
@@ -93,6 +90,28 @@ public class SubjectDataSource
 
         return subjects;
     }
+
+    public List<String> getAllSubjectNames()
+    {
+        List<String> subjectNameList = new ArrayList<String>();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_SUBJECT,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Subject subject = cursorToSubject(cursor);
+            subjectNameList.add(subject.getName());
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return subjectNameList;
+    }
+
 
     private Subject cursorToSubject(Cursor cursor) {
         Subject subject = new Subject();

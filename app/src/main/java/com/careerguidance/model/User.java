@@ -1,5 +1,13 @@
 package com.careerguidance.model;
 
+import android.content.Context;
+
+import com.careerguidance.DBLayout.CareerDataSource;
+import com.careerguidance.DBLayout.GenderDataSource;
+import com.careerguidance.DBLayout.GradeDataSource;
+import com.careerguidance.DBLayout.LocationDataSource;
+import com.careerguidance.DBLayout.SubjectDataSource;
+
 import java.util.Date;
 import java.util.*;
 
@@ -8,26 +16,55 @@ import java.util.*;
  * user profile page.
  */
 public class User {
-    int id;
-    String lastName;
-    String firstName;
-    Date birthDate;
-    String gender;
-    String location;
 
-    String photoFileName;
-    String username;
-    String password;
+    private LocationDataSource locationDataSource;
+    private GenderDataSource genderDataSource;
+    private SubjectDataSource subjectDataSource;
+    private GradeDataSource gradeDataSource;
+    private CareerDataSource careerDataSource;
 
-    ArrayList<String> interests;
 
-    Hashtable<String, Double> grades;
+    private int id;
+    private String lastName;
+    private String firstName;
+    private Date birthDate;
+    private Gender gender;
+    private Location location;
 
-    Career careerChoice;
+    private String photoFileName;
+    private String username;
+    private String password;
 
-    University universityChoice;
+    private ArrayList<Interest> interests;
+
+    private ArrayList<User_Grade> grades;
+
+    private Career careerChoice;
+
+    private University universityChoice;
 
     //Constructors
+    public User(Context context)
+    {
+        id = 0;
+
+        lastName = "";
+
+        firstName = "";
+
+        birthDate = new Date();
+
+        gender = null;
+
+        interests = new ArrayList<Interest>();
+
+        grades = new ArrayList<User_Grade>();
+
+        careerChoice = null;
+
+        universityChoice = null;
+    }
+
     public User()
     {
         id = 0;
@@ -38,18 +75,18 @@ public class User {
 
         birthDate = new Date();
 
-        gender = "";
+        gender = null;
 
-        interests = new ArrayList<String>();
+        interests = new ArrayList<Interest>();
 
-        grades = new Hashtable<String, Double>();
+        grades = new ArrayList<User_Grade>();
 
         careerChoice = null;
 
         universityChoice = null;
     }
 
-    User(String lName, String fName, Date dob, String gndr)
+    User(Context context, String lName, String fName, Date dob, Gender gndr)
     {
         lastName = lName;
 
@@ -66,23 +103,23 @@ public class User {
         return id;
     }
 
+    public String getFirstName() { return firstName; }
+
     public String getLastName()
     {
         return lastName;
     }
 
-    public String getLocation()
+    public Location getLocation()
     {
         return location;
     }
-
-    public String getFirstName() { return firstName; }
 
     public Date getBirthDate() {
         return birthDate;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -107,11 +144,15 @@ public class User {
     }
 
     //Setters
+    public void setId(int intId) {
+        id = intId;
+    }
+
     public void setLastName(String lName) {
         lastName = lName;
     }
 
-    public void setLocation(String locn) {
+    public void setLocation(Location locn) {
         location = locn;
     }
 
@@ -122,7 +163,7 @@ public class User {
     public void setBirthDate(Date bDate) { birthDate = bDate; }
 
     public void setGender(String gndr) {
-       gender = gndr;
+       gender = new Gender(gndr);
     }
 
     public void setPhotoFileName(String fileName) {
@@ -145,13 +186,26 @@ public class User {
         universityChoice = uni;
     }
 
-    public ArrayList<String> getInterests()
+    public ArrayList<Interest> getInterests()
     {
         return interests;
     }
 
-    public Hashtable getGrades()
+    public ArrayList getGrades()
     {
         return grades;
     }
+
+    //methods
+    public boolean hasProfile ()
+    {
+        if (firstName.equals("") && lastName.equals(""))
+            return false;
+
+        return true;
+    }
+
+
+
+
 }

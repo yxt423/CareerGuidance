@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by chris on 11/8/14.
  */
-public class UniversityDataSource
+public class ProgramDataSource
 {
 
     // Database fields
@@ -28,7 +28,7 @@ public class UniversityDataSource
             SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[3][0],
             SQLiteHelperClass.TBL_UNIVERSITY_COLS[4][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[5][0]};
 
-    public UniversityDataSource(Context context)
+    public ProgramDataSource(Context context)
     {
         dbHelper = new SQLiteHelperClass(context);
     }

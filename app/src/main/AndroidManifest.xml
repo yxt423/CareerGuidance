@@ -59,6 +59,10 @@
             android:name=".activity.helperActivity.GradesActivity"
             android:label="@string/title_activity_grades" >
         </activity>
+        <activity
+            android:name=".activity.TestDBActivity"
+            android:label="@string/title_activity_test_db" >
+        </activity>
     </application>
 
 </manifest>

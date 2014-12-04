@@ -1,19 +1,27 @@
 package com.careerguidance.model;
 
+import android.content.Context;
+
+import com.careerguidance.DBLayout.GenderDataSource;
+
 /**
  * Created by yxt on 11/16/14.
  */
-public class Gender {
+public class Gender
+{
     int id;
 
     String name;
+
+    GenderDataSource genderDataSource;
 
     public Gender()
     {
         name = "";
     }
 
-    public Gender(String gndr) {
+    public Gender(String gndr)
+    {
         name = gndr;
     }
 
@@ -25,7 +33,6 @@ public class Gender {
     public String getName() {
         return name;
     }
-
 
     //Setters
     public void setName(String gndr) {

@@ -21,7 +21,7 @@ public class University {
 
     URL url;
 
-    ArrayList<University> universityList;
+    ArrayList<Program> programList;
 
     ArrayList<String> videoList;
 
@@ -54,8 +54,8 @@ public class University {
         return url;
     }
 
-    public ArrayList<University> getUniversityList() {
-        return universityList;
+    public ArrayList<Program> getUniversityList() {
+        return programList;
     }
 
     public ArrayList<String> getVideoList() {
@@ -63,8 +63,8 @@ public class University {
     }
 
     //Setters
-    public void setName(String name) {
-        name = name;
+    public void setName(String strName) {
+        name = strName;
     }
 
     public void setDescription(String desc) {
@@ -83,8 +83,8 @@ public class University {
         url = theUrl;
     }
 
-    public void setCareerList(ArrayList<University> lstUniversity) {
-        universityList = lstUniversity;
+    public void setProgramList(ArrayList<Program> lstProgram) {
+        programList = lstProgram;
     }
 
     public void setVideoList(ArrayList<String> vidList) {

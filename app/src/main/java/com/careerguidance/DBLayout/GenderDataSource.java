@@ -23,8 +23,7 @@ public class GenderDataSource
     private SQLiteHelperClass dbHelper;
 
     private String[] allColumns = { SQLiteHelperClass.TBL_GENDER_COLS[0][0],
-            SQLiteHelperClass.TBL_GENDER_COLS[1][0], SQLiteHelperClass.TBL_GENDER_COLS[2][0],
-            SQLiteHelperClass.TBL_GENDER_COLS[3][0]};
+            SQLiteHelperClass.TBL_GENDER_COLS[1][0]};
 
     public GenderDataSource(Context context)
     {
@@ -45,9 +44,6 @@ public class GenderDataSource
     {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_GENDER_COLS[1][0], name);
-        values.put(SQLiteHelperClass.TBL_GENDER_COLS[2][0], description);
-        values.put(SQLiteHelperClass.TBL_GENDER_COLS[3][0], salary);
-
 
         long insertId = database.insert(SQLiteHelperClass.TBL_GENDER, null,
                 values);

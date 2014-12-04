@@ -15,62 +15,63 @@ import java.util.ArrayList;
  * Created by chris on 11/8/14.
  */
 
-public class SQLiteHelperClass extends SQLiteOpenHelper {
+public class SQLiteHelperClass extends SQLiteOpenHelper
+{
 
-    private static final String DATABASE_NAME = "careerguidance.db";
+    protected static final String DATABASE_NAME = "careerguidance.db";
 
-    private static final int DATABASE_VERSION = 1;
+    protected static final int DATABASE_VERSION = 1;
 
     //Location Table================
-    public static final String TBL_LOCATION = "location";
+    protected static final String TBL_LOCATION = "location";
 
-    public static final String TBL_LOCATION_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_LOCATION_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"name", "TEXT"},
                                                         {"currency", "TEXT"},
                                                         {"currency_symbol","TEXT"}};
 
-    public static final String  TBL_LOCATION_OPTIONS [] = {};
+    protected static final String  TBL_LOCATION_OPTIONS [] = {};
 
     //Gender Table================
-    public static final String TBL_GENDER = "gender";
+    protected static final String TBL_GENDER = "gender";
 
-    public static final String TBL_GENDER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_GENDER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"name", "TEXT"}};
 
-    public static final String  TBL_GENDER_OPTIONS [] = {};
+    protected static final String  TBL_GENDER_OPTIONS [] = {};
 
     //Subjects Table================
-    public static final String TBL_SUBJECT = "subject";
+    protected static final String TBL_SUBJECT = "subject";
 
-    public static final String TBL_SUBJECT_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_SUBJECT_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"name", "TEXT"},
                                                         {"description", "TEXT"}};
 
-    public static final String  TBL_SUBJECT_OPTIONS [] = {};
+    protected static final String  TBL_SUBJECT_OPTIONS [] = {};
 
     //Interests Table===============
-    public static final String TBL_INTEREST = "interest";
+    protected static final String TBL_INTEREST = "interest";
 
-    public static final String TBL_INTEREST_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_INTEREST_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"name", "TEXT"},
                                                         {"description", "TEXT"}};
 
-    public static final String  TBL_INTEREST_OPTIONS [] = {};
+    protected static final String  TBL_INTEREST_OPTIONS [] = {};
 
     //Career Table==================
-    public static final String TBL_CAREER = "career";
+    protected static final String TBL_CAREER = "career";
 
-    public static final String TBL_CAREER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_CAREER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"name", "TEXT"},
                                                         {"description", "TEXT"},
                                                         {"salary", "REAL"}};
 
-    public static final String  TBL_CAREER_OPTIONS [] = {};
+    protected static final String  TBL_CAREER_OPTIONS [] = {};
 
     //University Table==============
-    public static final String TBL_UNIVERSITY = "university";
+    protected static final String TBL_UNIVERSITY = "university";
 
-    public static final String TBL_UNIVERSITY_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_UNIVERSITY_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                             {"name", "TEXT"},
                                                             {"description", "TEXT"},
                                                             {"fees", "REAL"},
@@ -78,25 +79,25 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
                                                             {"location_id", "INTEGER"}};
 
 
-    public static final String  TBL_UNIVERSITY_OPTIONS [] = {"FOREIGN KEY (location_id) REFERENCES location(_id)"};
+    protected static final String  TBL_UNIVERSITY_OPTIONS [] = {"FOREIGN KEY (location_id) REFERENCES location(_id)"};
 
     //University_program Table=====================
-    public static final String TBL_UNIVERSITY_PROGRAM = "university_program";
+    protected static final String TBL_UNIVERSITY_PROGRAM = "university_program";
 
-    public static final String TBL_UNIVERSITY_PROGRAM_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_UNIVERSITY_PROGRAM_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                                     {"university_id", "INTEGER"},
                                                                     {"name", "INTEGER"},
                                                                     {"career_id", "INTEGER"},
                                                                     {"description", "TEXT"},
                                                                     {"gpa", "REAL"}};
 
-    public static final String  TBL_UNIVERSITY_PROGRAM_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
+    protected static final String  TBL_UNIVERSITY_PROGRAM_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
                                                                     "FOREIGN KEY (career_id) REFERENCES career(_id)"};
 
     //User Table=====================
-    public static final String TBL_USER = "user";
+    protected static final String TBL_USER = "user";
 
-    public static final String  TBL_USER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String  TBL_USER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                         {"firstname", "TEXT"},
                                                         {"lastname", "TEXT"},
                                                         {"gender_id", "INTEGER"},
@@ -107,59 +108,69 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
                                                         {"career_id", "INTEGER"},
                                                         {"university_id", "INTEGER"}};
 
-    public static final String  TBL_USER_OPTIONS [] = {"FOREIGN KEY (gender_id) REFERENCES gender(_id)",
+    protected static final String  TBL_USER_OPTIONS [] = {"FOREIGN KEY (gender_id) REFERENCES gender(_id)",
                                                         "FOREIGN KEY (location_id) REFERENCES location(_id)",
                                                         "FOREIGN KEY (career_id) REFERENCES career(_id)",
                                                         "FOREIGN KEY (university_id) REFERENCES university(_id)"};
 
     //User_Grade Table===============
-    public static final String TBL_USER_GRADE = "user_grade";
+    protected static final String TBL_USER_GRADE = "user_grade";
 
-    public static final String TBL_USER_GRADE_COLS [][] = {{"user_id", "INTEGER"},
+    protected static final String TBL_USER_GRADE_COLS [][] = {{"user_id", "INTEGER"},
                                                             {"subject_id", "INTEGER"},
                                                             {"gpa", "REAL"}};
 
-    public static final String  TBL_USER_GRADE_OPTIONS [] = {"FOREIGN KEY (user_id) REFERENCES user(_id)",
+    protected static final String  TBL_USER_GRADE_OPTIONS [] = {"FOREIGN KEY (user_id) REFERENCES user(_id)",
                                                             "FOREIGN KEY (subject_id) REFERENCES subject(_id)"};
 
-    //University_Grade Table===============
-    public static final String TBL_UNIVERSITY_GRADE = "university_grade";
+    //User_Interest Table===============
+    protected static final String TBL_USER_INTEREST = "user_interest";
 
-    public static final String TBL_UNIVERSITY_GRADE_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_USER_INTEREST_COLS [][] = {{"user_id", "INTEGER"},
+                                                             {"interest_id", "INTEGER"}};
+
+    protected static final String  TBL_USER_INTEREST_OPTIONS [] = {"FOREIGN KEY (user_id) REFERENCES user(_id)",
+                                                                "FOREIGN KEY (interest_id) REFERENCES interest(_id)"};
+
+    //University_Grade Table===============
+    protected static final String TBL_UNIVERSITY_GRADE = "university_grade";
+
+    protected static final String TBL_UNIVERSITY_GRADE_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                                 {"university_id", "INTEGER"},
                                                                 {"program_id", "INTEGER"},
                                                                 {"subject_id", "INTEGER"},
                                                                 {"gpa", "REAL"}};
 
-    public static final String  TBL_UNIVERSITY_GRADE_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
+    protected static final String  TBL_UNIVERSITY_GRADE_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
                                                                     "FOREIGN KEY (program_id) REFERENCES university_program(_id)",
                                                                     "FOREIGN KEY (subject_id) REFERENCES subject(_id)"};
 
     //University_Career Table===============
-    public static final String TBL_UNIVERSITY_CAREER = "university_career";
+    protected static final String TBL_UNIVERSITY_CAREER = "university_career";
 
-    public static final String TBL_UNIVERSITY_CAREER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_UNIVERSITY_CAREER_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                                 {"university_id", "INTEGER"},
                                                                 {"program_id", "INTEGER"},
                                                                 {"career_id", "INTEGER"}};
 
-    public static final String  TBL_UNIVERSITY_CAREER_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
+    protected static final String  TBL_UNIVERSITY_CAREER_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
                                                                     "FOREIGN KEY (program_id) REFERENCES university_program(_id)",
                                                                     "FOREIGN KEY (career_id) REFERENCES career(_id)"};
 
     //University_Interest Table===============
-    public static final String TBL_UNIVERSITY_INTEREST = "university_interest";
+    protected static final String TBL_UNIVERSITY_INTEREST = "university_interest";
 
-    public static final String TBL_UNIVERSITY_INTEREST_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+    protected static final String TBL_UNIVERSITY_INTEREST_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
                                                                     {"university_id", "INTEGER"},
                                                                     {"program_id", "INTEGER"},
                                                                     {"interest_id", "INTEGER"}};
 
-    public static final String  TBL_UNIVERSITY_INTEREST_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
+    protected static final String  TBL_UNIVERSITY_INTEREST_OPTIONS [] = {"FOREIGN KEY (university_id) REFERENCES university(_id)",
                                                                         "FOREIGN KEY (program_id) REFERENCES university_program(_id)",
                                                                         "FOREIGN KEY (interest_id) REFERENCES interest(_id)"};
 
     //methods========================
+
     public void createTable(SQLiteDatabase database, String tblName, String [][] tblCols, String [] tblFKeys)
     {
         String sqlCreate = "CREATE TABLE " + tblName + "( ";
@@ -327,15 +338,15 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
         values = null;
         values = new ContentValues();
 
-        values.put("firstname", "Teenage");
-        values.put("lastname", "User1");
-        values.put("gender_id", 1);
-        values.put("birthdate", "06/06/2000");
-        values.put("location_id", 1);
-        values.put("username", "user");
-        values.put("password", "password");
-        values.put("career_id", 1);
-        values.put("university_id", 1);
+        values.putNull("firstname");
+        values.putNull("lastname");
+        values.putNull("gender_id");
+        values.putNull("birthdate");
+        values.putNull("location_id");
+        values.putNull("username");
+        values.putNull("password");
+        values.putNull("career_id");
+        values.putNull("university_id");
 
         database.insert("user", null, values);
 
@@ -361,7 +372,7 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
         database.insert("university_grade", null, values);
 
         //user_grade table
-        values = null;
+/*        values = null;
         values = new ContentValues();
 
         values.put("user_id", 1);
@@ -379,6 +390,16 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
 
         database.insert("user_grade", null, values);
 
+
+        //user_interest table
+        values = null;
+        values = new ContentValues();
+
+        values.put("user_id", 1);
+        values.put("interest_id", 1);
+
+        database.insert("user_interest", null, values);
+*/
         //university_career table
         values = null;
         values = new ContentValues();
@@ -438,6 +459,8 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
 
         createTable(database, TBL_USER_GRADE, TBL_USER_GRADE_COLS, TBL_USER_GRADE_OPTIONS);
 
+        createTable(database, TBL_USER_INTEREST, TBL_USER_INTEREST_COLS, TBL_USER_INTEREST_OPTIONS);
+
         createTable(database, TBL_UNIVERSITY_GRADE, TBL_UNIVERSITY_GRADE_COLS, TBL_UNIVERSITY_GRADE_OPTIONS);
 
         createTable(database, TBL_UNIVERSITY_CAREER, TBL_UNIVERSITY_CAREER_COLS, TBL_UNIVERSITY_CAREER_OPTIONS);
@@ -463,7 +486,7 @@ public class SQLiteHelperClass extends SQLiteOpenHelper {
     public ArrayList<Cursor> getData(String Query){
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[] { "mesage" };
+        String[] columns = new String[] { "message" };
         //an array list of cursor to save two cursors one has results from the query
         //other cursor stores error message if any errors are triggered
         ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
