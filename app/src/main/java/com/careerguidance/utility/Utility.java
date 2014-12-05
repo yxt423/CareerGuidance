@@ -1,5 +1,6 @@
 package com.careerguidance.utility;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -30,5 +31,9 @@ public class Utility {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public static String getLocationCountryName(Context context) {
+        return context.getResources().getConfiguration().locale.getDisplayCountry();
     }
 }

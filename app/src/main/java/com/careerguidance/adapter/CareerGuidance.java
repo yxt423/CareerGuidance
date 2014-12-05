@@ -1,7 +1,6 @@
 package com.careerguidance.adapter;
 
 import android.content.Context;
-import android.widget.TextView;
 
 import com.careerguidance.DBLayout.CareerDataSource;
 import com.careerguidance.DBLayout.GenderDataSource;
@@ -10,7 +9,6 @@ import com.careerguidance.DBLayout.LocationDataSource;
 import com.careerguidance.DBLayout.SubjectDataSource;
 import com.careerguidance.DBLayout.UniversityDataSource;
 import com.careerguidance.DBLayout.UserDataSource;
-import com.careerguidance.R;
 import com.careerguidance.cgexception.CGException;
 import com.careerguidance.model.Career;
 import com.careerguidance.model.Gender;
@@ -20,7 +18,6 @@ import com.careerguidance.model.Subject;
 import com.careerguidance.model.University;
 import com.careerguidance.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -156,7 +153,7 @@ public class CareerGuidance {
         {
             if (userDataSource.setLastName(user.getId(), strLastname))
             {
-                user.setGender(strLastname);
+                user.setLastName(strLastname);
             }
             else
             {

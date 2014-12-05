@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
+import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +23,10 @@ import java.util.Collections;
  */
 public class SelectionActivity extends Activity {
 
-    // private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
     ArrayAdapter<String> adapter = null;
     String pageTitle = null;
     String[] listValues = null;
-    int functionNo = 0;
+    int functionNo = 0;  // 1 gender, 2 location
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,11 @@ public class SelectionActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.putExtra("returnValue", pageTitle + ":   " + list.get(position));
+                if (functionNo == 2 && position == 0) {
+                    intent.putExtra("returnValue", pageTitle + ":   " + Utility.getLocationCountryName(getApplicationContext()));
+                } else {
+                    intent.putExtra("returnValue", pageTitle + ":   " + list.get(position));
+                }
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -73,21 +76,21 @@ public class SelectionActivity extends Activity {
         }
     }
 
-    public String[] getSelectionValues() {
-        if (pageTitle.equals("Gender")) {
-            return new String[] {"Male", "Female"};
-        } else if (pageTitle.equals("Location")) {
-            return new String[] {"Use current location", "United States", "Kenya", "China"};
-        } else if (pageTitle.equals("Grades")) {
-            return new String[] {"Math", "Science", "Language Arts", "Social Studies", "History", "Add new one"};
-        } else if (pageTitle.equals("Interests")) {
-            return new String[] {"Reading", "Sports", "Add new one"};
-        } else if (pageTitle.equals("More Resources")) {
-            return new String[] {"Official Website", "Wiki page", "Search in Google"};
-        } else {
-            return new String[]{};
-        }
-    }
+//    public String[] getSelectionValues() {
+//        if (pageTitle.equals("Gender")) {
+//            return new String[] {"Male", "Female"};
+//        } else if (pageTitle.equals("Location")) {
+//            return new String[] {"Use current location", "United States", "Kenya", "China"};
+//        } else if (pageTitle.equals("Grades")) {
+//            return new String[] {"Math", "Science", "Language Arts", "Social Studies", "History", "Add new one"};
+//        } else if (pageTitle.equals("Interests")) {
+//            return new String[] {"Reading", "Sports", "Add new one"};
+//        } else if (pageTitle.equals("More Resources")) {
+//            return new String[] {"Official Website", "Wiki page", "Search in Google"};
+//        } else {
+//            return new String[]{};
+//        }
+//    }
 
 
     @Override
