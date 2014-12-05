@@ -22,13 +22,21 @@ public class TestDBActivity extends Activity {
 
         objCareerGuidance = new CareerGuidance(this);
 
+        CareerGuidance objCareerGuidance1 = new CareerGuidance(this);
+
         TextView test = (TextView) findViewById(R.id.output);
 
-        String userId = objCareerGuidance.getAllInterestNames().toString();
+        String userId = "CG values: " + objCareerGuidance.getAllInterestNames().toString() + "\n";
+
+        userId += "CG1 values: " + objCareerGuidance1.getAllUniversityNames().toString() + "\n";
 
         objCareerGuidance.setUserFirstName("Christopher");
 
         objCareerGuidance.setUserLastName("Njuguna");
+
+        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
+
+        userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
 
         if (objCareerGuidance.userHasProfile())
             test.setText(userId);

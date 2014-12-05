@@ -23,24 +23,25 @@ import java.util.List;
 /**
  * Created by chris on 12/4/14.
  */
-public class CareerGuidance {
-    private User user;
+public class CareerGuidance
+{
+    private static User user;
 
-    private UserDataSource userDataSource;
+    private static UserDataSource userDataSource;
 
-    private LocationDataSource locationDataSource;
+    private static LocationDataSource locationDataSource;
 
-    private GenderDataSource genderDataSource;
+    private static GenderDataSource genderDataSource;
 
-    private SubjectDataSource subjectDataSource;
+    private static SubjectDataSource subjectDataSource;
 
-    private InterestDataSource interestDataSource;
+    private static InterestDataSource interestDataSource;
 
-    private CareerDataSource careerDataSource;
+    private static CareerDataSource careerDataSource;
 
-    private UniversityDataSource universityDataSource;
+    private static UniversityDataSource universityDataSource;
 
-    private Context context;
+    private static Context context;
 
     public CareerGuidance(Context contxt)
     {
@@ -95,14 +96,14 @@ public class CareerGuidance {
     //Getters
 
     //User Getters
-    public void getUserFirstName()
+    public String getUserFirstName()
     {
-        user.getFirstName();
+        return user.getFirstName();
     }
 
-    public void getUserLastName()
+    public String getUserLastName()
     {
-        user.getLastName();
+        return user.getLastName();
     }
 
     public Gender getUserGender()
