@@ -226,7 +226,6 @@ public class ProfileFragment extends Fragment {
         alert.show();
     }
 
-    // TODO: edit
     public void showEditBirthdayDialog() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Birthday");

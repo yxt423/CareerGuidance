@@ -28,6 +28,8 @@ import java.util.ArrayList;
  *
  */
 public class CareerListFragment extends Fragment {
+    //private CareerGuidance careerGuidance = new CareerGuidance(getActivity());
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -84,6 +86,7 @@ public class CareerListFragment extends Fragment {
             list.add(values[i]);
         }
 
+//        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
         final StableArrayAdapter adapter = new StableArrayAdapter(getActivity(),
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);

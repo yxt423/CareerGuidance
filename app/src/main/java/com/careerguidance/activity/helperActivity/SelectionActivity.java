@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.careerguidance.DBLayout.AndroidDatabaseManager;
 import com.careerguidance.R;
+import com.careerguidance.activity.TestDBActivity;
 import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
@@ -103,6 +105,18 @@ public class SelectionActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return id == R.id.action_admin_mode || super.onOptionsItemSelected(item);
+
+        if (id == R.id.action_admin_mode) {
+            Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_db_testing) {
+            Intent intent = new Intent(this, TestDBActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,6 +1,7 @@
 package com.careerguidance.activity.helperActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.careerguidance.DBLayout.AndroidDatabaseManager;
 import com.careerguidance.R;
+import com.careerguidance.activity.TestDBActivity;
 
 public class GalleryActivity extends Activity {
 
@@ -69,9 +72,18 @@ public class GalleryActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         if (id == R.id.action_admin_mode) {
+            Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
             return true;
         }
+        if (id == R.id.action_db_testing) {
+            Intent intent = new Intent(this, TestDBActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

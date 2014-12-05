@@ -8,6 +8,7 @@
     <!-- menu buttons -->
     <string name="action_settings">Settings</string>
     <string name="action_admin_mode">Admin Mode</string>
+    <string name="action_db_testing">Database Testing</string>
 
     <!-- cover page buttions -->
     <string name="match_career_button">Find your career match</string>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.careerguidance.DBLayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.adapter.StableArrayAdapter;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
  * to the university detail info page.
  */
 public class UniversityListActivity extends Activity {
+//    private CareerGuidance careerGuidance = new CareerGuidance(getApplicationContext());
 
     String careerName = null;
 
@@ -37,7 +39,7 @@ public class UniversityListActivity extends Activity {
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
         }
-
+//        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllUniversityNames();
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
@@ -66,9 +68,18 @@ public class UniversityListActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         if (id == R.id.action_admin_mode) {
+            Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
             return true;
         }
+        if (id == R.id.action_db_testing) {
+            Intent intent = new Intent(this, TestDBActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

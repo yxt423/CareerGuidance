@@ -50,11 +50,6 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void testDBButton(View v) {
-        Intent intent = new Intent(this, TestDBActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,6 +66,11 @@ public class MainActivity extends Activity {
 
         if (id == R.id.action_admin_mode) {
             Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_db_testing) {
+            Intent intent = new Intent(this, TestDBActivity.class);
             startActivity(intent);
             return true;
         }

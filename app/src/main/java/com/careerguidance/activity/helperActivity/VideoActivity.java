@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import com.careerguidance.DBLayout.AndroidDatabaseManager;
 import com.careerguidance.R;
+import com.careerguidance.activity.TestDBActivity;
 
 public class VideoActivity extends Activity {
 
@@ -50,9 +52,18 @@ public class VideoActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         if (id == R.id.action_admin_mode) {
+            Intent intent = new Intent(this, AndroidDatabaseManager.class);
+            startActivity(intent);
             return true;
         }
+        if (id == R.id.action_db_testing) {
+            Intent intent = new Intent(this, TestDBActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
