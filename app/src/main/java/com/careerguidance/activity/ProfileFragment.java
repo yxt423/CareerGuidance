@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
@@ -30,6 +32,7 @@ import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GradesActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -47,7 +50,7 @@ import java.util.Collections;
  *
  */
 public class ProfileFragment extends Fragment {
-    private static final int REQUEST_IMAGE_CAPTURE = 10;
+    private static final int REQUEST_IMAGE_CAPTURE = 100;
     private Context context = getActivity();
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +61,6 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
 
     ListView listView = null;
-    ImageView profilePhoto = null;
     ImageView editName = null;
     TextView userName = null;
 
@@ -68,6 +70,11 @@ public class ProfileFragment extends Fragment {
 
     String birthday = null;
     Calendar calendar = Calendar.getInstance();
+
+    // user photo related.
+    ImageView profilePhoto = null;
+    File folder = null;
+    File user_photo = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -100,6 +107,13 @@ public class ProfileFragment extends Fragment {
 
         optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
         Collections.addAll(optionList, optionListStr);
+
+        // for profile photo
+        folder = new File(Environment.getExternalStorageDirectory(), "pictures");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        user_photo = new File(folder, "user_photo.png");
     }
 
     // Inflate the layout for this fragment
@@ -206,6 +220,9 @@ public class ProfileFragment extends Fragment {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            // take a photo and save to local file.
+            Uri uriSavedImage = Uri.fromFile(user_photo);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
@@ -282,11 +299,15 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == Activity.RESULT_OK) {
-                Bundle extras = intent.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                profilePhoto.setImageBitmap(imageBitmap);
-            } else {
-                Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
+//                Bundle extras = intent.getExtras();
+//                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                profilePhoto.setImageBitmap(imageBitmap);
+                if (user_photo.exists()) {
+                    Bitmap myBitmap = BitmapFactory.decodeFile(user_photo.getAbsolutePath());
+                    profilePhoto.setImageBitmap(myBitmap);
+                } else {
+                    Toast.makeText(getActivity(), "file not saved", Toast.LENGTH_SHORT).show();
+                }
             }
         }
         else if (resultCode == Activity.RESULT_OK) {  // if requestCode is none of the above, it is one of the position on the list.

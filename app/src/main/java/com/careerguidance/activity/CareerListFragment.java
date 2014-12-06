@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.careerguidance.R;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ import java.util.ArrayList;
  *
  */
 public class CareerListFragment extends Fragment {
-    //private CareerGuidance careerGuidance = new CareerGuidance(getActivity());
+    // Hi Chris: uncomment this line and see how it works.
+    private CareerGuidance careerGuidance = null;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,6 +69,8 @@ public class CareerListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        careerGuidance = new CareerGuidance(getActivity());
     }
 
     // Inflate the layout for this fragment
