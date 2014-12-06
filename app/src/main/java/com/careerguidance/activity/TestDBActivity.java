@@ -6,10 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.careerguidance.DBLayout.UserDataSource;
 import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
-import com.careerguidance.model.User;
 
 public class TestDBActivity extends Activity {
 
@@ -22,18 +20,35 @@ public class TestDBActivity extends Activity {
 
         objCareerGuidance = new CareerGuidance(this);
 
+        CareerGuidance objCareerGuidance1 = new CareerGuidance(this);
+
         TextView test = (TextView) findViewById(R.id.output);
 
-        String userId = objCareerGuidance.getAllInterestNames().toString();
+        String userId;
+
+        if (objCareerGuidance.userHasProfile())
+            userId = "has profile";
+        else
+             userId = "No Profile";
+
+        userId += "CG values: " + objCareerGuidance.getAllInterestNames().toString() + "\n";
+
+        userId += "CG1 values: " + objCareerGuidance1.getAllUniversityNames().toString() + "\n";
 
         objCareerGuidance.setUserFirstName("Christopher");
 
-        objCareerGuidance.setUserLastName("Njuguna");
+        objCareerGuidance1.setUserLastName("Njuguna");
 
         if (objCareerGuidance.userHasProfile())
             test.setText(userId);
         else
             test.setText("No Profile");
+
+        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
+
+        userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
+
+        objCareerGuidance.addUserGrade(1,2.8);
     }
 
     @Override

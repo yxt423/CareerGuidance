@@ -55,7 +55,7 @@
             android:name=".activity.helperActivity.VideoActivity"
             android:label="@string/title_activity_video" >
         </activity>
-        <activity android:name=".DBLayout.AndroidDatabaseManager" />
+        <activity android:name=".dblayout.AndroidDatabaseManager" />
         <activity
             android:name=".activity.helperActivity.GradesActivity"
             android:label="@string/title_activity_grades" >

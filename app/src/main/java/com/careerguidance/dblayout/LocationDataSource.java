@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 /**
  * Created by chris on 11/8/14.

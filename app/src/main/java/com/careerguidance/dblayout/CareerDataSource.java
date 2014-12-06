@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 /**
  * Created by chris on 11/8/14.
@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.careerguidance.model.Career;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CareerDataSource
@@ -114,6 +113,64 @@ public class CareerDataSource
         cursor.close();
 
         return careerNames;
+    }
+
+    public int getIdFromName(String careerName)
+    {
+        int careerId = -1;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Career career = cursorToCareer(cursor);
+
+            if (careerName.equals(career.getName()))
+            {
+                careerId = career.getId();
+
+                break;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return careerId;
+    }
+
+    public String getNameFromId(int careerId)
+    {
+        String careerName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Career career = cursorToCareer(cursor);
+
+            if (careerId == career.getId())
+            {
+                careerName = career.getName();
+
+                break;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return careerName;
     }
 
     private Career cursorToCareer(Cursor cursor) {

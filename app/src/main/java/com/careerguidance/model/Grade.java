@@ -3,7 +3,8 @@ package com.careerguidance.model;
 /**
  * Created by yxt on 11/16/14.
  */
-public class User_Grade {
+public class Grade
+{
 
     int id;
 
@@ -11,14 +12,15 @@ public class User_Grade {
 
     double GPA;
 
-    public User_Grade()
+    public Grade()
     {
         subject = null;
 
         GPA = 0.0;
     }
 
-    public User_Grade(Subject subj, double theGPA) {
+    public Grade(Subject subj, double theGPA)
+    {
 
         subject = subj;
 

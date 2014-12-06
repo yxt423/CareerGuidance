@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 /**
  * Created by chris on 11/8/14.
@@ -110,6 +110,62 @@ public class InterestDataSource
         cursor.close();
 
         return  interestNameList;
+    }
+
+    public String getNameFromId(int interestId)
+    {
+        String interestName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_INTEREST,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Interest interest = cursorToInterest(cursor);
+
+            if (interest.getId() == interestId)
+            {
+                interestName = interest.getName();
+
+                break;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return  interestName;
+    }
+
+    public int getIdFromName (String interestName)
+    {
+        int interestId = -1;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_INTEREST,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Interest interest = cursorToInterest(cursor);
+
+            if (interestName.equals(interest.getName()))
+            {
+                interestId = interest.getId();
+
+                break;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return  interestId;
     }
 
     private Interest cursorToInterest(Cursor cursor) {

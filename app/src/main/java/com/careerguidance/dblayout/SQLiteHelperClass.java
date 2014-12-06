@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 import android.content.ContentValues;
 import android.content.Context;

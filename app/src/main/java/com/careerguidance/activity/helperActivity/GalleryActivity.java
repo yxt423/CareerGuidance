@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.careerguidance.DBLayout.AndroidDatabaseManager;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
 

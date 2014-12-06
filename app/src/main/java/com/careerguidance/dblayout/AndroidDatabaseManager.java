@@ -1,5 +1,5 @@
 //add your package name here example: package com.example.dbm;
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 //all required import files
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.careerguidance.DBLayout.AndroidDatabaseManager;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
 import com.careerguidance.adapter.GradesArrayAdapter;

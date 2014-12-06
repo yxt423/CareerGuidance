@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.careerguidance.model.Location;
 import com.careerguidance.model.University;
 
 import java.net.MalformedURLException;
@@ -98,12 +99,55 @@ public class UniversityDataSource
         return universityList;
     }
 
+    public List<University> getAllUniversity(Location location)
+    {
+        List<University> universityList = new ArrayList<University>();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, "location_id = " + location.getId(), null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            University university = cursorToUniversity(cursor);
+            universityList.add(university);
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return universityList;
+    }
+
     public List<String> getAllUniversityNames()
     {
         List<String> universityNameList = new ArrayList<String>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
                 allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            University university = cursorToUniversity(cursor);
+            universityNameList.add(university.getName());
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return universityNameList;
+    }
+
+    public List<String> getAllUniversityNames(Location location)
+    {
+        List<String> universityNameList = new ArrayList<String>();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, "location_id = " + location.getId(), null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast())

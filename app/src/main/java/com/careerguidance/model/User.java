@@ -1,12 +1,14 @@
 package com.careerguidance.model;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.careerguidance.DBLayout.CareerDataSource;
-import com.careerguidance.DBLayout.GenderDataSource;
-import com.careerguidance.DBLayout.GradeDataSource;
-import com.careerguidance.DBLayout.LocationDataSource;
-import com.careerguidance.DBLayout.SubjectDataSource;
+import com.careerguidance.cgexception.CGException;
+import com.careerguidance.dblayout.CareerDataSource;
+import com.careerguidance.dblayout.GenderDataSource;
+import com.careerguidance.dblayout.User_GradeDataSource;
+import com.careerguidance.dblayout.LocationDataSource;
+import com.careerguidance.dblayout.SubjectDataSource;
 
 import java.util.Date;
 import java.util.*;
@@ -20,7 +22,7 @@ public class User {
     private LocationDataSource locationDataSource;
     private GenderDataSource genderDataSource;
     private SubjectDataSource subjectDataSource;
-    private GradeDataSource gradeDataSource;
+    private User_GradeDataSource userGradeDataSource;
     private CareerDataSource careerDataSource;
 
 
@@ -37,7 +39,7 @@ public class User {
 
     private ArrayList<Interest> interests;
 
-    private ArrayList<User_Grade> grades;
+    private ArrayList<Grade> grades;
 
     private Career careerChoice;
 
@@ -58,7 +60,7 @@ public class User {
 
         interests = new ArrayList<Interest>();
 
-        grades = new ArrayList<User_Grade>();
+        grades = new ArrayList<Grade>();
 
         careerChoice = null;
 
@@ -79,7 +81,7 @@ public class User {
 
         interests = new ArrayList<Interest>();
 
-        grades = new ArrayList<User_Grade>();
+        grades = new ArrayList<Grade>();
 
         careerChoice = null;
 
@@ -188,24 +190,108 @@ public class User {
 
     public ArrayList<Interest> getInterests()
     {
-        return interests;
+        ArrayList<Interest> tempInterests = (ArrayList<Interest>) interests.clone();
+
+        return tempInterests;
     }
 
-    public ArrayList getGrades()
+    public ArrayList<Grade> getGrades()
     {
-        return grades;
+        ArrayList<Grade> tempGrades = (ArrayList<Grade>) grades.clone();
+
+        return tempGrades;
     }
 
     //methods
     public boolean hasProfile ()
     {
-        if (firstName.equals("") && lastName.equals(""))
-            return false;
+        if (firstName != null & lastName != null)
+            return true;
 
-        return true;
+        return false;
     }
 
 
+    public void addGrade (Grade grade)
+    {
+        try
+        {
+            if (!grades.contains(grade)) {
+                grades.add(grade);
+            }
+            else
+            {
+                CGException exception = new CGException("Grade already exists");
 
+                throw exception;
+            }
+        }
+        catch (CGException e)
+        {
+            Log.d("CGException:", e.toString());
+        }
+    }
 
+    public void delGrade (Grade grade)
+    {
+        try
+        {
+            if (grades.contains(grade))
+            {
+                grades.remove(grade);
+            }
+            else
+            {
+                CGException exception = new CGException("Grade does not exist");
+
+                throw exception;
+            }
+        }
+        catch (CGException exception)
+        {
+            Log.d("CGException:", exception.toString());
+        }
+    }
+
+    public void addInterest (Interest interest)
+    {
+        try
+        {
+            if (!interests.contains(interest))
+            {
+                interests.add(interest);
+            }
+            else
+            {
+                CGException exception = new CGException("Interest already exists");
+
+                throw exception;
+            }
+        }
+        catch (CGException e)
+        {
+            Log.d("CGException:", e.toString());
+        }
+    }
+
+    public void delInterest (Interest interest)
+    {
+        try
+        {
+            if (interests.contains(interest))
+            {
+                grades.remove(interest);
+            }
+            else
+            {
+                CGException exception = new CGException("Interest does not exist");
+
+                throw exception;
+            }
+        }
+        catch (CGException exception)
+        {
+            Log.d("CGException:", exception.toString());
+        }
+    }
 }

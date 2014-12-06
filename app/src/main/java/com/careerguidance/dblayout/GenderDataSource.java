@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 /**
  * Created by chris on 11/8/14.
@@ -40,7 +40,65 @@ public class GenderDataSource
         dbHelper.close();
     }
 
-    public Gender createGender(String name, String description, double salary)
+    public boolean isValidGender(String strGender)
+    {
+        if (getGenderId(strGender) != -1)
+            return true;
+        else
+            return false;
+    }
+
+    public int getGenderId(String name)
+    {
+        int genderId = -1;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_GENDER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Gender gender = cursorToGender(cursor);
+
+            if (name.equalsIgnoreCase(gender.getName()))
+                genderId = gender.getId();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return genderId;
+    }
+
+    public String getGenderName(int id)
+    {
+        String genderName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_GENDER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Gender gender = cursorToGender(cursor);
+
+            if (id == gender.getId())
+                genderName = gender.getName();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return genderName;
+    }
+
+    public Gender createGender(String name)
     {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_GENDER_COLS[1][0], name);

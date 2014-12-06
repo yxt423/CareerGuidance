@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,9 +24,9 @@ public class ProgramDataSource
 
     private SQLiteHelperClass dbHelper;
 
-    private String[] allColumns = { SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[1][0],
-            SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[3][0],
-            SQLiteHelperClass.TBL_UNIVERSITY_COLS[4][0], SQLiteHelperClass.TBL_UNIVERSITY_COLS[5][0]};
+    private String[] allColumns = { SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[0][0], SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[1][0],
+            SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[2][0], SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[3][0],
+            SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[4][0], SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[5][0]};
 
     public ProgramDataSource(Context context)
     {
@@ -46,18 +46,18 @@ public class ProgramDataSource
     public University createUniversity(String name, String description, double fees, String url, String location)
     {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[1][0], name);
-        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], description);
-        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[3][0], fees);
-        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[4][0], url);
-        values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[5][0], location);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[1][0], name);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[2][0], description);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[3][0], fees);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[4][0], url);
+        values.put(SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[5][0], location);
 
 
         long insertId = database.insert(SQLiteHelperClass.TBL_USER, null,
                 values);
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
-                allColumns, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0] + " = " + insertId, null,
+                allColumns, SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[0][0] + " = " + insertId, null,
                 null, null, null);
 
         cursor.moveToFirst();
@@ -73,7 +73,7 @@ public class ProgramDataSource
     {
         long id = university.getId();
 
-        database.delete(SQLiteHelperClass.TBL_UNIVERSITY, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0]
+        database.delete(SQLiteHelperClass.TBL_UNIVERSITY, SQLiteHelperClass.TBL_UNIVERSITY_PROGRAM_COLS[0][0]
                 + " = " + id, null);
     }
 
@@ -85,6 +85,7 @@ public class ProgramDataSource
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast())
         {
             University university = cursorToUniversity(cursor);
@@ -106,6 +107,7 @@ public class ProgramDataSource
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast())
         {
             University university = cursorToUniversity(cursor);

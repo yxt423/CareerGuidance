@@ -1,4 +1,4 @@
-package com.careerguidance.DBLayout;
+package com.careerguidance.dblayout;
 
 /**
  * Created by chris on 11/8/14.
@@ -15,16 +15,14 @@ import com.careerguidance.model.Career;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CareerGuidanceDataSource
+public abstract class CareerGuidanceDataSource
 {
     // Database fields
     private SQLiteDatabase database;
 
     private SQLiteHelperClass dbHelper;
 
-    private String[] allColumns = { SQLiteHelperClass.TBL_CAREER_COLS[0][0],
-            SQLiteHelperClass.TBL_CAREER_COLS[1][0], SQLiteHelperClass.TBL_CAREER_COLS[2][0],
-            SQLiteHelperClass.TBL_CAREER_COLS[3][0]};
+    private String[] allColumns = { };
 
     public CareerGuidanceDataSource(Context context)
     {
