@@ -73,7 +73,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
 		//in the below line Change the text 'yourCustomSqlHelper' with your custom sqlitehelper class name
 		dbm = new SQLiteHelperClass(AndroidDatabaseManager.this);
-		
+
 		mainscrollview = new ScrollView(AndroidDatabaseManager.this);
 		
 		//the main linear layout to which all tables spinners etc will be added.In this activity every element is created dynamically  to avoid using xml file

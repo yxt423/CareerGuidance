@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 public class CareerListFragment extends Fragment {
     // Hi Chris: uncomment this line and see how it works.
-    private CareerGuidance careerGuidance = null;
+    private CareerGuidance careerGuidance;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
