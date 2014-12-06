@@ -48,7 +48,7 @@ public class TestDBActivity extends Activity {
 
         userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
 
-        objCareerGuidance.addUserGrade(1,2.8);
+        objCareerGuidance.addUserGrade(10,2.8);
     }
 
     @Override

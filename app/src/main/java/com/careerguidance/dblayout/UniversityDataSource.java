@@ -46,6 +46,11 @@ public class UniversityDataSource
 
     public University createUniversity(String name, String description, double fees, String url, String location)
     {
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][1] + " = " + name, null,
+                null, null, null);
+
+        cursor.moveToFirst();
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[1][0], name);
         values.put(SQLiteHelperClass.TBL_UNIVERSITY_COLS[2][0], description);
@@ -57,7 +62,7 @@ public class UniversityDataSource
         long insertId = database.insert(SQLiteHelperClass.TBL_USER, null,
                 values);
 
-        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+        cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
                 allColumns, SQLiteHelperClass.TBL_UNIVERSITY_COLS[0][0] + " = " + insertId, null,
                 null, null, null);
 

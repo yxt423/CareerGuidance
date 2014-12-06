@@ -8,8 +8,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.careerguidance.cgexception.CGException;
 import com.careerguidance.model.Grade;
 
 import java.util.ArrayList;
@@ -44,34 +47,62 @@ public class User_GradeDataSource
     {
         Grade newUser_Grade = null;
 
+        //query the database to see if the record already exists
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
                 allColumns, SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0] + " = " + userId
                         + " AND " + SQLiteHelperClass.TBL_USER_GRADE_COLS[1][0] + " = " + subjectId,
                 null, null, null, null);
 
-        if (cursor.getCount() == 0)
+
+
+        if (cursor.getCount() == 0) //if the record doesn't already exist
+        try
         {
             ContentValues values = new ContentValues();
+
             values.put(SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0], userId);
+
             values.put(SQLiteHelperClass.TBL_USER_GRADE_COLS[1][0], subjectId);
+
             values.put(SQLiteHelperClass.TBL_USER_GRADE_COLS[2][0], GPA);
 
 
-            long insertId = database.insert(SQLiteHelperClass.TBL_USER_GRADE, null,
+            long insertId = database.insert(SQLiteHelperClass.TBL_USER_GRADE, null, //try to insert the record
                     values);
 
+            //query the database to ensure the record was inserted
             cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
                     allColumns, SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0] + " = " + insertId
                             + " AND " + SQLiteHelperClass.TBL_USER_GRADE_COLS[1][0] + " = " + subjectId,
                     null, null, null, null);
 
-            cursor.moveToFirst();
+            //if it was inserted create a new object
+            if (cursor.moveToFirst())
+                newUser_Grade = cursorToUser_Grade(cursor);
 
-            newUser_Grade = cursorToUser_Grade(cursor);
+            cursor.close(); //close the cursor
+        }
+        catch (SQLException sqlException) //if an error occurred when inserting
+        {
+            try
+            {
+                if(sqlException instanceof SQLiteConstraintException)
+                {
+                    try
+                    {
+                        CGException exception = new CGException("Foreign key constraint violation");
 
-            cursor.close();
+                        throw (exception);
+                    }
+                    catch (CGException e)
+                    {
+
+                    }
+                }
+            }
         }
 
+        //return the object
         return newUser_Grade;
     }
 
@@ -131,6 +162,7 @@ public class User_GradeDataSource
         //user_Grade.setId(cursor.getLong(0));
 
         user_Grade.setSubject(cursor.getString(1));
+
         user_Grade.setGPA(cursor.getDouble(2));
 
         return user_Grade;

@@ -65,16 +65,9 @@ public class CareerGuidance
 
     public void openDataSources()
     {
-        userDataSource = new UserDataSource(context);
+        careerDataSource = new CareerDataSource(context);
 
-        userDataSource.open();
-
-        user = userDataSource.getUser(1); //only 1 user so get the first and only user in the database
-
-
-        locationDataSource = new LocationDataSource(context);
-
-        locationDataSource.open();
+        careerDataSource.open();
 
 
         genderDataSource = new GenderDataSource(context);
@@ -82,34 +75,24 @@ public class CareerGuidance
         genderDataSource.open();
 
 
-        subjectDataSource = new SubjectDataSource(context);
-
-        subjectDataSource.open();
-
-
         interestDataSource = new InterestDataSource(context);
 
         interestDataSource.open();
 
 
-        careerDataSource = new CareerDataSource(context);
+        locationDataSource = new LocationDataSource(context);
 
-        careerDataSource.open();
+        locationDataSource.open();
+
+
+        subjectDataSource = new SubjectDataSource(context);
+
+        subjectDataSource.open();
 
 
         universityDataSource = new UniversityDataSource(context);
 
         universityDataSource.open();
-
-
-        user_gradeDataSource = new User_GradeDataSource(context);
-
-        user_gradeDataSource.open();
-
-
-        user_interestDataSource = new User_InterestDataSource(context);
-
-        user_interestDataSource.open();
 
 
         university_gradeDataSource = new University_GradeDataSource(context);
@@ -120,6 +103,48 @@ public class CareerGuidance
         university_interestDataSource = new University_InterestDataSource(context);
 
         university_interestDataSource.open();
+
+
+        userDataSource = new UserDataSource(context);
+
+        userDataSource.open();
+
+        user = userDataSource.getUser(1); //only 1 user so get the first and only user in the database
+
+
+        user_gradeDataSource = new User_GradeDataSource(context);
+
+        user_gradeDataSource.open();
+
+
+        user_interestDataSource = new User_InterestDataSource(context);
+
+        user_interestDataSource.open();
+    }
+
+    public void closeDataSources()
+    {
+        careerDataSource.close();
+
+        genderDataSource.close();
+
+        interestDataSource.close();
+
+        locationDataSource.close();
+
+        subjectDataSource.close();
+
+        universityDataSource.close();
+
+        university_gradeDataSource.close();
+
+        university_interestDataSource.close();
+
+        userDataSource.close();
+
+        user_gradeDataSource.close();
+
+        user_interestDataSource.close();
     }
 
     public boolean userHasProfile()
@@ -321,7 +346,6 @@ public class CareerGuidance
         }
     }
 
-
     public void delUserGrade(Grade grade)
     {
         user_gradeDataSource.deleteGrade(user.getId(), grade.getSubject().getId());
@@ -351,7 +375,6 @@ public class CareerGuidance
             System.out.println(e);
         }
     }
-
 
     //University
     public List<University> getAllUniversity()

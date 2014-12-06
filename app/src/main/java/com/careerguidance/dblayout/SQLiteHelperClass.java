@@ -425,6 +425,13 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
+    @Override
+    public void onConfigure(SQLiteDatabase database)
+    {
+        database.setForeignKeyConstraintsEnabled(true);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase database) {
 
@@ -441,6 +448,7 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         database.execSQL("drop table university_career");
         database.execSQL("drop table university_interest");
 */
+
         createTable(database, TBL_LOCATION, TBL_LOCATION_COLS, TBL_LOCATION_OPTIONS);
 
         createTable(database, TBL_GENDER, TBL_GENDER_COLS, TBL_GENDER_OPTIONS);
