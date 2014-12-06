@@ -3,10 +3,13 @@ package com.careerguidance.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -21,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GradesActivity;
@@ -43,6 +47,9 @@ import java.util.Collections;
  *
  */
 public class ProfileFragment extends Fragment {
+    private static final int REQUEST_IMAGE_CAPTURE = 10;
+    private Context context = getActivity();
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -115,6 +122,7 @@ public class ProfileFragment extends Fragment {
                 takePhotoButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dispatchTakePictureIntent();
                         dialog.dismiss();
                     }
                 });
@@ -195,9 +203,16 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
     // show the edit user name dialog once.
     public void showEditNameDialog(String message) {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle("Name");
         if (message != null) {
             alert.setMessage(message);
@@ -265,7 +280,16 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle extras = intent.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                profilePhoto.setImageBitmap(imageBitmap);
+            } else {
+                Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if (resultCode == Activity.RESULT_OK) {  // if requestCode is none of the above, it is one of the position on the list.
             optionList.set(requestCode, intent.getStringExtra("returnValue"));
             adapter.notifyDataSetChanged();
         }
