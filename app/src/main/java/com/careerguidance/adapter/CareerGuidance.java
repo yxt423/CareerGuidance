@@ -122,7 +122,8 @@ public class CareerGuidance
         university_interestDataSource.open();
     }
 
-    public boolean userHasProfile() {
+    public boolean userHasProfile()
+    {
         return user.hasProfile();
     }
 
@@ -309,7 +310,7 @@ public class CareerGuidance
             }
             else
             {
-                CGException exception = new CGException("Error adding interest");
+                CGException exception = new CGException("Error adding grade");
 
                 throw exception;
             }

@@ -24,22 +24,31 @@ public class TestDBActivity extends Activity {
 
         TextView test = (TextView) findViewById(R.id.output);
 
-        String userId = "CG values: " + objCareerGuidance.getAllInterestNames().toString() + "\n";
+        String userId;
+
+        if (objCareerGuidance.userHasProfile())
+            userId = "has profile";
+        else
+             userId = "No Profile";
+
+        userId += "CG values: " + objCareerGuidance.getAllInterestNames().toString() + "\n";
 
         userId += "CG1 values: " + objCareerGuidance1.getAllUniversityNames().toString() + "\n";
 
         objCareerGuidance.setUserFirstName("Christopher");
 
-        objCareerGuidance.setUserLastName("Njuguna");
-
-        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
-
-        userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
+        objCareerGuidance1.setUserLastName("Njuguna");
 
         if (objCareerGuidance.userHasProfile())
             test.setText(userId);
         else
             test.setText("No Profile");
+
+        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
+
+        userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
+
+        objCareerGuidance.addUserGrade(1,2.8);
     }
 
     @Override

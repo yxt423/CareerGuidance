@@ -190,21 +190,25 @@ public class User {
 
     public ArrayList<Interest> getInterests()
     {
-        return interests;
+        ArrayList<Interest> tempInterests = (ArrayList<Interest>) interests.clone();
+
+        return tempInterests;
     }
 
-    public ArrayList getGrades()
+    public ArrayList<Grade> getGrades()
     {
-        return grades;
+        ArrayList<Grade> tempGrades = (ArrayList<Grade>) grades.clone();
+
+        return tempGrades;
     }
 
     //methods
     public boolean hasProfile ()
     {
-        if (firstName.equals("") && lastName.equals(""))
-            return false;
+        if (firstName != null & lastName != null)
+            return true;
 
-        return true;
+        return false;
     }
 
 
