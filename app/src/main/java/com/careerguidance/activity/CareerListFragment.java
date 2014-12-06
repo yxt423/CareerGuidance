@@ -1,6 +1,7 @@
 package com.careerguidance.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.careerguidance.R;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  *
  */
-public class CareerListFragment extends Fragment {
-    //private CareerGuidance careerGuidance = new CareerGuidance(getActivity());
+public class CareerListFragment extends Fragment
+{
+    private CareerGuidance careerGuidance;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,6 +70,10 @@ public class CareerListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Context context = getActivity();
+
+        careerGuidance = new CareerGuidance(context);
     }
 
     // Inflate the layout for this fragment

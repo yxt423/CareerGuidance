@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class SQLiteHelperClass extends SQLiteOpenHelper
 {
+    private static SQLiteHelperClass sInstance;
 
     protected static final String DATABASE_NAME = "careerguidance.db";
 
@@ -421,7 +422,21 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         database.insert("university_interest", null, values);
     }
 
-    public SQLiteHelperClass(Context context) {
+    public static SQLiteHelperClass getInstance(Context context)
+    {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null)
+        {
+            sInstance = new SQLiteHelperClass(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
+    public SQLiteHelperClass(Context context)
+    {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -491,7 +506,9 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    public ArrayList<Cursor> getData(String Query){
+    public ArrayList<Cursor> getData(String Query)
+    {
+        //This method is used by AndroidDatabaseManager
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String[] columns = new String[] { "message" };
