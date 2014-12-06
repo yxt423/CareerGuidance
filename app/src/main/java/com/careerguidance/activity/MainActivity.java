@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 
@@ -17,31 +18,54 @@ import com.careerguidance.R;
  * find a career match / see all career options.
  */
 public class MainActivity extends Activity {
+    private CareerGuidance careerGuidance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        careerGuidance = new CareerGuidance(getApplicationContext());
     }
 
     public void matchCareerButton(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("You don't have a profile yet.");
-        builder.setMessage("We will help you find a career according to your profile information.");
-        builder.setPositiveButton("Go Create A Profile!", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent(getBaseContext(), MainTabHost.class);
-                intent.putExtra("currentTab", 2);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        if (careerGuidance.userHasProfile()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("You don't have a profile yet.");
+            builder.setMessage("We will help you find a career according to your profile information.");
+            builder.setPositiveButton("Go Create A Profile!", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent = new Intent(getBaseContext(), MainTabHost.class);
+                    intent.putExtra("currentTab", 2);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("You don't have a profile yet.");
+            builder.setMessage("We will help you find a career according to your profile information.");
+            builder.setPositiveButton("Go Create A Profile!", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent = new Intent(getBaseContext(), MainTabHost.class);
+                    intent.putExtra("currentTab", 2);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void careerOptionsButton(View v) {

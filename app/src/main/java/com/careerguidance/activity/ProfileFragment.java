@@ -3,7 +3,6 @@ package com.careerguidance.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,6 +30,7 @@ import android.widget.Toast;
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GradesActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
+import com.careerguidance.adapter.CareerGuidance;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,7 +51,8 @@ import java.util.Collections;
  */
 public class ProfileFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 100;
-    private Context context = getActivity();
+
+    private CareerGuidance careerGuidance;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -104,6 +105,7 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        careerGuidance = new CareerGuidance(getActivity());
 
         optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
         Collections.addAll(optionList, optionListStr);
@@ -229,7 +231,7 @@ public class ProfileFragment extends Fragment {
 
     // show the edit user name dialog once.
     public void showEditNameDialog(String message) {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Name");
         if (message != null) {
             alert.setMessage(message);

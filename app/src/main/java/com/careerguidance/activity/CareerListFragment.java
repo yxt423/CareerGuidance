@@ -29,7 +29,6 @@ import java.util.ArrayList;
  *
  */
 public class CareerListFragment extends Fragment {
-    // Hi Chris: uncomment this line and see how it works.
     private CareerGuidance careerGuidance;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,12 +84,13 @@ public class CareerListFragment extends Fragment {
                 "career10", "career11", "career12", "career13", "career14", "career15",
                 "career16", "career17", "career18"};
 
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
+//        final ArrayList<String> list = new ArrayList<String>();
+//        for (int i = 0; i < values.length; ++i) {
+//            list.add(values[i]);
+//        }
 
-//        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
+
+        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
         final StableArrayAdapter adapter = new StableArrayAdapter(getActivity(),
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);

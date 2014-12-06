@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_name"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/photo"
+            android:src="@drawable/default_photo"
             android:contentDescription="user_photo" />
     </RelativeLayout>
 
