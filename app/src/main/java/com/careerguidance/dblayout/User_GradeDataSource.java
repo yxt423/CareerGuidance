@@ -100,6 +100,10 @@ public class User_GradeDataSource
                     }
                 }
             }
+            catch (SQLException e)
+            {
+
+            }
         }
 
         //return the object
