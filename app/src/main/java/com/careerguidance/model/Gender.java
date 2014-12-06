@@ -1,8 +1,6 @@
 package com.careerguidance.model;
 
-import android.content.Context;
-
-import com.careerguidance.DBLayout.GenderDataSource;
+import com.careerguidance.dblayout.GenderDataSource;
 
 /**
  * Created by yxt on 11/16/14.

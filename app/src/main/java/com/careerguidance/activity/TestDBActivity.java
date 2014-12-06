@@ -6,10 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.careerguidance.DBLayout.UserDataSource;
 import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
-import com.careerguidance.model.User;
 
 public class TestDBActivity extends Activity {
 
