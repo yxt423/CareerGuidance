@@ -17,6 +17,7 @@ import com.careerguidance.model.Location;
 import com.careerguidance.model.Subject;
 import com.careerguidance.model.University;
 import com.careerguidance.model.User;
+import com.careerguidance.model.User_Grade;
 
 import java.util.List;
 
@@ -126,7 +127,7 @@ public class CareerGuidance
         return user.getCareerChoice();
     }
 
-    //Setters
+    //User Setters
     public void setUserFirstName(String strFirstname)
     {
         try
@@ -190,37 +191,20 @@ public class CareerGuidance
         }
     }
 
-    public boolean isValidGender(String strGender)
-    {
-        List<Gender> genders = genderDataSource.getAllGenders();
-
-        boolean validGender = false;
-
-        for (Gender gender : genders)
-        {
-            if (strGender.equals(gender.getName()))
-            {
-                validGender = true;
-
-                break;
-            }
-        }
-
-        return validGender;
-    }
 
     public void setUserGender(String strGender)
     {
         try {
-            if (isValidGender(strGender))
+            if (genderDataSource.isValidGender(strGender))
             {
-                userDataSource.setGender(user.getId(), strGender);
+                int genderId = genderDataSource.getGenderId(strGender);
 
-                user.setGender(strGender);
+                if (userDataSource.setGenderId(user.getId(), genderId))
+                    user.setGender(strGender);
             }
             else
             {
-                CGException cgException = new CGException("Invalid Gender");
+                CGException cgException = new CGException ("Invalid Gender");
 
                 throw cgException;
             }
@@ -241,7 +225,7 @@ public class CareerGuidance
             }
             else
             {
-                CGException cgException = new CGException("Unable to save name to database");
+                CGException cgException = new CGException("Unable to save University to database");
 
                 throw cgException;
             }
@@ -271,6 +255,11 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+    }
+
+    public void addUserGrade(User_Grade)
+    {
+
     }
 
     //University

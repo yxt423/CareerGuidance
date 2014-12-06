@@ -85,6 +85,7 @@ public class ProgramDataSource
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast())
         {
             University university = cursorToUniversity(cursor);
@@ -106,6 +107,7 @@ public class ProgramDataSource
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast())
         {
             University university = cursorToUniversity(cursor);

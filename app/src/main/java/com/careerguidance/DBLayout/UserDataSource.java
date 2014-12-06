@@ -11,8 +11,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.careerguidance.model.Career;
 import com.careerguidance.model.Location;
+import com.careerguidance.model.Subject;
 import com.careerguidance.model.University;
 import com.careerguidance.model.User;
+import com.careerguidance.model.User_Grade;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -109,11 +111,11 @@ public class UserDataSource
                 + " = " + id, null);
     }
 
-    public User getUser(int userid)
+    public User getUser(int userId)
     {
         User user = null;
 
-        Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,allColumns, "_id = " + userid, null, null, null, null);
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,allColumns, "_id = " + userId, null, null, null, null);
 
         if (cursor.moveToFirst())
             user = cursorToUser(cursor);
@@ -164,7 +166,7 @@ public class UserDataSource
         return user;
     }
 
-    public boolean setUserDetail(int userid, String column, String strValue)
+    public boolean setUserDetail(int userId, String column, String strValue)
     {
         int rowsAffected = 0;
 
@@ -172,7 +174,7 @@ public class UserDataSource
 
         values.put(column, strValue);
 
-        rowsAffected = database.update("user", values,"_id = " + userid, null);
+        rowsAffected = database.update("user", values,"_id = " + userId, null);
 
         if (rowsAffected == 1)
             return true;
@@ -180,37 +182,48 @@ public class UserDataSource
             return false;
     }
 
-    public boolean setFirstName(int userid, String strFirstName)
+    public boolean setFirstName(int userId, String strFirstName)
     {
-        return setUserDetail(userid, "firstname", strFirstName);
+        return setUserDetail(userId, "firstname", strFirstName);
     }
 
-    public boolean setLastName(int userid, String strLastName)
+    public boolean setLastName(int userId, String strLastName)
     {
-        return setUserDetail(userid, "lastname", strLastName);
+        return setUserDetail(userId, "lastname", strLastName);
     }
 
-    public boolean setLocation(int userid, String strLocation)
+    public boolean setLocation(int userId, String strLocation)
     {
-        return setUserDetail(userid,"location", strLocation);
+        return setUserDetail(userId,"location", strLocation);
     }
 
-    public boolean setGender(int userid, String strGender)
+    public boolean setGenderId(int userId, int genderId)
     {
-        return setUserDetail(userid, "gender", strGender);
+        int rowsAffected = 0;
+
+        ContentValues values = new ContentValues();
+
+        values.put("gender_id", genderId);
+
+        rowsAffected = database.update("user", values,"_id = " + userId, null);
+
+        if (rowsAffected == 1)
+            return true;
+        else
+            return false;
     }
 
-    public boolean setUserName(int userid, String strUserName)
+    public boolean setUserName(int userId, String strUserName)
     {
-        return setUserDetail(userid, "username", strUserName);
+        return setUserDetail(userId, "username", strUserName);
     }
 
-    public boolean setPassword(int userid, String strPassword)
+    public boolean setPassword(int userId, String strPassword)
     {
-        return setUserDetail(userid, "password", strPassword);
+        return setUserDetail(userId, "password", strPassword);
     }
 
-    public boolean setUserUniversity(int userid, University university)
+    public boolean setUserUniversity(int userId, University university)
     {
         int rowsAffected = 0;
 
@@ -218,7 +231,7 @@ public class UserDataSource
 
         values.put("university_id", university.getId());
 
-        rowsAffected = database.update("user", values, "_id = " + userid, null);
+        rowsAffected = database.update("user", values, "_id = " + userId, null);
 
         if (rowsAffected == 1)
             return true;
@@ -226,7 +239,7 @@ public class UserDataSource
             return false;
     }
 
-    public boolean setUserCareer(int userid, Career career)
+    public boolean setUserCareer(int userId, Career career)
     {
         int rowsAffected = 0;
 
@@ -234,11 +247,41 @@ public class UserDataSource
 
         values.put("career_id", career.getId());
 
-        rowsAffected = database.update("user", values, "_id = " + userid, null);
+        rowsAffected = database.update("user", values, "_id = " + userId, null);
 
         if (rowsAffected == 1)
             return true;
         else
             return false;
+    }
+
+    public boolean addGrade(User_Grade grade)
+    {
+
+    }
+
+    public boolean updateGrade(User_Grade grade)
+    {
+
+    }
+
+    public boolean delGrade(User_Grade grade)
+    {
+
+    }
+
+    public boolean addInterest(User_Interest grade)
+    {
+
+    }
+
+    public boolean updateInterest(User_Grade grade)
+    {
+
+    }
+
+    public boolean delInterest(User_Grade grade)
+    {
+
     }
 }
