@@ -14,19 +14,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.GradesArrayAdapter;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class GradesActivity extends Activity {
+    private CareerGuidance careerGuidance;
 
     GradesArrayAdapter adapter = null;
     String[] courseNameStr = new String[] {"Math", "Science", "Language Arts", "Social Studies", "History"};
-    String[] courseCourses = new String[] {"90", "85", "73", "98", "62"};
+    String[] courseCourses = new String[] {"0", "0", "0", "0", "0", "0", "0", "0", "0"};
     ArrayList<String> courseNameList = new ArrayList<String>();
     ArrayList<String> scoreList = new ArrayList<String>();
 
@@ -35,12 +37,17 @@ public class GradesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grades);
 
+        careerGuidance = new CareerGuidance(getApplicationContext());
+
         final TextView pageTitleView = (TextView) findViewById(R.id.page_title);
         pageTitleView.setText("Grades");
 
         final ListView listview = (ListView) findViewById(R.id.listview);
         Collections.addAll(courseNameList, courseNameStr);
         Collections.addAll(scoreList, courseCourses);
+
+        courseNameList = (ArrayList<String>) careerGuidance.getAllSubjectNames();
+
         adapter = new GradesArrayAdapter(this, courseNameList, scoreList);
         listview.setAdapter(adapter);
 

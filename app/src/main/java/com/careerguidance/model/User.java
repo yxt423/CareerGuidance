@@ -205,7 +205,7 @@ public class User {
     //methods
     public boolean hasProfile ()
     {
-        if (firstName != null & lastName != null)
+        if (firstName != null || lastName != null)
             return true;
 
         return false;

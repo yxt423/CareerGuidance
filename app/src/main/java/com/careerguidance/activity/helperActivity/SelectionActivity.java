@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
@@ -24,6 +25,7 @@ import java.util.Collections;
  * This activity is reused for location selection, gender selection, etc.
  */
 public class SelectionActivity extends Activity {
+    private CareerGuidance careerGuidance;
 
     ArrayAdapter<String> adapter = null;
     String pageTitle = null;
@@ -34,6 +36,8 @@ public class SelectionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+
+        careerGuidance = new CareerGuidance(getApplicationContext());
 
         Bundle extras = getIntent().getExtras();
         functionNo = extras.getInt("function_no");

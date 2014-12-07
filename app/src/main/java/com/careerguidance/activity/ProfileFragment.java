@@ -163,15 +163,27 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // user name
+        userName = (TextView) v.findViewById(R.id.user_name);
+        if (careerGuidance.userHasProfile()) {
+            userName.setText(careerGuidance.getUserFirstName());
+        }
+
         // the pencil picture on click: show the edit name dialog
         editName = (ImageView) v.findViewById(R.id.edit_name);
-        userName = (TextView) v.findViewById(R.id.user_name);
         editName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 showEditNameDialog(null);
             }
         });
+
+        if (careerGuidance.getUserGender().getName() != null) {
+            optionList.set(1, optionList.get(1) + ":  " + careerGuidance.getUserGender().getName());
+        }
+        if (careerGuidance.getUserLocation().getName() != null) {
+            optionList.set(2, optionList.get(2) + ":  " + careerGuidance.getUserLocation().getName());
+        }
 
 
         // the personal information list.
@@ -248,7 +260,7 @@ public class ProfileFragment extends Fragment {
                     showEditNameDialog("Name can not be empty.");
                 } else {
                     userName.setText(value);
-                    // save user name in database.
+                    careerGuidance.setUserFirstName(value);
                 }
             }
         });
@@ -313,8 +325,15 @@ public class ProfileFragment extends Fragment {
             }
         }
         else if (resultCode == Activity.RESULT_OK) {  // if requestCode is none of the above, it is one of the position on the list.
-            optionList.set(requestCode, intent.getStringExtra("returnValue"));
+            String value = intent.getStringExtra("returnValue");
+            optionList.set(requestCode, value);
             adapter.notifyDataSetChanged();
+
+            if (requestCode == 1) {
+                careerGuidance.setUserGender(value);
+            } else if (requestCode == 2) {
+                careerGuidance.setUserLocation(value);
+            }
         }
     }
 

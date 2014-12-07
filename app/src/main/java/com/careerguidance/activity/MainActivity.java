@@ -30,23 +30,9 @@ public class MainActivity extends Activity {
 
     public void matchCareerButton(View v) {
         if (careerGuidance.userHasProfile()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("You don't have a profile yet.");
-            builder.setMessage("We will help you find a career according to your profile information.");
-            builder.setPositiveButton("Go Create A Profile!", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent intent = new Intent(getBaseContext(), MainTabHost.class);
-                    intent.putExtra("currentTab", 2);
-                    startActivity(intent);
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            Intent intent = new Intent(getBaseContext(), MainTabHost.class);
+            intent.putExtra("currentTab", 2);
+            startActivity(intent);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("You don't have a profile yet.");
