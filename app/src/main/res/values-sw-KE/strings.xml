@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">CareerGuidance</string>
     <string name="hello_world">Hello world</string>
 
     <!-- menu buttons -->
@@ -43,5 +44,19 @@
     <string name="universities_page_title">Famous Universities</string>
     <string name="university_description">University Description:</string>
     <string name="university_location">University Location: </string>
+
+    <!-- activity titles -->
+    <string name="title_activity_main_tab_host">MainTabHost</string>
+    <string name="title_activity_career_info">CareerInfoActivity</string>
+    <string name="title_activity_university_info">UniversityInfoActivity</string>
+    <string name="title_activity_university_list">UniversityListActivity</string>
+    <string name="title_activity_selection">SelectionActivity</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_grades">GradesActivity</string>
+    <string name="title_activity_test_db">TestDBActivity</string>
+    <string name="title_activity_interests">InterestsActivity</string>
+    <string name="title_activity_location">LocationActivity</string>
 
 </resources>

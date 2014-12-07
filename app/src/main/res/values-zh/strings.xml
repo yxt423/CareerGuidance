@@ -49,5 +49,19 @@
     <string name="university_description">简介:</string>
     <string name="university_location">学校位置: </string>
 
+    <!-- activity titles -->
+    <string name="title_activity_main_tab_host">MainTabHost</string>
+    <string name="title_activity_career_info">CareerInfoActivity</string>
+    <string name="title_activity_university_info">UniversityInfoActivity</string>
+    <string name="title_activity_university_list">UniversityListActivity</string>
+    <string name="title_activity_selection">SelectionActivity</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_grades">GradesActivity</string>
+    <string name="title_activity_test_db">TestDBActivity</string>
+    <string name="title_activity_interests">InterestsActivity</string>
+    <string name="title_activity_location">LocationActivity</string>
+
 
 </resources>
