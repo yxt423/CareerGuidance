@@ -76,6 +76,10 @@ public class Career {
     }
 
     //Setters
+    public void setId(int careerId) {
+        id = careerId;
+    }
+
     public void setDescription(String desc) {
         description = desc;
     }

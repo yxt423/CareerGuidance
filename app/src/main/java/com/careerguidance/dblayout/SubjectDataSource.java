@@ -70,9 +70,9 @@ public class SubjectDataSource
                 + " = " + id, null);
     }
 
-    public List<Subject> getAllSubjects()
+    public ArrayList<Subject> getAllSubjects()
     {
-        List<Subject> subjects = new ArrayList<Subject>();
+        ArrayList<Subject> subjects = new ArrayList<Subject>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_SUBJECT,
                 allColumns, null, null, null, null, null);
@@ -91,9 +91,9 @@ public class SubjectDataSource
         return subjects;
     }
 
-    public List<String> getAllSubjectNames()
+    public ArrayList<String> getAllSubjectNames()
     {
-        List<String> subjectNameList = new ArrayList<String>();
+        ArrayList<String> subjectNameList = new ArrayList<String>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_SUBJECT,
                 allColumns, null, null, null, null, null);

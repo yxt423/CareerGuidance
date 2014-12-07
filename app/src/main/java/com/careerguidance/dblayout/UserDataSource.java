@@ -13,6 +13,7 @@ import com.careerguidance.model.Career;
 import com.careerguidance.model.Location;
 import com.careerguidance.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -169,6 +170,8 @@ public class UserDataSource
     private User cursorToUser(Cursor cursor) {
         User user = new User();
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
         GenderDataSource genderDataSource = new GenderDataSource(localContext);
         genderDataSource.open();
         LocationDataSource locationDataSource = new LocationDataSource(localContext);
@@ -184,13 +187,22 @@ public class UserDataSource
         user.setFirstName(cursor.getString(1));
         user.setLastName(cursor.getString(2));
         user.setGender(genderDataSource.getGenderObject(cursor.getInt(3)));
-        //user.setBirthDate(cursor.getString(4));
+
+        try
+        {
+            user.setBirthDate(formatter.parse(cursor.getString(4)));
+        }
+        catch (Exception e)
+        {
+
+        }
+
         user.setBirthDate(date);
         user.setLocation(locationDataSource.getLocationObject(cursor.getInt(5)));
         user.setUsername(cursor.getString(6));
         user.setPassword(cursor.getString(7));
         user.setUniversityChoice(universityDataSource.getUniversityObject(cursor.getInt(9)));
-        user.setCareerChoice(careerDataSource.getCareerObjecct(cursor.getInt(8)));
+        user.setCareerChoice(careerDataSource.getCareerObject(cursor.getInt(8)));
 
         genderDataSource.close();
         locationDataSource.close();
@@ -224,6 +236,22 @@ public class UserDataSource
     public boolean setLastName(int userId, String strLastName)
     {
         return setUserDetail(userId, "lastname", strLastName);
+    }
+
+    public boolean setBirthDate(Date date)
+    {
+        int rowsAffected = 0;
+
+        ContentValues values = new ContentValues();
+
+        values.put("birthdate", date.toString());
+
+        rowsAffected = database.update("user", values,"_id = 1", null);
+
+        if (rowsAffected == 1)
+            return true;
+        else
+            return false;
     }
 
     public boolean setLocation(int userId, int locationId)

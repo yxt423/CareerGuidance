@@ -70,9 +70,9 @@ public class InterestDataSource
                 + " = " + id, null);
     }
 
-    public List<Interest> getAllInterests()
+    public ArrayList<Interest> getAllInterests()
     {
-        List<Interest> interests = new ArrayList<Interest>();
+        ArrayList<Interest> interests = new ArrayList<Interest>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_INTEREST,
                 allColumns, null, null, null, null, null);
@@ -91,9 +91,9 @@ public class InterestDataSource
         return interests;
     }
 
-    public List<String> getAllInterestNames()
+    public ArrayList<String> getAllInterestNames()
     {
-        List<String> interestNameList = new ArrayList<String>();
+        ArrayList<String> interestNameList = new ArrayList<String>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_INTEREST,
                 allColumns, null, null, null, null, null);

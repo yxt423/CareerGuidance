@@ -178,7 +178,10 @@ public class User {
         firstName = fName;
     }
 
-    public void setBirthDate(Date bDate) { birthDate = bDate; }
+    public void setBirthDate(Date bDate)
+    {
+        birthDate = bDate;
+    }
 
     public void setGender(Gender gndr) {
        gender = gndr;

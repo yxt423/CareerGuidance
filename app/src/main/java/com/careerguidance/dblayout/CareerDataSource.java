@@ -201,7 +201,7 @@ public class CareerDataSource
         return career;
     }
 
-    public Career getCareerObjecct(int careerId)
+    public Career getCareerObject(int careerId)
     {
         Career career = null;
 
@@ -231,8 +231,7 @@ public class CareerDataSource
     private Career cursorToCareer(Cursor cursor) {
         Career career = new Career();
 
-        //career.setId(cursor.getLong(0));
-
+        career.setId(cursor.getInt(0));
         career.setName(cursor.getString(1));
         career.setDescription(cursor.getString(2));
         career.setAvgSalary(cursor.getDouble(3));

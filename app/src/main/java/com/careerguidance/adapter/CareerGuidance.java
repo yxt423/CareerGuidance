@@ -24,7 +24,9 @@ import com.careerguidance.model.Subject;
 import com.careerguidance.model.University;
 import com.careerguidance.model.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,47 +74,21 @@ public class CareerGuidance
     {
         careerDataSource = new CareerDataSource(context);
 
-        careerDataSource.open();
-
-
         career_interestDataSource = new Career_InterestDataSource(context);
-
-        career_interestDataSource.open();
-
 
         genderDataSource = new GenderDataSource(context);
 
-        genderDataSource.open();
-
-
         interestDataSource = new InterestDataSource(context);
-
-        interestDataSource.open();
-
 
         locationDataSource = new LocationDataSource(context);
 
-        locationDataSource.open();
-
-
         subjectDataSource = new SubjectDataSource(context);
-
-        subjectDataSource.open();
-
 
         universityDataSource = new UniversityDataSource(context);
 
-        universityDataSource.open();
-
-
         university_gradeDataSource = new University_GradeDataSource(context);
 
-        university_gradeDataSource.open();
-
-
         university_interestDataSource = new University_InterestDataSource(context);
-
-        university_interestDataSource.open();
 
 
         userDataSource = new UserDataSource(context);
@@ -121,15 +97,13 @@ public class CareerGuidance
 
         user = userDataSource.getUser(1); //only 1 user so get the first and only user in the database
 
+        userDataSource.close();
+
 
         user_gradeDataSource = new User_GradeDataSource(context);
 
-        user_gradeDataSource.open();
-
-
         user_interestDataSource = new User_InterestDataSource(context);
 
-        user_interestDataSource.open();
     }
 
     public void closeDataSources()
@@ -161,8 +135,6 @@ public class CareerGuidance
     {
         return user.hasProfile();
     }
-
-    //Getters
 
     //User Getters
     public String getUserFirstName()
@@ -198,13 +170,15 @@ public class CareerGuidance
     }
 
     //User Setters
-    public void setUserFirstName(String strFirstname)
+    public void setUserFirstName(String strFirstName)
     {
         try
         {
-           if (userDataSource.setFirstName(user.getId(), strFirstname))
+            userDataSource.open();
+
+           if (userDataSource.setFirstName(user.getId(), strFirstName))
            {
-                user.setFirstName(strFirstname);
+                user.setFirstName(strFirstName);
            }
            else
            {
@@ -217,12 +191,18 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            userDataSource.close();
+        }
     }
 
     public void setUserLastName(String strLastname)
     {
         try
         {
+            userDataSource.open();
+
             if (userDataSource.setLastName(user.getId(), strLastname))
             {
                 user.setLastName(strLastname);
@@ -238,11 +218,20 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            userDataSource.close();
+        }
     }
 
     public void setUserLocation(String strLocation)
     {
-        try {
+        try
+        {
+            userDataSource.open();
+
+            locationDataSource.open();
+
             if (locationDataSource.isValidLocation(strLocation))
             {
                 int locationId = locationDataSource.getLocationId(strLocation);
@@ -261,12 +250,49 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            userDataSource.close();
+
+            locationDataSource.close();
+        }
     }
 
+    public void setUserBirthDate(Date birthDate)
+    {
+        try
+        {
+            userDataSource.open();
+
+            if (userDataSource.setBirthDate(birthDate))
+            {
+                user.setBirthDate(birthDate);
+            }
+            else
+            {
+                CGException cgException = new CGException("Unable to save birthDate to database");
+
+                throw cgException;
+            }
+        }
+        catch (CGException e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            userDataSource.close();
+        }
+    }
 
     public void setUserGender(String strGender)
     {
-        try {
+        try
+        {
+            userDataSource.open();
+
+            genderDataSource.open();
+
             if (genderDataSource.isValidGender(strGender))
             {
                 int genderId = genderDataSource.getGenderId(strGender);
@@ -285,12 +311,20 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            userDataSource.close();
+
+            genderDataSource.close();
+        }
     }
 
     public void setUserUniversity(University university)
     {
         try
         {
+            userDataSource.open();
+
             if (userDataSource.setUserUniversity(user.getId(), university.getId()))
             {
                 user.setUniversityChoice(university);
@@ -310,12 +344,16 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally {
+            userDataSource.close();
+        }
     }
 
     public void setUserCareer(Career career)
     {
         try
         {
+
             if (userDataSource.setUserCareer(user.getId(), career))
             {
                 user.setCareerChoice(career);
@@ -335,12 +373,18 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            userDataSource.close();
+        }
     }
 
     public void addUserGrade(int subjectId, double gpa)
     {
         try
         {
+            user_gradeDataSource.open();
+
             Grade userGrade = user_gradeDataSource.create_UserGrade(user.getId(), subjectId, gpa);
 
             if (userGrade != null)
@@ -358,19 +402,38 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            user_gradeDataSource.close();
+        }
     }
 
     public void delUserGrade(Grade grade)
     {
-        user_gradeDataSource.deleteGrade(user.getId(), grade.getSubject().getId());
+        try
+        {
+            user_gradeDataSource.open();
 
-        user.delGrade(grade);
+            user_gradeDataSource.deleteGrade(user.getId(), grade.getSubject().getId());
+
+            user.delGrade(grade);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            user_gradeDataSource.close();
+        }
     }
 
     public void addUserInterest(int interestId)
     {
         try
         {
+            user_interestDataSource.open();
+
             Interest newInterest = user_interestDataSource.addInterest(user.getId(), interestId);
 
             if (newInterest != null)
@@ -388,70 +451,290 @@ public class CareerGuidance
         {
             System.out.println(e);
         }
+        finally
+        {
+            user_interestDataSource.close();
+        }
     }
 
     //University
     public List<University> getAllUniversity()
     {
-        return universityDataSource.getAllUniversity();
+        List<University> uniList = new ArrayList<University>();
+
+        try
+        {
+            universityDataSource.open();
+
+            uniList = universityDataSource.getAllUniversity();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            universityDataSource.close();
+        }
+
+        return uniList;
     }
 
     public List<String> getAllUniversityNames()
     {
-        return universityDataSource.getAllUniversityNames();
+        List<String> nameList = new ArrayList<String>();
+        try
+        {
+            universityDataSource.open();
+
+            nameList = universityDataSource.getAllUniversityNames();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            universityDataSource.close();
+        }
+
+        return nameList;
     }
 
-    public University getUniversity(int universityId)
+    public University getUniversityById(int universityId)
     {
-        return universityDataSource.getUniversityById(universityId);
+        University university = null;
+        try
+        {
+            universityDataSource.open();
+
+            university =  universityDataSource.getUniversityById(universityId);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            universityDataSource.close();
+        }
+
+        return university;
     }
 
     //Career
     public ArrayList<Career> getAllCareers()
     {
-        return careerDataSource.getAllCareers();
+        ArrayList<Career> careerList = null;
+
+        try
+        {
+            careerDataSource.open();
+
+            careerList = careerDataSource.getAllCareers();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            try
+            {
+                careerDataSource.close();
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+
+        return careerList;
     }
 
-    public List<String> getAllCareerNames()
+    public ArrayList<String> getAllCareerNames()
     {
-        return careerDataSource.getAllCareerNames();
+        ArrayList<String> careerNames = null;
+
+        try
+        {
+            careerDataSource.open();
+
+            careerNames = careerDataSource.getAllCareerNames();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            try
+            {
+                careerDataSource.close();
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+
+        return careerNames;
     }
 
     public Career getCareer(int careerId)
     {
-        return careerDataSource.getCareerById(careerId);
+        Career career = null;
+
+        try
+        {
+            careerDataSource.open();
+
+            career = careerDataSource.getCareerById(careerId);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            careerDataSource.close();
+        }
+
+        return career;
     }
 
     //Subject
     public List<Subject> getAllSubjects()
     {
-        return subjectDataSource.getAllSubjects();
+        ArrayList<Subject> subjects = null;
+
+        try
+        {
+            subjectDataSource.open();
+
+            subjects = subjectDataSource.getAllSubjects();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            subjectDataSource.close();
+        }
+
+        return subjects;
     }
 
     public List<String> getAllSubjectNames()
     {
-        return subjectDataSource.getAllSubjectNames();
+        ArrayList<String> subjects = null;
+
+        try
+        {
+            subjectDataSource.open();
+
+            subjects = subjectDataSource.getAllSubjectNames();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            subjectDataSource.close();
+        }
+
+        return subjects;
     }
 
     //Interest
     public List<Interest> getAllInterests()
     {
-        return interestDataSource.getAllInterests();
+        ArrayList<Interest> interests = null;
+
+        try
+        {
+            interestDataSource.open();
+
+            interests = interestDataSource.getAllInterests();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            interestDataSource.close();
+        }
+
+        return interests;
     }
 
     public List<String> getAllInterestNames()
     {
-        return interestDataSource.getAllInterestNames();
+        ArrayList<String> interestNames = null;
+
+        try
+        {
+            interestDataSource.open();
+
+            interestNames = interestDataSource.getAllInterestNames();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            interestDataSource.close();
+        }
+
+        return interestNames;
     }
 
     public String getInterestName(int interestId)
     {
-        return interestDataSource.getNameFromId(interestId);
+        String interestName = "";
+
+        try
+        {
+            interestDataSource.open();
+
+            interestName = interestDataSource.getNameFromId(interestId);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            interestDataSource.close();
+        }
+
+        return interestName;
     }
 
     public int getInterestIdFromName(String interestName)
     {
-        return interestDataSource.getIdFromName(interestName);
+        int interestId = -1;
+
+        try
+        {
+            interestDataSource.open();
+
+            interestId = interestDataSource.getIdFromName(interestName);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            interestDataSource.close();
+        }
+
+        return interestId;
     }
 
     public HashMap<String, Double> match ()
