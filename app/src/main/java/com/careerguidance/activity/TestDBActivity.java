@@ -52,7 +52,7 @@ public class TestDBActivity extends Activity {
 
         System.out.println("\nGender = " + objCareerGuidance1.getUserGender().getName());
 
-        objCareerGuidance.setUserLocation("Kenya");
+        objCareerGuidance.setUserLocation("2");
 
         userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
 

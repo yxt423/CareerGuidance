@@ -168,6 +168,61 @@ public class UniversityDataSource
         return universityNameList;
     }
 
+    public University getUniversityById(int universityId)
+    {
+        University university = null;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            university = cursorToUniversity(cursor);
+
+            if (university.getId() == universityId)
+            {
+                return university;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return university;
+    }
+
+    public University getUniversityObject(int universityId)
+    {
+        University university = null;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            university = cursorToUniversity(cursor);
+
+            if (university.getId() == universityId)
+            {
+                return university;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return university;
+    }
+
+
     private University cursorToUniversity(Cursor cursor) {
         University university = new University();
 

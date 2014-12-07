@@ -154,8 +154,24 @@ public class User {
         lastName = lName;
     }
 
-    public void setLocation(String locn) {
+    public void setLocation(int locnId, String locn)
+    {
+        location = new Location(locnId, locn);
+    }
+
+    public void setLocation(String locn)
+    {
         location = new Location(locn);
+    }
+
+    public void setLocation(int locn)
+    {
+        location = new Location(locn);
+    }
+
+    public void setLocation(Location locn)
+    {
+        location = locn;
     }
 
     public void setFirstName(String fName) {
@@ -164,8 +180,12 @@ public class User {
 
     public void setBirthDate(Date bDate) { birthDate = bDate; }
 
-    public void setGender(String gndr) {
-       gender = new Gender(gndr);
+    public void setGender(Gender gndr) {
+       gender = gndr;
+    }
+
+    public void setGender(int gndrId, String gndr) {
+        gender = new Gender(gndrId, gndr);
     }
 
     public void setPhotoFileName(String fileName) {

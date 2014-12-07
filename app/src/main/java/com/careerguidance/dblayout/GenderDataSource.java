@@ -48,6 +48,57 @@ public class GenderDataSource
             return false;
     }
 
+    public Gender getGenderObject(String genderName)
+    {
+        Gender gender = null;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_GENDER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            gender = cursorToGender(cursor);
+
+            if (genderName.equalsIgnoreCase(gender.getName()))
+                return gender;
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return gender;
+    }
+
+    public Gender getGenderObject(int genderId)
+    {
+        Gender gender = new Gender();
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_GENDER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            gender = cursorToGender(cursor);
+
+            if (genderId == gender.getId())
+                return gender;
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return gender;
+    }
+
+
     public int getGenderId(String name)
     {
         int genderId = -1;

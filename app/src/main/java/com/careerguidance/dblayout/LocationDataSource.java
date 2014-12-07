@@ -127,6 +127,57 @@ public class LocationDataSource
         return locationId;
     }
 
+    public String getLocationName(int locationId)
+    {
+        String locationName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_LOCATION,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Location location = cursorToLocation(cursor);
+
+            if (locationId == location.getId())
+                locationName = location.getName();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return locationName;
+    }
+
+    public Location getLocationObject(int locationId)
+    {
+        Location location = null;
+
+        String locationName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_LOCATION,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            location = cursorToLocation(cursor);
+
+            if (locationId == location.getId())
+                return location;
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return location;
+    }
 
     private Location cursorToLocation(Cursor cursor) {
         Location location = new Location();
