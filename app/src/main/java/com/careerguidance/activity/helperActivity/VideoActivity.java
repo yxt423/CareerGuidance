@@ -9,9 +9,8 @@ import android.view.MenuItem;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
-import com.careerguidance.activity.TestDBActivity;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 
 public class VideoActivity extends Activity {
 
@@ -58,11 +57,11 @@ public class VideoActivity extends Activity {
             startActivity(intent);
             return true;
         }
-        if (id == R.id.action_db_testing) {
-            Intent intent = new Intent(this, TestDBActivity.class);
-            startActivity(intent);
-            return true;
-        }
+//        if (id == R.id.action_db_testing) {
+//            Intent intent = new Intent(this, TestDBActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

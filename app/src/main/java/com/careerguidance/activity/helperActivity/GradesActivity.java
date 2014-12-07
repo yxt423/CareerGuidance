@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
-import com.careerguidance.activity.TestDBActivity;
 import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.GradesArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
@@ -144,11 +143,11 @@ public class GradesActivity extends Activity {
             startActivity(intent);
             return true;
         }
-        if (id == R.id.action_db_testing) {
-            Intent intent = new Intent(this, TestDBActivity.class);
-            startActivity(intent);
-            return true;
-        }
+//        if (id == R.id.action_db_testing) {
+//            Intent intent = new Intent(this, TestDBActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

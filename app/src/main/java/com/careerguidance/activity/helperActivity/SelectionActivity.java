@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
-import com.careerguidance.activity.TestDBActivity;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
 
 import java.util.ArrayList;
@@ -78,11 +77,11 @@ public class SelectionActivity extends Activity {
             startActivity(intent);
             return true;
         }
-        if (id == R.id.action_db_testing) {
-            Intent intent = new Intent(this, TestDBActivity.class);
-            startActivity(intent);
-            return true;
-        }
+//        if (id == R.id.action_db_testing) {
+//            Intent intent = new Intent(this, TestDBActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
