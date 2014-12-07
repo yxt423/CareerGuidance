@@ -15,11 +15,16 @@ import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
 
+import java.util.ArrayList;
+
 public class GalleryActivity extends Activity {
 
     private LinearLayout mGallery;
     private LayoutInflater mInflater;
-    private Integer[] images = null;
+//    private Integer[] images = null;
+    private ArrayList<Integer> imageIds = new ArrayList<Integer>();
+    private String imageIdentifierPrefix = "";
+    private boolean hasPhotos = true;
 
     /**
      * inflate the gallery layout with a set of local pictures.
@@ -37,24 +42,57 @@ public class GalleryActivity extends Activity {
 
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        float density = metrics.density;
-        int densityDpi = metrics.densityDpi;
 
         mInflater = LayoutInflater.from(this);
 
-        images = new Integer[] {R.drawable.p1, R.drawable.p2, R.drawable.p3,
-                R.drawable.p4, R.drawable.p5};
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+        if (type.contains("career")) {
+            imageIdentifierPrefix += "c_";
+        } else if (type.contains("university")) {
+            imageIdentifierPrefix += "u_";
+        }
+
+        String name = intent.getStringExtra("name");
+        if (name.contains("Carnegie Mellon University")) {
+            imageIdentifierPrefix += "cmu_";
+        } else if (name.contains("Massachusetts Institute of Technology")) {
+            imageIdentifierPrefix += "mit_";
+        } else if (name.contains("Software")) {
+            imageIdentifierPrefix += "se_";
+        }
+        else {
+            hasPhotos = false;
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            int id = getResources().getIdentifier(imageIdentifierPrefix + String.valueOf(i), "drawable", "com.careerguidance");
+            if (id != 0) {
+                imageIds.add(id);
+            }
+        }
 
         mGallery = (LinearLayout) findViewById(R.id.id_gallery);
 
-        for (int i = 0; i < images.length; i++) {
+        if (hasPhotos) {
+            for (int i = 0; i < imageIds.size(); i++) {
+                View view = mInflater.inflate(R.layout.gallery_item,
+                        mGallery, false);
+                ImageView img = (ImageView) view.findViewById(R.id.gallery_item_image);
+                img.setMinimumWidth(width);
+                img.setMaxWidth(width);
+                img.setMaxHeight(height);
+                img.setImageResource(imageIds.get(i));
+                mGallery.addView(view);
+            }
+        }
+        else {
             View view = mInflater.inflate(R.layout.gallery_item,
                     mGallery, false);
-            ImageView img = (ImageView) view
-                    .findViewById(R.id.gallery_item_image);
+            ImageView img = (ImageView) view.findViewById(R.id.gallery_item_image);
             img.setMaxWidth(width);
             img.setMaxHeight(height);
-            img.setImageResource(images[i]);
+            img.setImageResource(R.drawable.no_image_available);
             mGallery.addView(view);
         }
     }

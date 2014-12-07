@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="hello_world">Hello world</string>
+
+    <!-- menu buttons -->
+    <string name="action_settings">Settings</string>
+    <string name="action_admin_mode">Admin Mode</string>
+    <string name="action_db_testing">Database Testing</string>
+
+    <!-- cover page buttons -->
+    <string name="match_career_button">Find your career match</string>
+    <string name="career_options_button">See career options</string>
+
+    <!-- tabs -->
+    <string name="tab1">Careers</string>
+    <string name="tab2">Find Match</string>
+    <string name="tab3">Profile</string>
+
+    <!-- profile page strings -->
+    <string name="profile_func0">Birthday</string>
+    <string name="profile_func1">Gender</string>
+    <string name="profile_func2">Country</string>
+    <string name="profile_func3">Grades</string>
+    <string name="profile_func4">Interests</string>
+    <string name="user_name">Name</string>
+    <string name="take_photo_button">Take a new photo</string>
+    <string name="choose_photo_button">Choose an existing photo</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="find_career_match_button">Find me a career</string>
+
+    <!-- other buttons -->
+    <string name="ok_button">OK</string>
+    <string name="submit_button">Submit</string>
+
+    <!-- career -->
+    <string name="careers">Careers</string>
+    <string name="career_description">Description: </string>
+    <string name="career_salary">Average Salary: </string>
+    <string name="skills_required">Skills Required: </string>
+
+    <!-- Universities -->
+    <string name="universities_page_title">Famous Universities</string>
+    <string name="university_description">University Description:</string>
+    <string name="university_location">University Location: </string>
 
 </resources>

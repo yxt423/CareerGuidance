@@ -53,7 +53,7 @@ public class UniversityInfoActivity extends Activity {
 
     // create the listview
     public void createListView() {
-        String[] values = new String[] {"More Pictures", "Watch Videos", "More Resources"};
+        String[] values = new String[] {"More Pictures", "Watch Videos"};
         final ListView listview = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -72,6 +72,8 @@ public class UniversityInfoActivity extends Activity {
                 switch (position) {
                     case 0:
                         Intent intent = new Intent(getBaseContext(), GalleryActivity.class);
+                        intent.putExtra("type", "university");
+                        intent.putExtra("name", "Carnegie Mellon University");
                         startActivity(intent);
                         break;
                     case 1:

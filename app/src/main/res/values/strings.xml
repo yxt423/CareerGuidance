@@ -25,7 +25,7 @@
     <string name="profile_func2">Country</string>
     <string name="profile_func3">Grades</string>
     <string name="profile_func4">Interests</string>
-    <string name="user_name">Your Name</string>
+    <string name="user_name">Name</string>
     <string name="take_photo_button">Take a new photo</string>
     <string name="choose_photo_button">Choose an existing photo</string>
     <string name="cancel_button">Cancel</string>
@@ -38,7 +38,7 @@
     <!-- career -->
     <string name="careers">Careers</string>
     <string name="career_description">Description: </string>
-    <string name="career_description_txt">        A software engineer is responsible for the development, maintenance and operation of computer
+    <string name="career_description_txt">A software engineer is responsible for the development, maintenance and operation of computer
         software to enable businesses and organisations to function as efficiently as possible. \n
         Software engineers work in a range of industries, from offices to manufacturing companies developing, operating and maintaining
         specific software to allow the company’s work to be carried out with as few disruptions as possible. Typically, a software
@@ -67,7 +67,7 @@
     <string name="universities_page_title">Famous Universities</string>
     <string name="university_name">Carnegie Mellon University</string>
     <string name="university_description">University Description:</string>
-    <string name="university_description_txt">        Carnegie Mellon University (Carnegie Mellon or CMU) is a private research university in Pittsburgh, Pennsylvania. \n
+    <string name="university_description_txt">Carnegie Mellon University (Carnegie Mellon or CMU) is a private research university in Pittsburgh, Pennsylvania. \n
         The university began as the Carnegie Technical Schools founded by Andrew Carnegie in 1900. In 1912, the school became the
         Carnegie Institute of Technology and began granting four-year degrees. In 1967, the Carnegie Institute of Technology merged
         with the Mellon Institute of Industrial Research to form Carnegie Mellon University. The university\'s 140-acre (0.57 km2)

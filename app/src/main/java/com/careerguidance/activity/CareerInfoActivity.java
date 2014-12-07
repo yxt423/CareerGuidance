@@ -71,8 +71,7 @@ public class CareerInfoActivity extends Activity {
 
     public void createListView() {
         // create the listview
-        String[] values = new String[] {"Famous Universities",
-                "More Pictures", "Watch Videos", "More Resources"};
+        String[] values = new String[] {"Famous Universities", "More Pictures", "Watch Videos"};
         final ListView listview = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -97,6 +96,8 @@ public class CareerInfoActivity extends Activity {
                         break;
                     case 1:
                         intent = new Intent(getBaseContext(), GalleryActivity.class);
+                        intent.putExtra("type", "career");
+                        intent.putExtra("name", career.getName());
                         startActivity(intent);
                         break;
                     case 2:
