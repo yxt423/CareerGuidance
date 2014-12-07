@@ -1,20 +1,26 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- For Nexus 4 tablet -->
+
+    <dimen name="activity_horizontal_margin">5dp</dimen>
+    <dimen name="activity_vertical_margin">5dp</dimen>
 
 
-    <dimen name="line_space">18dp</dimen>
-    <dimen name="line_space_small">9dp</dimen>
-    <dimen name="line_space_large">38dp</dimen>
+    <dimen name="line_space">5dp</dimen>
+    <dimen name="line_space_small">3dp</dimen>
+    <dimen name="line_space_large">10dp</dimen>
 
-    <dimen name="photo_width">200dp</dimen>
-    <dimen name="photo_height">200dp</dimen>
+    <dimen name="photo_width">100dp</dimen>
+    <dimen name="photo_height">100dp</dimen>
 
 
-    <dimen name="image_large_width">250dp</dimen>
+    <dimen name="cover_image_width">200dp</dimen>
+    <dimen name="cover_image_height">200dp</dimen>
 
-    <dimen name="long_button_width">350dp</dimen>
-    <dimen name="mid_button_width">200dp</dimen>
+
+    <dimen name="image_large_width">150dp</dimen>
+
+    <dimen name="long_button_width">300dp</dimen>
+    <dimen name="mid_button_width">100dp</dimen>
 
 </resources>

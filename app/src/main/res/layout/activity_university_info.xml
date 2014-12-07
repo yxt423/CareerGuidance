@@ -32,9 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_name"
         android:layout_marginTop="@dimen/line_space"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/u_cmu_1"
-        android:contentDescription="university_image" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/university_description"
@@ -43,13 +41,13 @@
         android:layout_below="@+id/university_image"
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/university_description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/university_description_txt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/university_location"
@@ -58,13 +56,13 @@
         android:layout_below="@+id/university_description_txt"
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/university_location"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/university_location_txt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_location"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/listview"

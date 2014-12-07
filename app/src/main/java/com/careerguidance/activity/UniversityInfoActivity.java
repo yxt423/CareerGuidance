@@ -72,7 +72,6 @@ public class UniversityInfoActivity extends Activity {
 
         universityNameView.setText(universityName);
         universityDescription.setText(university.getDescription());
-
     }
 
     // create the listview
@@ -97,12 +96,12 @@ public class UniversityInfoActivity extends Activity {
                     case 0:
                         Intent intent = new Intent(getBaseContext(), GalleryActivity.class);
                         intent.putExtra("type", "university");
-                        intent.putExtra("name", "Carnegie Mellon University");
+                        intent.putExtra("name", universityName);
                         startActivity(intent);
                         break;
                     case 1:
                         intent = new Intent(getBaseContext(), VideoActivity.class);
-                        intent.putExtra("videoNo", R.raw.qi_li_xiang);
+                        intent.putExtra("videoNo", R.raw.video_cmu);
                         startActivity(intent);
                         break;
                     default:

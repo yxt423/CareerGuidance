@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,9 +29,11 @@ public class CareerInfoActivity extends Activity {
 
     private CareerGuidance careerGuidance;
 
-    TextView careerNameView = null;
+    ImageView careerPhoto;
+    TextView careerNameView;
     Career career;
     int careerId;
+    String careerName;
 
     TextView careerDescription;
     TextView careerSalary;
@@ -42,31 +45,39 @@ public class CareerInfoActivity extends Activity {
         setContentView(R.layout.activity_career_info);
 
         careerGuidance = new CareerGuidance(getApplicationContext());
-
-        // set career name on page title
-        careerNameView = (TextView) findViewById(R.id.career_name);
-        Intent intent = getIntent();
-        careerId = intent.getIntExtra("career id", 0);
-        career = careerGuidance.getCareer(careerId);
-        careerNameView.setText(career.getName());
-
         createTextContentView();
         createListView();
     }
 
     public void createTextContentView() {
+
+        // set career name on page title
+        careerPhoto = (ImageView) findViewById(R.id.career_image);
+        careerNameView = (TextView) findViewById(R.id.career_name);
         careerDescription = (TextView) findViewById(R.id.career_description_txt);
         careerSalary = (TextView) findViewById(R.id.career_salary_txt);
-        careerSkills = (TextView) findViewById(R.id.skills_required_txt);
+//        careerSkills = (TextView) findViewById(R.id.skills_required_txt);
 
+        Intent intent = getIntent();
+        careerId = intent.getIntExtra("career id", 0);
+        career = careerGuidance.getCareer(careerId);
+        careerName = career.getName();
+
+        careerNameView.setText(careerName);
         careerDescription.setText(career.getDescription());
         careerSalary.setText(String.valueOf(career.getAvgSalary()));
 
-        String skillsStr = "";
-        for (String s : career.getSkillsRequired()) {
-            skillsStr += s + "\n";
+//        String skillsStr = "";
+//        for (String s : career.getSkillsRequired()) {
+//            skillsStr += s + "\n";
+//        }
+//        careerSkills.setText(skillsStr);
+
+        String imageIdentifierPrefix = "c_" + careerName.toLowerCase().replace(" ", "_") + "_1";
+        int id = getResources().getIdentifier(imageIdentifierPrefix, "drawable", "com.careerguidance");
+        if (id != 0) {
+            careerPhoto.setImageResource(id);
         }
-        careerSkills.setText(skillsStr);
     }
 
     public void createListView() {
@@ -102,13 +113,8 @@ public class CareerInfoActivity extends Activity {
                         break;
                     case 2:
                         intent = new Intent(getBaseContext(), VideoActivity.class);
-                        intent.putExtra("videoNo", R.raw.qi_li_xiang);
+                        intent.putExtra("videoNo", R.raw.video_cmu);
                         startActivity(intent);
-                        break;
-                    case 3:
-//                        intent = new Intent(getBaseContext(), SelectionActivity.class);
-//                        intent.putExtra("pageTitle", "More Resources");
-//                        startActivity(intent);
                         break;
                     default:
                         break;

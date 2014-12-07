@@ -91,7 +91,7 @@ public class CareerListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CareerInfoActivity.class);
-                intent.putExtra("career id", position);
+                intent.putExtra("career id", position + 1);
                 intent.putExtra("career name", list.get(position));
                 startActivity(intent);
             }

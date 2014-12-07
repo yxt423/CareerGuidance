@@ -32,8 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/career_name"
         android:layout_marginTop="@dimen/line_space"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/software_engineer" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/career_description"
@@ -42,13 +41,13 @@
         android:layout_below="@+id/career_image"
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/career_description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/career_description_txt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/career_description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/career_salary"
@@ -57,32 +56,32 @@
         android:layout_below="@+id/career_description_txt"
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/career_salary"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/career_salary_txt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/career_salary"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/skills_required"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/career_salary_txt"
-        android:layout_marginTop="@dimen/line_space"
-        android:text="@string/skills_required"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    <TextView
-        android:id="@+id/skills_required_txt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/skills_required"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <!--<TextView-->
+        <!--android:id="@+id/skills_required"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/career_salary_txt"-->
+        <!--android:layout_marginTop="@dimen/line_space"-->
+        <!--android:text="@string/skills_required"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/skills_required_txt"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/skills_required"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
 
     <ListView
         android:id="@+id/listview"
-        android:layout_below="@+id/skills_required"
+        android:layout_below="@+id/career_salary_txt"
         android:layout_marginTop="@dimen/line_space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

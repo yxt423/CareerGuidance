@@ -10,13 +10,12 @@
 
     <ImageView
         android:id="@+id/cover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/cover_image_width"
+        android:layout_height="@dimen/cover_image_height"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/line_space_large"
-        android:src="@drawable/cover"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:src="@drawable/cover" />
 
     <Button
         android:id="@+id/match_career_button"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cover"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/line_space_large"
+        android:layout_marginTop="@dimen/line_space"
         android:onClick="matchCareerButton"
         android:text="@string/match_career_button" />
 
