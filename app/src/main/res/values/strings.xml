@@ -10,9 +10,12 @@
     <string name="action_admin_mode">Admin Mode</string>
     <string name="action_db_testing">Database Testing</string>
 
-    <!-- cover page buttions -->
+    <!-- cover page buttons -->
     <string name="match_career_button">Find your career match</string>
     <string name="career_options_button">See career options</string>
+
+    <!-- other buttons -->
+    <string name="submit_button">Submit</string>
 
     <!-- career -->
     <string name="careers">Careers</string>
@@ -73,5 +76,6 @@
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_grades">GradesActivity</string>
     <string name="title_activity_test_db">TestDBActivity</string>
+    <string name="title_activity_interests">InterestsActivity</string>
 
 </resources>

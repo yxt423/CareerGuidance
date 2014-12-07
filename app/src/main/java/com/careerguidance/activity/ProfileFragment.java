@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GradesActivity;
+import com.careerguidance.activity.helperActivity.InterestsActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.CareerGuidance;
 
@@ -55,6 +56,7 @@ import java.util.Collections;
 public class ProfileFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 100;
     private static final int SELECT_PHOTO = 101;
+    private static final int SELECT_INTERESTS_ACTIVITY = 102;
 
     private CareerGuidance careerGuidance;
 
@@ -175,6 +177,9 @@ public class ProfileFragment extends Fragment {
                     case 3:
                         intent = new Intent(getActivity(), GradesActivity.class);
                         startActivity(intent);
+                    case 4:
+                        intent = new Intent(getActivity(), InterestsActivity.class);
+                        startActivityForResult(intent, SELECT_INTERESTS_ACTIVITY);
                     default:
                         break;
                 }
