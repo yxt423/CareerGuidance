@@ -41,6 +41,7 @@
     <string name="skills_required">Skills Required: </string>
 
     <!-- Universities -->
+    <string name="university_name">Carnegie Mellon University</string>
     <string name="universities_page_title">Famous Universities</string>
     <string name="university_description">University Description:</string>
     <string name="university_location">University Location: </string>
