@@ -79,10 +79,10 @@ public class CareerListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_career_list, container, false);
 
         final ListView listview = (ListView) v.findViewById(R.id.listview);
-        String[] values = new String[] { "Software Engineer", "Analyst", "Physician",
-                "Lawyer", "Nurse", "Civil Engineer", "Mechanical Engineer", "Marketer",
-                "career10", "career11", "career12", "career13", "career14", "career15",
-                "career16", "career17", "career18"};
+//        String[] values = new String[] { "Software Engineer", "Analyst", "Physician",
+//                "Lawyer", "Nurse", "Civil Engineer", "Mechanical Engineer", "Marketer",
+//                "career10", "career11", "career12", "career13", "career14", "career15",
+//                "career16", "career17", "career18"};
 
 //        final ArrayList<String> list = new ArrayList<String>();
 //        for (int i = 0; i < values.length; ++i) {

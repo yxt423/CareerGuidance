@@ -358,12 +358,14 @@ public class ProfileFragment extends Fragment {
         //  if requestCode is none of the above, it is one of the position on the list.
         else if (resultCode == Activity.RESULT_OK) {
             String value = intent.getStringExtra("returnValue");
-            optionList.set(requestCode, value);
-            adapter.notifyDataSetChanged();
 
             if (requestCode == 1) {
+                optionList.set(requestCode, "Gender:  " + value);
+                adapter.notifyDataSetChanged();
                 careerGuidance.setUserGender(value);
             } else if (requestCode == 2) {
+                optionList.set(requestCode, "Location:  " + value);
+                adapter.notifyDataSetChanged();
                 careerGuidance.setUserLocation(value);
             }
         }

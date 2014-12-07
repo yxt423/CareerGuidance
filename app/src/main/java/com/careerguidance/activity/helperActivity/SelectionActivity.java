@@ -57,9 +57,9 @@ public class SelectionActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent();
                 if (functionNo == 2 && position == 0) {
-                    intent.putExtra("returnValue", pageTitle + ":   " + Utility.getLocationCountryName(getApplicationContext()));
+                    intent.putExtra("returnValue", Utility.getLocationCountryName(getApplicationContext()));
                 } else {
-                    intent.putExtra("returnValue", pageTitle + ":   " + list.get(position));
+                    intent.putExtra("returnValue", list.get(position));
                 }
                 setResult(RESULT_OK, intent);
                 finish();

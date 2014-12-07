@@ -33,10 +33,10 @@ public class UniversityListActivity extends Activity {
         careerGuidance = new CareerGuidance(getApplicationContext());
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[] { "Massachusetts Institute of Technology", "Stanford University", "Carnegie Mellon University",
-                "University of California—​Berkeley", "University of Illinois—​Urbana-​Champaign", "University of Michigan—​Ann Arbor",
-                "Georgia Institute of Technology ", "Cornell University",
-                "Purdue University—​West Lafayette"};
+//        String[] values = new String[] { "Massachusetts Institute of Technology", "Stanford University", "Carnegie Mellon University",
+//                "University of California—​Berkeley", "University of Illinois—​Urbana-​Champaign", "University of Michigan—​Ann Arbor",
+//                "Georgia Institute of Technology ", "Cornell University",
+//                "Purdue University—​West Lafayette"};
 
 //        final ArrayList<String> list = new ArrayList<String>();
 //        for (int i = 0; i < values.length; ++i) {

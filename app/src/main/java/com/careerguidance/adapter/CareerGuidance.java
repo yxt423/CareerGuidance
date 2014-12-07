@@ -2,6 +2,7 @@ package com.careerguidance.adapter;
 
 import android.content.Context;
 
+import com.careerguidance.cgexception.CGException;
 import com.careerguidance.dblayout.CareerDataSource;
 import com.careerguidance.dblayout.Career_InterestDataSource;
 import com.careerguidance.dblayout.GenderDataSource;
@@ -14,21 +15,18 @@ import com.careerguidance.dblayout.University_InterestDataSource;
 import com.careerguidance.dblayout.UserDataSource;
 import com.careerguidance.dblayout.User_GradeDataSource;
 import com.careerguidance.dblayout.User_InterestDataSource;
-import com.careerguidance.cgexception.CGException;
 import com.careerguidance.model.Career;
 import com.careerguidance.model.Gender;
+import com.careerguidance.model.Grade;
 import com.careerguidance.model.Interest;
 import com.careerguidance.model.Location;
 import com.careerguidance.model.Subject;
 import com.careerguidance.model.University;
 import com.careerguidance.model.User;
-import com.careerguidance.model.Grade;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.SortedMap;
 
 /**
  * Created by chris on 12/4/14.
