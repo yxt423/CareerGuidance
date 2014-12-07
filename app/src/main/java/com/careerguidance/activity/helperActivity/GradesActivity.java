@@ -27,7 +27,7 @@ public class GradesActivity extends Activity {
     private CareerGuidance careerGuidance;
 
     GradesArrayAdapter adapter = null;
-    String[] courseNameStr = new String[] {"Math", "Science", "Language Arts", "Social Studies", "History"};
+//    String[] courseNameStr = new String[] {"Math", "Science", "Language Arts", "Social Studies", "History"};
     String[] courseCourses = new String[] {"0", "0", "0", "0", "0", "0", "0", "0", "0"};
     ArrayList<String> courseNameList = new ArrayList<String>();
     ArrayList<String> scoreList = new ArrayList<String>();
@@ -43,7 +43,7 @@ public class GradesActivity extends Activity {
         pageTitleView.setText("Grades");
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-        Collections.addAll(courseNameList, courseNameStr);
+//        Collections.addAll(courseNameList, courseNameStr);
         Collections.addAll(scoreList, courseCourses);
 
         courseNameList = (ArrayList<String>) careerGuidance.getAllSubjectNames();
@@ -77,7 +77,7 @@ public class GradesActivity extends Activity {
 
     // on click method of add new course button
     public void addNewCourse(View v) {
-        showEditCourseDialog("New course", null, null, null, 0, 1);
+        showEditCourseDialog("New course", null, null, null, courseNameList.size(), 1);
     }
 
     public void showEditCourseDialog(final String title, String message,
@@ -108,7 +108,7 @@ public class GradesActivity extends Activity {
                 } else {
                     if (functionType == 1) { // add new course
                         courseNameList.add(courseName.getText().toString());
-                        scoreList.add(score.getText().toString());
+                        scoreList.set(position, score.getText().toString());
                         adapter.notifyDataSetChanged();
                     } else if (functionType == 2) { // edit course
                         courseNameList.set(position, courseName.getText().toString());
