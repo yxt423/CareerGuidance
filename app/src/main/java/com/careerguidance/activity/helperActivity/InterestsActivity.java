@@ -51,6 +51,10 @@ public class InterestsActivity extends Activity {
             if (checked.valueAt(i))
                 selectedItems.add(adapter.getItem(position));
         }
+
+        Intent intent = new Intent();
+        intent.putExtra("returnValue", selectedItems);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

@@ -320,7 +320,7 @@ public class ProfileFragment extends Fragment {
         alert.setTitle(getString(R.string.profile_func0));
 
         final DatePicker datePicker = new DatePicker(getActivity());
-        datePicker.setCalendarViewShown(false);
+        //datePicker.setCalendarViewShown(false);
         datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                 new DatePicker.OnDateChangedListener() {
             @Override
@@ -407,6 +407,13 @@ public class ProfileFragment extends Fragment {
             } else if (returnValue.contains("Kenya")) {
                 setLocale("sw-KE");
             }
+        }
+
+        else if (requestCode == SELECT_INTERESTS_ACTIVITY && resultCode == Activity.RESULT_OK) {
+//            ArrayList<String> selectedInterests  = (ArrayList<String>) intent.getSerializableExtra("returnValue");
+//            if (selectedInterests.contains("Biology")) {
+//
+//            }
         }
     }
 

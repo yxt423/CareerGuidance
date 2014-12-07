@@ -21,6 +21,7 @@ import com.careerguidance.model.Career;
 import com.careerguidance.model.University;
 
 import java.io.File;
+import java.util.Random;
 
 /**
  * Show the "match career tab (tab 2 in main page)"
@@ -89,8 +90,11 @@ public class FindCareerMatchFragment extends Fragment {
         }
 
         careerGuidance = new CareerGuidance(getActivity());
-        user_career = careerGuidance.getUserCareer();
-        user_university = careerGuidance.getUserUniversity();
+//        user_career = careerGuidance.getUserCareer();
+//        user_university = careerGuidance.getUserUniversity();
+        Random rand = new Random();
+        user_career = careerGuidance.getCareer( rand.nextInt((6 - 1) + 1) + 1);
+        user_university = careerGuidance.getUniversityById(rand.nextInt((2 - 1) + 1) + 1);
 
         // for profile photo
         folder = new File(Environment.getExternalStorageDirectory(), "pictures");
