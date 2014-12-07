@@ -10,10 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
-import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
@@ -112,9 +112,7 @@ public class CareerInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(getBaseContext(), VideoActivity.class);
-                        intent.putExtra("videoNo", R.raw.video_cmu);
-                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "No video Available", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;

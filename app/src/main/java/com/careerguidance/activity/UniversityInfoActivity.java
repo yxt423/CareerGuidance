@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
@@ -100,9 +101,13 @@ public class UniversityInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(getBaseContext(), VideoActivity.class);
-                        intent.putExtra("videoNo", R.raw.video_cmu);
-                        startActivity(intent);
+                        if (universityName.contains("Carnegie Mellon University")) {
+                            intent = new Intent(getBaseContext(), VideoActivity.class);
+                            intent.putExtra("videoNo", R.raw.video_cmu);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No video Available", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default:
                         break;
