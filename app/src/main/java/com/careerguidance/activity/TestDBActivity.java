@@ -56,9 +56,9 @@ public class TestDBActivity extends Activity {
 
         objCareerGuidance.setUserLocation("Kenya");
 
-       // HashMap<String, Double> matches = objCareerGuidance.match();
+        HashMap<String, Double> matches = objCareerGuidance.match();
 
-        //userId += matches.toString();
+        userId += matches.toString();
     }
 
     @Override

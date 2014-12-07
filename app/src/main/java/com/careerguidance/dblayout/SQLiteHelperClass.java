@@ -219,7 +219,7 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
     {
         //location table
         ContentValues values = new ContentValues();
-        values.put("name", "United States of America");
+        values.put("name", "United States");
         values.put("currency", "USD");
         values.put("currency_symbol", "$");
 
