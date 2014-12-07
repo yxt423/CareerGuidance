@@ -8,12 +8,7 @@ import java.util.Hashtable;
  * Career class, define university instance and attributes of a career,
  * and APIs for accessing career data.
  */
-public class Career {
-    int id;
-
-    String name;
-
-    String description;
+public class Career extends  Target {
 
     double avgSalary;
 
@@ -25,8 +20,7 @@ public class Career {
 
     public Career()
     {
-        name = "";
-        description = "";
+        super();
         avgSalary = 0.00;
         skillsRequired = new ArrayList<String>();
         gradesRequired = new Hashtable<String, Double>();

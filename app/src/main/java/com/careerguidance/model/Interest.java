@@ -3,15 +3,11 @@ package com.careerguidance.model;
 /**
  * Created by yxt on 11/16/14.
  */
-public class Interest {
-    int id;
-
-    String name;
-    String description;
+public class Interest extends Target{
 
     public Interest()
     {
-        name = "";
+        super();
     }
 
     public Interest(String interestName) {

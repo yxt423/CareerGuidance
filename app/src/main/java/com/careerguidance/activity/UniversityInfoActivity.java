@@ -56,8 +56,8 @@ public class UniversityInfoActivity extends Activity {
 
         Intent intent = getIntent();
         universityId = intent.getIntExtra("university id", 0);
-        universityName = intent.getStringExtra("university name");
         university = careerGuidance.getUniversityById(universityId);
+        universityName = university.getName();
 
         // set university photo
         String imageIdentifierPrefix = "u_";

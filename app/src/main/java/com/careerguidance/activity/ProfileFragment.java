@@ -36,6 +36,8 @@ import com.careerguidance.activity.helperActivity.InterestsActivity;
 import com.careerguidance.activity.helperActivity.LocationActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.CareerGuidance;
+import com.careerguidance.model.Career;
+import com.careerguidance.model.University;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,6 +94,10 @@ public class ProfileFragment extends Fragment {
 
     // for location setting.
     Locale myLocale;
+
+    // result of matching
+    Career user_career;
+    University user_university;
 
     private OnFragmentInteractionListener mListener;
 
@@ -206,6 +212,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // call the matching function....
+
+                user_career = careerGuidance.getCareer(3);
+                user_university = careerGuidance.getUniversityById(1);
+                careerGuidance.setUserCareer(user_career);
+                careerGuidance.setUserUniversity(user_university);
 
                 // switch tab
                 MainTabHost activity = (MainTabHost) getActivity();

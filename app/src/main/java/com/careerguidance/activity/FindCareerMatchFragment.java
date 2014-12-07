@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
+import com.careerguidance.model.Career;
+import com.careerguidance.model.University;
 
 import java.io.File;
 
@@ -43,14 +45,20 @@ public class FindCareerMatchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    ImageView careerPhoto = null;
-    ImageView universityPhoto = null;
-
     // user photo related.
     ImageView userPhoto = null;
     File folder = null;
     File user_photo = null;
     TextView userName = null;
+
+    // result of matching
+    Career user_career;
+    University user_university;
+
+    TextView careerName = null;
+    TextView universityName = null;
+    ImageView careerPhoto = null;
+    ImageView universityPhoto = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -79,7 +87,10 @@ public class FindCareerMatchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         careerGuidance = new CareerGuidance(getActivity());
+        user_career = careerGuidance.getUserCareer();
+        user_university = careerGuidance.getUserUniversity();
 
         // for profile photo
         folder = new File(Environment.getExternalStorageDirectory(), "pictures");
@@ -95,6 +106,8 @@ public class FindCareerMatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_find_career_match, container, false);
 
+        careerName = (TextView) v.findViewById(R.id.career_name);
+        universityName = (TextView) v.findViewById(R.id.university_name);
         careerPhoto = (ImageView) v.findViewById(R.id.career_photo);
         universityPhoto = (ImageView) v.findViewById(R.id.university_photo);
 
@@ -110,20 +123,36 @@ public class FindCareerMatchFragment extends Fragment {
             userName.setText(careerGuidance.getUserFirstName());
         }
 
+        // set career
+        careerName.setText(user_career.getName());
+        String imageIdentifierPrefix = "c_" + user_career.getName().toLowerCase().replace(" ", "_") + "_1";
+        int id = getResources().getIdentifier(imageIdentifierPrefix, "drawable", "com.careerguidance");
+        if (id != 0) {
+            careerPhoto.setImageResource(id);
+        }
         careerPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(getActivity(), CareerInfoActivity.class);
-                intent.putExtra("career name", "Software Engineer");
+                intent.putExtra("career name", user_career.getName());
+                intent.putExtra("career id", user_career.getId());
                 startActivity(intent);
             }
         });
 
+        // set university
+        universityName.setText(user_university.getName());
+        imageIdentifierPrefix = "u_" + user_university.getName().toLowerCase().replace(" ", "_") + "_1";
+        id = getResources().getIdentifier(imageIdentifierPrefix, "drawable", "com.careerguidance");
+        if (id != 0) {
+            universityPhoto.setImageResource(id);
+        }
         universityPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(getActivity(), UniversityInfoActivity.class);
-                intent.putExtra("university name", "Carnegie Mellon University");
+                intent.putExtra("university name", user_university.getName());
+                intent.putExtra("university id", user_university.getId());
                 startActivity(intent);
             }
         });

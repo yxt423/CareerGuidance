@@ -7,13 +7,7 @@ import java.util.ArrayList;
  * University class, define university instance and attributes of universities,
  * and APIs for accessing university data.
  */
-public class University {
-
-    int id;
-
-    String name;
-
-    String description;
+public class University extends  Target {
 
     String location;
 
@@ -27,6 +21,7 @@ public class University {
 
     //Constructors
     public University() {
+        super();
     }
 
     //Getters
