@@ -185,13 +185,11 @@ public class CareerDataSource
 
         while (!cursor.isAfterLast())
         {
-            Career career = cursorToCareer(cursor);
+            career = cursorToCareer(cursor);
 
             if (career.getId() == careerId)
             {
                 return career;
-
-                break;
             }
 
             cursor.moveToNext();
