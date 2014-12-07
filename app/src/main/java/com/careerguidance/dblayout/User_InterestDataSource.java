@@ -82,7 +82,7 @@ public class User_InterestDataSource
         List<Interest> user_Interests = new ArrayList<Interest>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
-                allColumns, "user_id = 1", null, null, null, null);
+                allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
 

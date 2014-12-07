@@ -123,7 +123,7 @@ public class Career_InterestDataSource
     {
         Interest career_Interest = new Interest();
 
-        //career_Interest.setId(cursor.getLong(0));
+        career_Interest.setId(cursor.getInt(0));
 
         career_Interest.setName(cursor.getString(1));
 

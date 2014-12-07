@@ -116,8 +116,7 @@ public class SubjectDataSource
     private Subject cursorToSubject(Cursor cursor) {
         Subject subject = new Subject();
 
-        //subject.setId(cursor.getLong(0));
-
+        subject.setId(cursor.getInt(0));
         subject.setName(cursor.getString(1));
         subject.setDescription(cursor.getString(2));
 

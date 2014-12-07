@@ -171,8 +171,7 @@ public class InterestDataSource
     private Interest cursorToInterest(Cursor cursor) {
         Interest interest = new Interest();
 
-        //interest.setId(cursor.getLong(0));
-
+        interest.setId(cursor.getInt(0));
         interest.setName(cursor.getString(1));
         interest.setDescription(cursor.getString(2));
 

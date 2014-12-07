@@ -39,6 +39,10 @@ public class Program {
     }
 
     //Setters
+    public void setId(int programId) {
+        id = programId;
+    }
+
     public void setSubject(Subject subj) {
         subject = subj;
     }

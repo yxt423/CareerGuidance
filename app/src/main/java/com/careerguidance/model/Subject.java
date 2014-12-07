@@ -32,6 +32,10 @@ public class Subject {
     }
 
     //Setters
+    public void setId(int subjectId) {
+        id = subjectId;
+    }
+
     public void setName(String subjectName) {
         name = subjectName;
     }

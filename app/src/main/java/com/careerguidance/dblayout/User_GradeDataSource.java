@@ -143,7 +143,7 @@ public class User_GradeDataSource
         List<Grade> user_Grades = new ArrayList<Grade>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
-                allColumns, "user_id = 1", null, null, null, null);
+                allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast())

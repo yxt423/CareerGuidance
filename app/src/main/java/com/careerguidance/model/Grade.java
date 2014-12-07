@@ -41,6 +41,10 @@ public class Grade
     }
 
     //Setters
+    public void setId(int subjectId) {
+        id = subjectId;
+    }
+
     public void setSubject(Subject subj) {
         subject = subj;
     }

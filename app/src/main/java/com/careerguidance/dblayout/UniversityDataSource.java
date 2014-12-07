@@ -226,8 +226,7 @@ public class UniversityDataSource
     private University cursorToUniversity(Cursor cursor) {
         University university = new University();
 
-        //university.setId(cursor.getLong(0));
-
+        university.setId(cursor.getInt(0));
         university.setName(cursor.getString(1));
         university.setDescription(cursor.getString(2));
         university.setFees(cursor.getDouble(3));

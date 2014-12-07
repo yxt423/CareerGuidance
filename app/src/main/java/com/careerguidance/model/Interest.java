@@ -32,6 +32,10 @@ public class Interest {
     }
 
     //Setters
+    public void setId(int interestId) {
+        id = interestId;
+    }
+
     public void setName(String interestName) {
         name = interestName;
     }

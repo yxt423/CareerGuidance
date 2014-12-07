@@ -63,6 +63,10 @@ public class University {
     }
 
     //Setters
+    public void setId(int uniId) {
+        id = uniId;
+    }
+
     public void setName(String strName) {
         name = strName;
     }

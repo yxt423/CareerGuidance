@@ -99,7 +99,7 @@ public class University_InterestDataSource
         List<Interest> university_Interests = new ArrayList<Interest>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_UNIVERSITY_INTEREST,
-                allColumns, "university_id = 1", null, null, null, null);
+                allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast())
@@ -119,8 +119,7 @@ public class University_InterestDataSource
     {
         Interest university_Interest = new Interest();
 
-        //university_Interest.setId(cursor.getLong(0));
-
+        university_Interest.setId(cursor.getInt(0));
         university_Interest.setName(cursor.getString(1));
 
         return university_Interest;
