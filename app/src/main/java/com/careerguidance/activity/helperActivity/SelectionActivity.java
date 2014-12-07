@@ -82,22 +82,6 @@ public class SelectionActivity extends Activity {
         }
     }
 
-//    public String[] getSelectionValues() {
-//        if (pageTitle.equals("Gender")) {
-//            return new String[] {"Male", "Female"};
-//        } else if (pageTitle.equals("Location")) {
-//            return new String[] {"Use current location", "United States", "Kenya", "China"};
-//        } else if (pageTitle.equals("Grades")) {
-//            return new String[] {"Math", "Science", "Language Arts", "Social Studies", "History", "Add new one"};
-//        } else if (pageTitle.equals("Interests")) {
-//            return new String[] {"Reading", "Sports", "Add new one"};
-//        } else if (pageTitle.equals("More Resources")) {
-//            return new String[] {"Official Website", "Wiki page", "Search in Google"};
-//        } else {
-//            return new String[]{};
-//        }
-//    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -10,13 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.careerguidance.adapter.CareerGuidance;
-import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
-import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.activity.helperActivity.VideoActivity;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
@@ -79,9 +78,9 @@ public class CareerInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 3:
-                        intent = new Intent(getBaseContext(), SelectionActivity.class);
-                        intent.putExtra("pageTitle", "More Resources");
-                        startActivity(intent);
+//                        intent = new Intent(getBaseContext(), SelectionActivity.class);
+//                        intent.putExtra("pageTitle", "More Resources");
+//                        startActivity(intent);
                         break;
                     default:
                         break;
