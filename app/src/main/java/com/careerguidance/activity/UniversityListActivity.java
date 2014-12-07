@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
+import com.careerguidance.dblayout.AndroidDatabaseManager;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * to the university detail info page.
  */
 public class UniversityListActivity extends Activity {
-//    private CareerGuidance careerGuidance = new CareerGuidance(getApplicationContext());
+    private CareerGuidance careerGuidance = null;
 
     String careerName = null;
 
@@ -29,17 +30,20 @@ public class UniversityListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_list);
 
+        careerGuidance = new CareerGuidance(getApplicationContext());
+
         final ListView listview = (ListView) findViewById(R.id.listview);
         String[] values = new String[] { "Massachusetts Institute of Technology", "Stanford University", "Carnegie Mellon University",
                 "University of California—​Berkeley", "University of Illinois—​Urbana-​Champaign", "University of Michigan—​Ann Arbor",
                 "Georgia Institute of Technology ", "Cornell University",
                 "Purdue University—​West Lafayette"};
 
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
-//        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllUniversityNames();
+//        final ArrayList<String> list = new ArrayList<String>();
+//        for (int i = 0; i < values.length; ++i) {
+//            list.add(values[i]);
+//        }
+
+        final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllUniversityNames();
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);

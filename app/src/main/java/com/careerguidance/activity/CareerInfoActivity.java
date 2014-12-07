@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
  */
 public class CareerInfoActivity extends Activity {
 
+    private CareerGuidance careerGuidance;
+
     TextView careerNameView = null;
     String careerName = null;
 
@@ -32,6 +35,8 @@ public class CareerInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_career_info);
+
+        careerGuidance = new CareerGuidance(getApplicationContext());
 
         // set career name on page title
         careerNameView = (TextView) findViewById(R.id.career_name);

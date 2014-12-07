@@ -33,6 +33,9 @@ import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.CareerGuidance;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -51,6 +54,7 @@ import java.util.Collections;
  */
 public class ProfileFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 100;
+    private static final int SELECT_PHOTO = 101;
 
     private CareerGuidance careerGuidance;
 
@@ -124,44 +128,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // profile photo on click: show dialog for editing the profile photo:
-        // take a new photo or choose an existing photo.
-        profilePhoto = (ImageView) v.findViewById(R.id.profile_photo);
-        profilePhoto.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_change_photo);
-                dialog.setTitle("Change the photo");
-
-                Button takePhotoButton = (Button) dialog.findViewById(R.id.take_photo_button);
-                takePhotoButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dispatchTakePictureIntent();
-                        dialog.dismiss();
-                    }
-                });
-
-                Button choosePhotoButton = (Button) dialog.findViewById(R.id.choose_photo_button);
-                choosePhotoButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
-                cancelButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-            }
-        });
+        createProfilePhotoView(v);
 
         // user name
         userName = (TextView) v.findViewById(R.id.user_name);
@@ -231,14 +198,58 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // take a photo and save to local file.
-            Uri uriSavedImage = Uri.fromFile(user_photo);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    // profile photo on click: show dialog for editing the profile photo:
+    // take a new photo or choose an existing photo.
+    private void createProfilePhotoView(View v) {
+        profilePhoto = (ImageView) v.findViewById(R.id.profile_photo);
+
+        if (user_photo.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(user_photo.getAbsolutePath());
+            profilePhoto.setImageBitmap(myBitmap);
         }
+
+        profilePhoto.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_change_photo);
+                dialog.setTitle("Change the photo");
+
+                Button takePhotoButton = (Button) dialog.findViewById(R.id.take_photo_button);
+                takePhotoButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            // take a photo and save to local file.
+                            Uri uriSavedImage = Uri.fromFile(user_photo);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }
+                        dialog.dismiss();
+                    }
+                });
+
+                Button choosePhotoButton = (Button) dialog.findViewById(R.id.choose_photo_button);
+                choosePhotoButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                        photoPickerIntent.setType("image/*");
+                        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                        dialog.dismiss();
+                    }
+                });
+
+                Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
+                cancelButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) { dialog.dismiss(); }
+                });
+
+                dialog.show();
+            }
+        });
     }
 
     // show the edit user name dialog once.
@@ -311,20 +322,41 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+
+        // use the photo just taken as profile photo
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == Activity.RESULT_OK) {
-//                Bundle extras = intent.getExtras();
-//                Bitmap imageBitmap = (Bitmap) extras.get("data");
-//                profilePhoto.setImageBitmap(imageBitmap);
                 if (user_photo.exists()) {
                     Bitmap myBitmap = BitmapFactory.decodeFile(user_photo.getAbsolutePath());
                     profilePhoto.setImageBitmap(myBitmap);
                 } else {
-                    Toast.makeText(getActivity(), "file not saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Saving photo failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
-        else if (resultCode == Activity.RESULT_OK) {  // if requestCode is none of the above, it is one of the position on the list.
+
+        // use the photo selected from local files as profile photo
+        else if (requestCode == SELECT_PHOTO) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                Uri selectedImage = intent.getData();
+                InputStream imageStream = null;
+                FileOutputStream out = null;
+                try {
+                    imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
+                    Bitmap SelectedImage = BitmapFactory.decodeStream(imageStream);
+                    profilePhoto.setImageBitmap(SelectedImage);
+
+                    out = new FileOutputStream(user_photo);
+                    SelectedImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(getActivity(), "Image not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        //  if requestCode is none of the above, it is one of the position on the list.
+        else if (resultCode == Activity.RESULT_OK) {
             String value = intent.getStringExtra("returnValue");
             optionList.set(requestCode, value);
             adapter.notifyDataSetChanged();

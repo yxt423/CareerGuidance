@@ -2,8 +2,11 @@ package com.careerguidance.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -12,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.careerguidance.R;
+
+import java.io.File;
 
 /**
  * Show the "match career tab (tab 2 in main page)"
@@ -38,7 +43,11 @@ public class FindCareerMatchFragment extends Fragment {
 
     ImageView careerPhoto = null;
     ImageView universityPhoto = null;
+
+    // user photo related.
     ImageView userPhoto = null;
+    File folder = null;
+    File user_photo = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -68,6 +77,13 @@ public class FindCareerMatchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        // for profile photo
+        folder = new File(Environment.getExternalStorageDirectory(), "pictures");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        user_photo = new File(folder, "user_photo.png");
     }
 
     // Inflate the layout for this fragment
@@ -78,7 +94,12 @@ public class FindCareerMatchFragment extends Fragment {
 
         careerPhoto = (ImageView) v.findViewById(R.id.career_photo);
         universityPhoto = (ImageView) v.findViewById(R.id.university_photo);
+
         userPhoto = (ImageView) v.findViewById(R.id.user_photo);
+        if (user_photo.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(user_photo.getAbsolutePath());
+            userPhoto.setImageBitmap(myBitmap);
+        }
 
         careerPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
