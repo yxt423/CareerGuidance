@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/university_name"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/cmu"
+            android:src="@drawable/u_cmu_1"
             android:contentDescription="university_photo" />
     </RelativeLayout>
 

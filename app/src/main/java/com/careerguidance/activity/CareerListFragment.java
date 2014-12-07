@@ -92,7 +92,7 @@ public class CareerListFragment extends Fragment {
 
 
         final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
-        final ArrayList<Career> careerList = (ArrayList<Career>) careerGuidance.getAllCareers();
+        final ArrayList<Career> careerList =  careerGuidance.getAllCareers();
         final StableArrayAdapter adapter = new StableArrayAdapter(getActivity(),
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);

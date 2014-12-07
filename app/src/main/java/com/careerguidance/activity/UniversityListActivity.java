@@ -13,6 +13,7 @@ import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
+import com.careerguidance.model.University;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,7 @@ public class UniversityListActivity extends Activity {
 //        }
 
         final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllUniversityNames();
+        final ArrayList<University> universityList = (ArrayList<University>) careerGuidance.getAllUniversity();
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
@@ -52,6 +54,7 @@ public class UniversityListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent(getBaseContext(), UniversityInfoActivity.class);
+                intent.putExtra("university id", universityList.get(position).getId());
                 intent.putExtra("university name", list.get(position));
                 startActivity(intent);
             }

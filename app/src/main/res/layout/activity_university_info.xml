@@ -33,7 +33,7 @@
         android:layout_below="@+id/university_name"
         android:layout_marginTop="@dimen/line_space"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/cmu"
+        android:src="@drawable/u_cmu_1"
         android:contentDescription="university_image" />
 
     <TextView

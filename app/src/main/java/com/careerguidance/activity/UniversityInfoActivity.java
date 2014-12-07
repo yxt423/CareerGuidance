@@ -7,12 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GalleryActivity;
 import com.careerguidance.activity.helperActivity.VideoActivity;
+import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
 import com.careerguidance.model.University;
@@ -21,34 +23,56 @@ import com.careerguidance.utility.Utility;
 import java.util.ArrayList;
 
 public class UniversityInfoActivity extends Activity {
+    private CareerGuidance careerGuidance;
 
-    University university;
 
-    TextView universityNameView = null;
-    String universityName = null;
-
+    ImageView universityPhoto;
+    TextView universityNameView;
     TextView universityDescription;
     TextView universityLocation;
 
+    String universityName = null;
+    int universityId;
+    University university;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_info);
 
+        careerGuidance = new CareerGuidance(getApplicationContext());
+
         createTextContentView();
         createListView();
     }
 
+    // set university text content
     public void createTextContentView() {
-        // set university name on page title
         universityNameView = (TextView) findViewById(R.id.university_name);
-        Intent intent = getIntent();
-        universityName = intent.getStringExtra("university name");
-        universityNameView.setText(universityName);
-
         universityDescription = (TextView) findViewById(R.id.university_description_txt);
         universityLocation = (TextView) findViewById(R.id.university_location_txt);
+        universityPhoto = (ImageView) findViewById(R.id.university_image);
+
+        Intent intent = getIntent();
+        universityId = intent.getIntExtra("university id", 0);
+        universityName = intent.getStringExtra("university name");
+        university = careerGuidance.getUniversity(universityId);
+
+        // set university photo
+        String imageIdentifierPrefix = "u_";
+        if (universityName.contains("Carnegie Mellon University")) {
+            imageIdentifierPrefix += "cmu_";
+        } else if (universityName.contains("Massachusetts Institute of Technology")) {
+            imageIdentifierPrefix += "mit_";
+        }
+        int id = getResources().getIdentifier(imageIdentifierPrefix + "1", "drawable", "com.careerguidance");
+        if (id != 0) {
+            universityPhoto.setImageResource(id);
+        }
+
+        universityNameView.setText(universityName);
+        universityDescription.setText(university.getDescription());
+
     }
 
     // create the listview
@@ -80,11 +104,6 @@ public class UniversityInfoActivity extends Activity {
                         intent = new Intent(getBaseContext(), VideoActivity.class);
                         intent.putExtra("videoNo", R.raw.qi_li_xiang);
                         startActivity(intent);
-                        break;
-                    case 2:
-//                        intent = new Intent(getBaseContext(), SelectionActivity.class);
-//                        intent.putExtra("pageTitle", "More Resources");
-//                        startActivity(intent);
                         break;
                     default:
                         break;

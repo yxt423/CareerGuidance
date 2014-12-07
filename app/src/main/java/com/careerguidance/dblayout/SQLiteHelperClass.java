@@ -248,14 +248,12 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         values = new ContentValues();
 
         values.put("name", "Female");
-
         database.insert("gender", null, values);
 
         values = null;
         values = new ContentValues();
 
         values.put("name", "Male");
-
         database.insert("gender", null, values);
 
         //subject table
@@ -278,49 +276,77 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         //interest table
         values = null;
         values = new ContentValues();
-
         values.put("name", "Music");
-
         database.insert("interest", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "Sports");
+        database.insert("interest", null, values);
 
+        values = new ContentValues();
+        values.put("name", "Literature");
+        database.insert("interest", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Debate");
+        database.insert("interest", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Chemistry");
+        database.insert("interest", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Biology");
+        database.insert("interest", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Physics");
+        database.insert("interest", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Computer");
         database.insert("interest", null, values);
 
         //career table
         values = null;
         values = new ContentValues();
-
-        values.put("name", "Medicine");
-        values.put("description", "Be a doctor!");
+        values.put("name", "Software Engineer");
+        values.put("description", "A software engineer is responsible for the development, maintenance and operation of computer software to enable businesses and organisations to function as efficiently as possible. \n" +
+                "Software engineers work in a range of industries, from offices to manufacturing companies developing, operating and maintaining specific software to allow the company’s work to be carried out with as few disruptions as possible. Typically, a software engineer works with a business analyst or computer programmer to identify the needs of a company and to develop the  specifications of the engineering project. Working with a small team of IT professionals, the software engineer completes  the project following a particular development plan which covers each stage of the project, including testing, software analysis and the installation of completed IT systems.");
         values.put("salary", "40000");
+        database.insert("career", null, values);
 
+        values = new ContentValues();
+        values.put("name", "Physician");
+        values.put("description", "A physician is a professional who practices medicine, which is concerned with promoting, maintaining or restoring human health through the study, diagnosis, and treatment of disease, injury, and other physical and mental impairments. They may focus their practice on certain disease categories, types of patients, or methods of treatment – known as specialist medical practitioners – or assume responsibility for the provision of continuing and comprehensive medical care to individuals, families, and communities – known as general practitioners.[2] Medical practice properly requires both a detailed knowledge of the academic disciplines (such as anatomy and physiology) underlying diseases and their treatment – the science of medicine – and also a decent competence in its applied practice – the art or craft of medicine.");
+        values.put("salary", "40000");
+        database.insert("career", null, values);
+
+        values = new ContentValues();
+        values.put("name", "Lawyer");
+        values.put("description","A lawyer is a person who practices law, as an attorney, counsel or solicitor.[1] Law is the system of rules of conduct established by the sovereign government of a society to correct wrongs, maintain the stability of political and social authority, and deliver justice. Working as a lawyer involves the practical application of abstract legal theories and knowledge to solve specific individualized problems, or to advance the interests of those who hire lawyers to perform legal services.");
+        values.put("salary", "40000");
         database.insert("career", null, values);
 
         //university table
         values = null;
         values = new ContentValues();
-
         values.put("name", "Massachusetts Institute of Technology");
-        values.put("description", "Massachusetts Institute of Technology");
+        values.put("description", "The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT adopted a European polytechnic university model and stressed laboratory instruction in applied science and engineering. Researchers worked on computers, radar, and inertial guidance during World War II and the Cold War. Post-war defense research contributed to the rapid expansion of the faculty and campus under James Killian. The current 168-acre (68.0 ha) campus opened in 1916 and extends over 1 mile (1.6 km) along the northern bank of the Charles River basin.");
         values.put("fees", "56000");
         values.put("url", "http://www.mit.edu");
         values.put("location_id", 1);
-
         database.insert("university", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "Carnegie Mellon University");
-        values.put("description", "Carnegie Mellon University");
+        values.put("description", "Carnegie Mellon University (Carnegie Mellon or CMU) is a private research university in Pittsburgh, Pennsylvania. \n" +
+                "The university began as the Carnegie Technical Schools founded by Andrew Carnegie in 1900. In 1912, the school became the Carnegie Institute of Technology and began granting four-year degrees. In 1967, the Carnegie Institute of Technology merged with the Mellon Institute of Industrial Research to form Carnegie Mellon University. The university\\'s 140-acre (0.57 km2) main campus is 3 miles (4.8 km) from Downtown Pittsburgh and abuts the Carnegie Museums of Pittsburgh, the main branch of the Carnegie Library of Pittsburgh, Schenley Park, Phipps Conservatory and Botanical Gardens, and the campus of the ");
         values.put("fees", "40000");
         values.put("url", "http://www.cmu.edu");
         values.put("location_id", 1);
-
         database.insert("university", null, values);
 
         //university_program table
@@ -349,7 +375,6 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         //user table
         values = null;
         values = new ContentValues();
-
         values.putNull("firstname");
         values.putNull("lastname");
         values.putNull("gender_id");
@@ -359,28 +384,23 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         values.putNull("password");
         values.putNull("career_id");
         values.putNull("university_id");
-
         database.insert("user", null, values);
 
         //university_grade table
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 1);
         values.put("program_id", 1);
         values.put("subject_id", 1);
         values.put("gpa", 3.4);
-
         database.insert("university_grade", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 2);
         values.put("program_id", 1);
         values.put("subject_id", 1);
         values.put("gpa", 3.0);
-
         database.insert("university_grade", null, values);
 
         //user_grade table
