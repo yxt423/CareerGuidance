@@ -73,14 +73,15 @@ public class CareerDataSource
                 + " = " + id, null);
     }
 
-    public List<Career> getAllCareers()
+    public ArrayList<Career> getAllCareers()
     {
-        List<Career> careers = new ArrayList<Career>();
+        ArrayList<Career> careers = new ArrayList<Career>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast())
         {
             Career career = cursorToCareer(cursor);
@@ -94,9 +95,9 @@ public class CareerDataSource
         return careers;
     }
 
-    public List<String> getAllCareerNames()
+    public ArrayList<String> getAllCareerNames()
     {
-        List<String> careerNames = new ArrayList<String>();
+        ArrayList<String> careerNames = new ArrayList<String>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
                 allColumns, null, null, null, null, null);

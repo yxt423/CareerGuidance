@@ -3,6 +3,7 @@ package com.careerguidance.adapter;
 import android.content.Context;
 
 import com.careerguidance.dblayout.CareerDataSource;
+import com.careerguidance.dblayout.Career_InterestDataSource;
 import com.careerguidance.dblayout.GenderDataSource;
 import com.careerguidance.dblayout.InterestDataSource;
 import com.careerguidance.dblayout.LocationDataSource;
@@ -23,30 +24,36 @@ import com.careerguidance.model.University;
 import com.careerguidance.model.User;
 import com.careerguidance.model.Grade;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.SortedMap;
 
 /**
  * Created by chris on 12/4/14.
  */
 public class CareerGuidance
 {
-    private static User user;
+    private static CareerDataSource careerDataSource;
 
-    private static UserDataSource userDataSource;
-
-    private static LocationDataSource locationDataSource;
+    private static Career_InterestDataSource career_interestDataSource;
 
     private static GenderDataSource genderDataSource;
 
-    private static SubjectDataSource subjectDataSource;
-
     private static InterestDataSource interestDataSource;
 
-    private static CareerDataSource careerDataSource;
+    private static LocationDataSource locationDataSource;
+
+    private static SubjectDataSource subjectDataSource;
 
     private static UniversityDataSource universityDataSource;
 
     private static University_GradeDataSource university_gradeDataSource;
+
+    private static User user;
+
+    private static UserDataSource userDataSource;
 
     private static User_GradeDataSource user_gradeDataSource;
 
@@ -68,6 +75,11 @@ public class CareerGuidance
         careerDataSource = new CareerDataSource(context);
 
         careerDataSource.open();
+
+
+        career_interestDataSource = new Career_InterestDataSource(context);
+
+        career_interestDataSource.open();
 
 
         genderDataSource = new GenderDataSource(context);
@@ -230,15 +242,17 @@ public class CareerGuidance
 
     public void setUserLocation(String strLocation)
     {
-        try
-        {
-            if (userDataSource.setLocation(user.getId(), strLocation))
+        try {
+            if (locationDataSource.isValidLocation(strLocation))
             {
-                user.setGender(strLocation);
+                int locationId = locationDataSource.getLocationId(strLocation);
+
+                if (userDataSource.setLocation(user.getId(), locationId))
+                    user.setLocation(strLocation);
             }
             else
             {
-                CGException cgException = new CGException("Unable to save name to database");
+                CGException cgException = new CGException ("Invalid Location");
 
                 throw cgException;
             }
@@ -257,7 +271,7 @@ public class CareerGuidance
             {
                 int genderId = genderDataSource.getGenderId(strGender);
 
-                if (userDataSource.setGenderId(user.getId(), genderId))
+                if (userDataSource.setGender(user.getId(), genderId))
                     user.setGender(strGender);
             }
             else
@@ -388,7 +402,7 @@ public class CareerGuidance
     }
 
     //Career
-    public List<Career> getAllCareer()
+    public ArrayList<Career> getAllCareers()
     {
         return careerDataSource.getAllCareers();
     }
@@ -430,10 +444,44 @@ public class CareerGuidance
         return interestDataSource.getIdFromName(interestName);
     }
 
-    public Career match (User user)
+    public HashMap<String, Double> match ()
     {
-        Career career = null;
+        List<Interest> userInterests = user.getInterests();
 
-        return career;
+        ArrayList<Career> careers = getAllCareers();
+
+        HashMap<String,Double> careerMatch = null;
+
+        int careerMatchCounter;
+
+        String careerName;
+
+        ArrayList<String> careerInterests;
+
+        for (int i = 0; i < careers.size(); i++)
+        {
+            careerMatchCounter = 0;
+
+            careerName = careers.get(i).getName();
+
+            careerInterests = career_interestDataSource.getCareer_InterestNames(careers.get(i).getId());
+
+            for (int j = 0; j < careerInterests.size(); j++)
+            {
+                for (int k = 0; k < userInterests.size(); k++)
+                {
+                    if (userInterests.get(k).getName().equals(careerInterests.get(j)))
+                    {
+                        careerMatchCounter++;
+                    }
+                }
+            }
+
+            double matchPercent = careerMatchCounter / careerInterests.size();
+
+            careerMatch.put(careerName, matchPercent);
+        }
+
+        return careerMatch;
     }
 }

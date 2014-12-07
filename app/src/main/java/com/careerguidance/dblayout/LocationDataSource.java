@@ -94,11 +94,44 @@ public class LocationDataSource
         return locations;
     }
 
+    public boolean isValidLocation(String strLocation)
+    {
+        if (getLocationId(strLocation) != -1)
+            return true;
+        else
+            return false;
+    }
+
+    public int getLocationId(String name)
+    {
+        int locationId = -1;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_LOCATION,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            Location location = cursorToLocation(cursor);
+
+            if (name.equalsIgnoreCase(location.getName()))
+                locationId = location.getId();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return locationId;
+    }
+
+
     private Location cursorToLocation(Cursor cursor) {
         Location location = new Location();
 
-        //location.setId(cursor.getLong(0));
-
+        location.setId(cursor.getInt(0));
         location.setName(cursor.getString(1));
         location.setDescription(cursor.getString(2));
 

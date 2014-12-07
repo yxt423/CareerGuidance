@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
 
+import java.util.HashMap;
+
 public class TestDBActivity extends Activity {
 
     private CareerGuidance objCareerGuidance;
@@ -49,6 +51,14 @@ public class TestDBActivity extends Activity {
         userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
 
         objCareerGuidance.addUserGrade(10,2.8);
+
+        objCareerGuidance.setUserGender("male");
+
+        objCareerGuidance.setUserLocation("Kenya");
+
+       // HashMap<String, Double> matches = objCareerGuidance.match();
+
+        //userId += matches.toString();
     }
 
     @Override

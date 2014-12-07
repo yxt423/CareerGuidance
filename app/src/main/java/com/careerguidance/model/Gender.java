@@ -33,6 +33,10 @@ public class Gender
     }
 
     //Setters
+    public void setId(int genderId) {
+        id = genderId;
+    }
+
     public void setName(String gndr) {
         name = gndr;
     }

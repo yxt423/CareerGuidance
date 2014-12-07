@@ -170,6 +170,17 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
                                                                         "FOREIGN KEY (program_id) REFERENCES university_program(_id)",
                                                                         "FOREIGN KEY (interest_id) REFERENCES interest(_id)"};
 
+    //Career_Interest Table===============
+    protected static final String TBL_CAREER_INTEREST = "career_interest";
+
+    protected static final String TBL_CAREER_INTEREST_COLS [][] = {{"_id", "INTEGER PRIMARY KEY"},
+                                                                    {"career_id", "INTEGER"},
+                                                                    {"interest_id", "INTEGER"}};
+
+    protected static final String  TBL_CAREER_INTEREST_OPTIONS [] = {"FOREIGN KEY (career_id) REFERENCES career(_id)",
+                                                                        "FOREIGN KEY (interest_id) REFERENCES interest(_id)"};
+
+
     //methods========================
 
     public void createTable(SQLiteDatabase database, String tblName, String [][] tblCols, String [] tblFKeys)
@@ -420,6 +431,15 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         values.put("interest_id", 1);
 
         database.insert("university_interest", null, values);
+
+        //career_interest table
+        values = null;
+        values = new ContentValues();
+
+        values.put("career_id", 1);
+        values.put("interest_id", 1);
+
+        database.insert("career_interest", null, values);
     }
 
     public static SQLiteHelperClass getInstance(Context context)
@@ -473,6 +493,8 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         createTable(database, TBL_INTEREST, TBL_INTEREST_COLS, TBL_INTEREST_OPTIONS);
 
         createTable(database, TBL_CAREER, TBL_CAREER_COLS, TBL_CAREER_OPTIONS);
+
+        createTable(database, TBL_CAREER_INTEREST, TBL_CAREER_INTEREST_COLS, TBL_CAREER_INTEREST_OPTIONS);
 
         createTable(database, TBL_UNIVERSITY, TBL_UNIVERSITY_COLS, TBL_UNIVERSITY_OPTIONS);
 

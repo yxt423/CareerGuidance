@@ -30,6 +30,11 @@ public class Location {
     }
 
     //Setters
+    public void setId(int locationId)
+    {
+        id = locationId;
+    }
+
     public void setName(String locationName) {
         name = locationName;
     }

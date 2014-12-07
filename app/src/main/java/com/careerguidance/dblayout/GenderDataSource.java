@@ -151,7 +151,7 @@ public class GenderDataSource
     private Gender cursorToGender(Cursor cursor) {
         Gender gender = new Gender();
 
-        //gender.setId(cursor.getLong(0));
+        gender.setId(cursor.getInt(0));
 
         gender.setName(cursor.getString(1));
 

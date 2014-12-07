@@ -154,8 +154,8 @@ public class User {
         lastName = lName;
     }
 
-    public void setLocation(Location locn) {
-        location = locn;
+    public void setLocation(String locn) {
+        location = new Location(locn);
     }
 
     public void setFirstName(String fName) {

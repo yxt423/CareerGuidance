@@ -155,9 +155,9 @@ public class UserDataSource
         user.setGender(cursor.getString(3));
         //user.setBirthDate(cursor.getString(4));
         user.setBirthDate(date);
-        user.setLocation(new Location(cursor.getString(5)));
-        user.setUsername(cursor.getString(5));
-        user.setPassword(cursor.getString(5));
+        user.setLocation(cursor.getString(5));
+        user.setUsername(cursor.getString(6));
+        user.setPassword(cursor.getString(7));
 
         return user;
     }
@@ -170,7 +170,7 @@ public class UserDataSource
 
         values.put(column, strValue);
 
-        rowsAffected = database.update("user", values,"_id = " + userId, null);
+        rowsAffected = database.update("user", values, "_id = " + userId, null);
 
         if (rowsAffected == 1)
             return true;
@@ -188,12 +188,23 @@ public class UserDataSource
         return setUserDetail(userId, "lastname", strLastName);
     }
 
-    public boolean setLocation(int userId, String strLocation)
+    public boolean setLocation(int userId, int locationId)
     {
-        return setUserDetail(userId,"location", strLocation);
+        int rowsAffected = 0;
+
+        ContentValues values = new ContentValues();
+
+        values.put("location_id", locationId);
+
+        rowsAffected = database.update("user", values,"_id = " + userId, null);
+
+        if (rowsAffected == 1)
+            return true;
+        else
+            return false;
     }
 
-    public boolean setGenderId(int userId, int genderId)
+    public boolean setGender(int userId, int genderId)
     {
         int rowsAffected = 0;
 
