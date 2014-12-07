@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- app related -->
+    <string name="app_name">CareerGuidance</string>
+    <string name="hello_world">你好！</string>
+
+    <!-- menu buttons -->
+    <string name="action_settings">设置</string>
+    <string name="action_admin_mode">管理员模式</string>
+    <string name="action_db_testing">数据库测试</string>
+
+    <!-- cover page buttons -->
+    <string name="match_career_button">帮我选一个职业</string>
+    <string name="career_options_button">看看都有哪些职业</string>
+
+    <!-- tabs -->
+    <string name="tab1">职业列表</string>
+    <string name="tab2">匹配职业</string>
+    <string name="tab3">我的档案</string>
+
+    <!-- profile page strings -->
+    <string name="profile_func0">生日</string>
+    <string name="profile_func1">性别</string>
+    <string name="profile_func2">国家</string>
+    <string name="profile_func3">科目成绩</string>
+    <string name="profile_func4">兴趣</string>
+
+    <string name="user_name">姓名</string>
+    <string name="take_photo_button">照一张新照片</string>
+    <string name="choose_photo_button">从文件选择</string>
+    <string name="cancel_button">取消</string>
+    <string name="find_career_match_button">帮我选一个职业</string>
+
+    <!-- other buttons -->
+    <string name="ok_button">确定</string>
+    <string name="submit_button">提交</string>
+
+    <!-- career -->
+    <string name="careers">职业列表</string>
+    <string name="career_description">简介: </string>
+    <string name="career_salary">平均工资: </string>
+    <string name="skills_required">常用技能: </string>
+
+    <!-- Universities -->
+    <string name="universities_page_title">著名大学</string>
+    <string name="university_name">Carnegie Mellon University</string>
+    <string name="university_description">简介:</string>
+    <string name="university_location">学校位置: </string>
+
+
+</resources>

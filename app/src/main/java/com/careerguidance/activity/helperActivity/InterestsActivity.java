@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.careerguidance.R;
 import com.careerguidance.activity.TestDBActivity;
@@ -24,7 +23,6 @@ public class InterestsActivity extends Activity {
 
     ListView listView = null;
     ArrayAdapter<String> adapter = null;
-//    String[] listValues = new String[]{"1", "23"};
     ArrayList<String> interestsList = new ArrayList<String>();
 
     @Override
@@ -35,7 +33,7 @@ public class InterestsActivity extends Activity {
         careerGuidance = new CareerGuidance(getApplicationContext());
 
         TextView pageTitleView = (TextView) findViewById(R.id.page_title);
-        pageTitleView.setText("Interests");
+        pageTitleView.setText(getString(R.string.profile_func4));
         listView = (ListView) findViewById(R.id.listview);
 
         interestsList = (ArrayList<String>) careerGuidance.getAllInterestNames();
@@ -53,7 +51,7 @@ public class InterestsActivity extends Activity {
             if (checked.valueAt(i))
                 selectedItems.add(adapter.getItem(position));
         }
-        Toast.makeText(getApplicationContext(), selectedItems.get(0), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 

@@ -74,6 +74,10 @@
             android:name=".activity.helperActivity.InterestsActivity"
             android:label="@string/title_activity_interests" >
         </activity>
+        <activity
+            android:name=".activity.helperActivity.LocationActivity"
+            android:label="@string/title_activity_location" >
+        </activity>
     </application>
 
 </manifest>

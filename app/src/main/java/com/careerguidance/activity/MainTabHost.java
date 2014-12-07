@@ -29,9 +29,10 @@ public class MainTabHost extends FragmentActivity implements
         mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("Careers").setIndicator("Careers"), CareerListFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Find Match").setIndicator("Find Match"), FindCareerMatchFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Profile").setIndicator("Profile"), ProfileFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(getString(R.string.tab1)).setIndicator(getString(R.string.tab1)), CareerListFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(getString(R.string.tab2)).setIndicator(getString(R.string.tab2)), FindCareerMatchFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(getString(R.string.tab3)).setIndicator(getString(R.string.tab3)), ProfileFragment.class, null);
+
         mTabHost.setCurrentTab(currentTab);
     }
 

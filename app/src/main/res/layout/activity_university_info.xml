@@ -44,14 +44,28 @@
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/university_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/university_description_txt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/university_description"
+        android:text="@string/university_description_txt"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/university_location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/university_description"
+        android:layout_below="@+id/university_description_txt"
         android:layout_marginTop="@dimen/line_space"
         android:text="@string/university_location"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/university_location_txt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/university_location"
+        android:text="@string/university_location_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ListView

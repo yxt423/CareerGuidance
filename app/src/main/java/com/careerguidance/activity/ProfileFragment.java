@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +33,7 @@ import android.widget.Toast;
 import com.careerguidance.R;
 import com.careerguidance.activity.helperActivity.GradesActivity;
 import com.careerguidance.activity.helperActivity.InterestsActivity;
+import com.careerguidance.activity.helperActivity.LocationActivity;
 import com.careerguidance.activity.helperActivity.SelectionActivity;
 import com.careerguidance.adapter.CareerGuidance;
 
@@ -40,6 +44,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 /**
  * Show user profile for editing. The "find me a career" button will
@@ -54,9 +59,11 @@ import java.util.Collections;
  *
  */
 public class ProfileFragment extends Fragment {
-    private static final int REQUEST_IMAGE_CAPTURE = 100;
-    private static final int SELECT_PHOTO = 101;
-    private static final int SELECT_INTERESTS_ACTIVITY = 102;
+    private static final int REQUEST_IMAGE_CAPTURE = 0;
+    private static final int SELECT_PHOTO = 1;
+    private static final int SELECT_GENDER_ACTIVITY = 2;
+    private static final int SELECT_LOCATION_ACTIVITY = 3;
+    private static final int SELECT_INTERESTS_ACTIVITY = 4;
 
     private CareerGuidance careerGuidance;
 
@@ -82,6 +89,9 @@ public class ProfileFragment extends Fragment {
     ImageView profilePhoto = null;
     File folder = null;
     File user_photo = null;
+
+    // for location setting.
+    Locale myLocale;
 
     private OnFragmentInteractionListener mListener;
 
@@ -113,7 +123,8 @@ public class ProfileFragment extends Fragment {
         }
         careerGuidance = new CareerGuidance(getActivity());
 
-        optionListStr = new String[] {"Birthday", "Gender", "Location", "Grades", "Interests"};
+        optionListStr = new String[] {getString(R.string.profile_func0), getString(R.string.profile_func1),
+                getString(R.string.profile_func2), getString(R.string.profile_func3), getString(R.string.profile_func4)};
         Collections.addAll(optionList, optionListStr);
 
         // for profile photo
@@ -148,12 +159,11 @@ public class ProfileFragment extends Fragment {
         });
 
         if (careerGuidance.getUserGender().getName() != null) {
-            optionList.set(1, optionList.get(1) + ":  " + careerGuidance.getUserGender().getName());
+            optionList.set(1, getString(R.string.profile_func1) + ":  " + careerGuidance.getUserGender().getName());
         }
         if (careerGuidance.getUserLocation().getName() != null) {
-            optionList.set(2, optionList.get(2) + ":  " + careerGuidance.getUserLocation().getName());
+            optionList.set(2, getString(R.string.profile_func2) + ":  " + careerGuidance.getUserLocation().getName());
         }
-
 
         // the personal information list.
         listView = (ListView) v.findViewById(R.id.listview);
@@ -169,17 +179,21 @@ public class ProfileFragment extends Fragment {
                         showEditBirthdayDialog();
                         break;
                     case 1:
-                    case 2:
                         intent = new Intent(getActivity(), SelectionActivity.class);
-                        intent.putExtra("function_no", position);
-                        startActivityForResult(intent, position);
+                        startActivityForResult(intent, SELECT_GENDER_ACTIVITY);
+                        break;
+                    case 2:
+                        intent = new Intent(getActivity(), LocationActivity.class);
+                        startActivityForResult(intent, SELECT_LOCATION_ACTIVITY);
                         break;
                     case 3:
                         intent = new Intent(getActivity(), GradesActivity.class);
                         startActivity(intent);
+                        break;
                     case 4:
                         intent = new Intent(getActivity(), InterestsActivity.class);
                         startActivityForResult(intent, SELECT_INTERESTS_ACTIVITY);
+                        break;
                     default:
                         break;
                 }
@@ -249,7 +263,9 @@ public class ProfileFragment extends Fragment {
                 Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
                 cancelButton.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View v) { dialog.dismiss(); }
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
                 });
 
                 dialog.show();
@@ -290,7 +306,7 @@ public class ProfileFragment extends Fragment {
 
     public void showEditBirthdayDialog() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setTitle("Birthday");
+        alert.setTitle(getString(R.string.profile_func0));
 
         final DatePicker datePicker = new DatePicker(getActivity());
         datePicker.setCalendarViewShown(false);
@@ -303,16 +319,16 @@ public class ProfileFragment extends Fragment {
         });
         alert.setView(datePicker);
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 birthday = String.valueOf(calendar.get(Calendar.MONTH) + 1) + "/" +
                         calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
-                optionList.set(0, "Birthday:   " + birthday);
+                optionList.set(0, getString(R.string.profile_func0) + ":   " + birthday);
                 adapter.notifyDataSetChanged();
             }
         });
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(getString(R.string.cancel_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) { }
         });
         alert.show();
@@ -360,20 +376,41 @@ public class ProfileFragment extends Fragment {
             }
         }
 
-        //  if requestCode is none of the above, it is one of the position on the list.
-        else if (resultCode == Activity.RESULT_OK) {
+        else if (requestCode == SELECT_GENDER_ACTIVITY && resultCode == Activity.RESULT_OK) {
             String value = intent.getStringExtra("returnValue");
+            optionList.set(1, getString(R.string.profile_func1) + ":  " + value);
+            adapter.notifyDataSetChanged();
+            careerGuidance.setUserGender(value);
+        }
+        else if (requestCode == SELECT_LOCATION_ACTIVITY && resultCode == Activity.RESULT_OK) {
+            String returnValue = intent.getStringExtra("returnValue");
+            optionList.set(2, getString(R.string.profile_func2) + ":  " + returnValue);
+            adapter.notifyDataSetChanged();
+            careerGuidance.setUserLocation(returnValue);
 
-            if (requestCode == 1) {
-                optionList.set(requestCode, "Gender:  " + value);
-                adapter.notifyDataSetChanged();
-                careerGuidance.setUserGender(value);
-            } else if (requestCode == 2) {
-                optionList.set(requestCode, "Location:  " + value);
-                adapter.notifyDataSetChanged();
-                careerGuidance.setUserLocation(value);
+            // change language setting.
+            if (returnValue.contains("China")) {
+                setLocale("zh");
+            } else if (returnValue.contains("United States")) {
+                setLocale("en");
+            } else if (returnValue.contains("Kenya")) {
+                setLocale("sw-KE");
             }
         }
+    }
+
+    // change language setting.
+    public void setLocale(String lang) {
+        myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(getActivity(), MainTabHost.class);
+        refresh.putExtra("currentTab", 2);
+        getActivity().finish();
+        startActivity(refresh);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
+import com.careerguidance.model.Career;
 import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
@@ -28,7 +29,12 @@ public class CareerInfoActivity extends Activity {
     private CareerGuidance careerGuidance;
 
     TextView careerNameView = null;
-    String careerName = null;
+    Career career;
+    int careerId;
+
+    TextView careerDescription;
+    TextView careerSalary;
+    TextView careerSkills;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +46,30 @@ public class CareerInfoActivity extends Activity {
         // set career name on page title
         careerNameView = (TextView) findViewById(R.id.career_name);
         Intent intent = getIntent();
-        careerName = intent.getStringExtra("career name");
-        careerNameView.setText(careerName);
+        careerId = intent.getIntExtra("career id", 0);
+        career = careerGuidance.getCareer(careerId);
+        careerNameView.setText(career.getName());
 
+        createTextContentView();
+        createListView();
+    }
+
+    public void createTextContentView() {
+        careerDescription = (TextView) findViewById(R.id.career_description_txt);
+        careerSalary = (TextView) findViewById(R.id.career_salary_txt);
+        careerSkills = (TextView) findViewById(R.id.skills_required_txt);
+
+        careerDescription.setText(career.getDescription());
+        careerSalary.setText(String.valueOf(career.getAvgSalary()));
+
+        String skillsStr = "";
+        for (String s : career.getSkillsRequired()) {
+            skillsStr += s + "\n";
+        }
+        careerSkills.setText(skillsStr);
+    }
+
+    public void createListView() {
         // create the listview
         String[] values = new String[] {"Famous Universities",
                 "More Pictures", "Watch Videos", "More Resources"};

@@ -15,27 +15,44 @@ import com.careerguidance.activity.helperActivity.GalleryActivity;
 import com.careerguidance.activity.helperActivity.VideoActivity;
 import com.careerguidance.adapter.StableArrayAdapter;
 import com.careerguidance.dblayout.AndroidDatabaseManager;
+import com.careerguidance.model.University;
 import com.careerguidance.utility.Utility;
 
 import java.util.ArrayList;
 
 public class UniversityInfoActivity extends Activity {
 
+    University university;
+
     TextView universityNameView = null;
     String universityName = null;
+
+    TextView universityDescription;
+    TextView universityLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_info);
 
+        createTextContentView();
+        createListView();
+    }
+
+    public void createTextContentView() {
         // set university name on page title
         universityNameView = (TextView) findViewById(R.id.university_name);
         Intent intent = getIntent();
         universityName = intent.getStringExtra("university name");
         universityNameView.setText(universityName);
 
-        // create the listview
+        universityDescription = (TextView) findViewById(R.id.university_description_txt);
+        universityLocation = (TextView) findViewById(R.id.university_location_txt);
+    }
+
+    // create the listview
+    public void createListView() {
         String[] values = new String[] {"More Pictures", "Watch Videos", "More Resources"};
         final ListView listview = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();

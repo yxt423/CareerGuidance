@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.careerguidance.R;
 import com.careerguidance.adapter.CareerGuidance;
 import com.careerguidance.adapter.StableArrayAdapter;
+import com.careerguidance.model.Career;
 
 import java.util.ArrayList;
 
@@ -91,6 +92,7 @@ public class CareerListFragment extends Fragment {
 
 
         final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
+        final ArrayList<Career> careerList = (ArrayList<Career>) careerGuidance.getAllCareers();
         final StableArrayAdapter adapter = new StableArrayAdapter(getActivity(),
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
@@ -99,6 +101,7 @@ public class CareerListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CareerInfoActivity.class);
+                intent.putExtra("career id", careerList.get(position).getId());
                 intent.putExtra("career name", list.get(position));
                 startActivity(intent);
             }
@@ -107,7 +110,6 @@ public class CareerListFragment extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
