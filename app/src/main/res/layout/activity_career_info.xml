@@ -48,7 +48,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/career_description"
-        android:text="@string/career_description_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -64,7 +63,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/career_salary"
-        android:text="@string/career_salary_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -80,7 +78,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/skills_required"
-        android:text="@string/skills_required_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ListView

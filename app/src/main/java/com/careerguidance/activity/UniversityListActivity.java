@@ -54,7 +54,7 @@ public class UniversityListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent(getBaseContext(), UniversityInfoActivity.class);
-                intent.putExtra("university id", universityList.get(position).getId());
+                intent.putExtra("university id", position);
                 intent.putExtra("university name", list.get(position));
                 startActivity(intent);
             }

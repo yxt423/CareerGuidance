@@ -217,65 +217,65 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
 
     public void populateTables(SQLiteDatabase database)
     {
-        //location table
+        populateLocationTable(database);
+        populateGenderTable(database);
+        populateSubjectTable(database);
+        populateInterestTable(database);
+        populateCareerTable(database);
+        populateUniversityTable(database);
+
+        populateOtherTables(database);
+    }
+
+    //location table
+    public void populateLocationTable(SQLiteDatabase database) {
         ContentValues values = new ContentValues();
         values.put("name", "United States");
         values.put("currency", "USD");
         values.put("currency_symbol", "$");
-
         database.insert("location", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "China");
         values.put("currency", "YEN");
         values.put("currency_symbol", "¥");
-
         database.insert("location", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "Kenya");
         values.put("currency", "KES");
         values.put("currency_symbol", "K");
-
         database.insert("location", null, values);
+    }
 
-        //gender table
-        values = null;
-        values = new ContentValues();
-
+    public void populateGenderTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         values.put("name", "Female");
         database.insert("gender", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "Male");
         database.insert("gender", null, values);
+    }
 
-        //subject table
-        values = null;
-        values = new ContentValues();
-
+    public void populateSubjectTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         values.put("name", "English");
         values.put("description", "English");
-
         database.insert("subject", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("name", "Mathematics");
         values.put("description", "Mathematics");
-
         database.insert("subject", null, values);
+    }
 
-        //interest table
-        values = null;
-        values = new ContentValues();
+    public void populateInterestTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         values.put("name", "Music");
         database.insert("interest", null, values);
 
@@ -284,54 +284,83 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         values.put("name", "Sports");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Literature");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Debate");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Chemistry");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Biology");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Physics");
         database.insert("interest", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Computer");
         database.insert("interest", null, values);
+    }
 
-        //career table
-        values = null;
-        values = new ContentValues();
+    public void populateCareerTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         values.put("name", "Software Engineer");
         values.put("description", "A software engineer is responsible for the development, maintenance and operation of computer software to enable businesses and organisations to function as efficiently as possible. \n" +
                 "Software engineers work in a range of industries, from offices to manufacturing companies developing, operating and maintaining specific software to allow the company’s work to be carried out with as few disruptions as possible. Typically, a software engineer works with a business analyst or computer programmer to identify the needs of a company and to develop the  specifications of the engineering project. Working with a small team of IT professionals, the software engineer completes  the project following a particular development plan which covers each stage of the project, including testing, software analysis and the installation of completed IT systems.");
         values.put("salary", "40000");
         database.insert("career", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Physician");
         values.put("description", "A physician is a professional who practices medicine, which is concerned with promoting, maintaining or restoring human health through the study, diagnosis, and treatment of disease, injury, and other physical and mental impairments. They may focus their practice on certain disease categories, types of patients, or methods of treatment – known as specialist medical practitioners – or assume responsibility for the provision of continuing and comprehensive medical care to individuals, families, and communities – known as general practitioners.[2] Medical practice properly requires both a detailed knowledge of the academic disciplines (such as anatomy and physiology) underlying diseases and their treatment – the science of medicine – and also a decent competence in its applied practice – the art or craft of medicine.");
         values.put("salary", "40000");
         database.insert("career", null, values);
 
+        values = null;
         values = new ContentValues();
         values.put("name", "Lawyer");
         values.put("description","A lawyer is a person who practices law, as an attorney, counsel or solicitor.[1] Law is the system of rules of conduct established by the sovereign government of a society to correct wrongs, maintain the stability of political and social authority, and deliver justice. Working as a lawyer involves the practical application of abstract legal theories and knowledge to solve specific individualized problems, or to advance the interests of those who hire lawyers to perform legal services.");
         values.put("salary", "40000");
         database.insert("career", null, values);
 
-        //university table
         values = null;
         values = new ContentValues();
+        values.put("name", "Analyst");
+        values.put("description","Accounting analyst, an accounting analyst evaluates and interprets public company financial statements");
+        values.put("salary", "40000");
+        database.insert("career", null, values);
+
+        values = null;
+        values = new ContentValues();
+        values.put("name", "Civil Engineer");
+        values.put("description","A civil engineer is a person who practices civil engineering – the application of planning, designing, constructing, maintaining, and operating infrastructures while protecting the public and environmental health, as well as improving existing infrastructures that have been neglected.");
+        values.put("salary", "40000");
+        database.insert("career", null, values);
+
+        values = null;
+        values = new ContentValues();
+        values.put("name", "Nurse");
+        values.put("description","Nursing is a profession within the health care sector focused on the care of individuals, families, and communities so they may attain, maintain, or recover optimal health and quality of life.");
+        values.put("salary", "40000");
+        database.insert("career", null, values);
+    }
+
+    public void populateUniversityTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         values.put("name", "Massachusetts Institute of Technology");
         values.put("description", "The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT adopted a European polytechnic university model and stressed laboratory instruction in applied science and engineering. Researchers worked on computers, radar, and inertial guidance during World War II and the Cold War. Post-war defense research contributed to the rapid expansion of the faculty and campus under James Killian. The current 168-acre (68.0 ha) campus opened in 1916 and extends over 1 mile (1.6 km) along the northern bank of the Charles River basin.");
         values.put("fees", "56000");
@@ -348,28 +377,27 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         values.put("url", "http://www.cmu.edu");
         values.put("location_id", 1);
         database.insert("university", null, values);
+    }
 
+    public void populateOtherTables(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
         //university_program table
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 1);
         values.put("name", "B.Sc. Computer Science");
         values.put("career_id", 1);
         values.put("description", "Computer Science");
         values.put("gpa", 3.4);
-
         database.insert("university_program", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 2);
         values.put("name", "B.Sc. Computer Science");
         values.put("career_id", 1);
         values.put("description", "Computer Science");
         values.put("gpa", 3.6);
-
         database.insert("university_program", null, values);
 
         //user table
@@ -406,59 +434,47 @@ public class SQLiteHelperClass extends SQLiteOpenHelper
         //user_grade table
 /*        values = null;
         values = new ContentValues();
-
         values.put("user_id", 1);
         values.put("subject_id", 1);
         values.put("gpa", 3.4);
-
         database.insert("user_grade", null, values);
 
         values = null;
         values = new ContentValues();
-
         values.put("user_id", 1);
         values.put("subject_id", 2);
         values.put("gpa", 3.0);
-
         database.insert("user_grade", null, values);
 
 
         //user_interest table
         values = null;
         values = new ContentValues();
-
         values.put("user_id", 1);
         values.put("interest_id", 1);
-
         database.insert("user_interest", null, values);
 */
         //university_career table
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 1);
         values.put("program_id", 1);
         values.put("career_id", 1);
-
         database.insert("university_career", null, values);
 
         //university_interest table
         values = null;
         values = new ContentValues();
-
         values.put("university_id", 1);
         values.put("program_id", 1);
         values.put("interest_id", 1);
-
         database.insert("university_interest", null, values);
 
         //career_interest table
         values = null;
         values = new ContentValues();
-
         values.put("career_id", 1);
         values.put("interest_id", 1);
-
         database.insert("career_interest", null, values);
     }
 

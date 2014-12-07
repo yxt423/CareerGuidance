@@ -49,7 +49,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_description"
-        android:text="@string/university_description_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -65,7 +64,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_location"
-        android:text="@string/university_location_txt"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ListView

@@ -80,16 +80,6 @@ public class CareerListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_career_list, container, false);
 
         final ListView listview = (ListView) v.findViewById(R.id.listview);
-//        String[] values = new String[] { "Software Engineer", "Analyst", "Physician",
-//                "Lawyer", "Nurse", "Civil Engineer", "Mechanical Engineer", "Marketer",
-//                "career10", "career11", "career12", "career13", "career14", "career15",
-//                "career16", "career17", "career18"};
-
-//        final ArrayList<String> list = new ArrayList<String>();
-//        for (int i = 0; i < values.length; ++i) {
-//            list.add(values[i]);
-//        }
-
 
         final ArrayList<String> list = (ArrayList<String>) careerGuidance.getAllCareerNames();
         final ArrayList<Career> careerList =  careerGuidance.getAllCareers();
@@ -101,7 +91,7 @@ public class CareerListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CareerInfoActivity.class);
-                intent.putExtra("career id", careerList.get(position).getId());
+                intent.putExtra("career id", position);
                 intent.putExtra("career name", list.get(position));
                 startActivity(intent);
             }
