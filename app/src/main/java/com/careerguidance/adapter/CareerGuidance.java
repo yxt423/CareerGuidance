@@ -410,6 +410,11 @@ public class CareerGuidance
         return careerDataSource.getAllCareerNames();
     }
 
+    public Career getCareer(int careerId)
+    {
+        return careerDataSource.getCareerById(careerId);
+    }
+
     //Subject
     public List<Subject> getAllSubjects()
     {

@@ -46,19 +46,25 @@ public class TestDBActivity extends Activity {
         else
             test.setText("No Profile");
 
-        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
-
-        userId += "CG1: LastName : " + objCareerGuidance1.getUserLastName();
-
-        objCareerGuidance.addUserGrade(10,2.8);
-
         objCareerGuidance.setUserGender("male");
 
+        userId += "\nGender = " + objCareerGuidance1.getUserGender().getName();
+
+        System.out.println("\nGender = " + objCareerGuidance1.getUserGender().getName());
+
         objCareerGuidance.setUserLocation("Kenya");
+
+        userId += "CG: FirstName : " + objCareerGuidance.getUserFirstName();
+
+        userId += "CG1: LastName : " + objCareerGuidance.getUserLastName();
+
+        //objCareerGuidance.addUserGrade(10,2.8);
 
         HashMap<String, Double> matches = objCareerGuidance.match();
 
         userId += matches.toString();
+
+        test.setText(userId);
     }
 
     @Override
