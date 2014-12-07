@@ -1,5 +1,7 @@
 package com.careerguidance.model;
 
+import com.careerguidance.dblayout.LocationDataSource;
+
 public class Location {
     int id;
 
@@ -12,10 +14,23 @@ public class Location {
         name = "";
     }
 
-    public Location(String locationName) {
+    public Location(String locationName)
+    {
         name = locationName;
+
     }
 
+    public Location(int locationId)
+    {
+        id = locationId;
+    }
+
+    public Location(int locationId, String locationName)
+    {
+        id = locationId;
+
+        name = locationName;
+    }
     //Getters
     public int getId() {
         return id;
@@ -35,6 +50,10 @@ public class Location {
         id = locationId;
     }
 
+    public void setId(String location)
+    {
+        name = location;
+    }
     public void setName(String locationName) {
         name = locationName;
     }

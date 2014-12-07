@@ -177,7 +177,9 @@ public class CareerGuidance
 
     public Gender getUserGender()
     {
-        return user.getGender();
+        Gender gender = user.getGender();
+
+        return gender;
     }
 
     public Location getUserLocation()
@@ -270,7 +272,7 @@ public class CareerGuidance
                 int genderId = genderDataSource.getGenderId(strGender);
 
                 if (userDataSource.setGender(user.getId(), genderId))
-                    user.setGender(strGender);
+                    user.setGender(genderDataSource.getGenderObject(strGender));
             }
             else
             {
@@ -397,6 +399,11 @@ public class CareerGuidance
     public List<String> getAllUniversityNames()
     {
         return universityDataSource.getAllUniversityNames();
+    }
+
+    public University getUniversity(int universityId)
+    {
+        return universityDataSource.getUniversityById(universityId);
     }
 
     //Career

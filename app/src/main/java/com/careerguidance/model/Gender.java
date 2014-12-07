@@ -23,6 +23,13 @@ public class Gender
         name = gndr;
     }
 
+    public Gender(int genderId, String genderName)
+    {
+        id = genderId;
+
+        name = genderName;
+    }
+
     //Getters
     public int getId() {
         return id;

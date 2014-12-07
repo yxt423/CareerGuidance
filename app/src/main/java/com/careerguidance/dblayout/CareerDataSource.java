@@ -201,6 +201,33 @@ public class CareerDataSource
         return career;
     }
 
+    public Career getCareerObjecct(int careerId)
+    {
+        Career career = null;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast())
+        {
+            career = cursorToCareer(cursor);
+
+            if (career.getId() == careerId)
+            {
+                return career;
+            }
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return career;
+    }
+
     private Career cursorToCareer(Cursor cursor) {
         Career career = new Career();
 

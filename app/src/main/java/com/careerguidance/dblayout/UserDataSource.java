@@ -28,10 +28,15 @@ public class UserDataSource
             SQLiteHelperClass.TBL_USER_COLS[1][0], SQLiteHelperClass.TBL_USER_COLS[2][0],
             SQLiteHelperClass.TBL_USER_COLS[3][0], SQLiteHelperClass.TBL_USER_COLS[4][0],
             SQLiteHelperClass.TBL_USER_COLS[5][0], SQLiteHelperClass.TBL_USER_COLS[6][0],
-            SQLiteHelperClass.TBL_USER_COLS[7][0]};
+            SQLiteHelperClass.TBL_USER_COLS[7][0], SQLiteHelperClass.TBL_USER_COLS[8][0],
+            SQLiteHelperClass.TBL_USER_COLS[9][0]};
+
+    private Context localContext;
 
     public UserDataSource(Context context)
     {
+        localContext = context;
+
         dbHelper = new SQLiteHelperClass(context);
     }
 
@@ -45,7 +50,8 @@ public class UserDataSource
         dbHelper.close();
     }
 
-    public User createUser(String fName, String lName, String gndr, Date dob, String location, String username, String password)
+    public User createUser(String fName, String lName, String gndr, Date dob, String location, String username, String password,
+                           int career_id, int university_id)
     {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_USER_COLS[1][0], fName);
@@ -55,6 +61,8 @@ public class UserDataSource
         values.put(SQLiteHelperClass.TBL_USER_COLS[5][0], location);
         values.put(SQLiteHelperClass.TBL_USER_COLS[6][0], username);
         values.put(SQLiteHelperClass.TBL_USER_COLS[7][0], password);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[8][0], career_id);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[9][0], university_id);
 
         long insertId = database.insert(SQLiteHelperClass.TBL_USER, null,
                 values);
@@ -72,7 +80,8 @@ public class UserDataSource
         return newUser;
     }
 
-    public User updateUser(String fName, String lName, String gndr, Date dob, String location, String username, String password)
+    public User updateUser(String fName, String lName, String gndr, Date dob, String location, String username, String password,
+                           int career_id, int university_id)
     {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelperClass.TBL_USER_COLS[1][0], fName);
@@ -82,6 +91,8 @@ public class UserDataSource
         values.put(SQLiteHelperClass.TBL_USER_COLS[5][0], location);
         values.put(SQLiteHelperClass.TBL_USER_COLS[6][0], username);
         values.put(SQLiteHelperClass.TBL_USER_COLS[7][0], password);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[8][0], career_id);
+        values.put(SQLiteHelperClass.TBL_USER_COLS[9][0], university_id);
 
         long insertId = database.update(SQLiteHelperClass.TBL_USER, values, "_id = 1", null);
 
@@ -113,6 +124,17 @@ public class UserDataSource
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,allColumns, "_id = " + userId, null, null, null, null);
 
+/*        String sqlQuery = "select f.*, g.name from (select d.*, e.name as university from " +
+                "(select a.*, c.name as location_name from (select user.*, b.name as gender " +
+                "from user inner join gender b on user.gender_id = b._id) as a " +
+                "inner join location c on a.location_id = c._id) as d inner join university as e on " +
+                "d.university_id = e._id) as f inner join career as g on f.career_id = g._id";
+
+        String [] condition = {"f._id = 1"};
+
+        Cursor cursor = database.rawQuery(sqlQuery, condition);
+*/
+
         if (cursor.moveToFirst())
             user = cursorToUser(cursor);
 
@@ -127,7 +149,7 @@ public class UserDataSource
         List<User> users = new ArrayList<User>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER,
-                allColumns, "id = 1", null, null, null, null);
+                allColumns, "_id = 1", null, null, null, null);
 
         cursor.moveToFirst();
 
@@ -147,17 +169,33 @@ public class UserDataSource
     private User cursorToUser(Cursor cursor) {
         User user = new User();
 
+        GenderDataSource genderDataSource = new GenderDataSource(localContext);
+        genderDataSource.open();
+        LocationDataSource locationDataSource = new LocationDataSource(localContext);
+        locationDataSource.open();
+        UniversityDataSource universityDataSource = new UniversityDataSource(localContext);
+        universityDataSource.open();
+        CareerDataSource careerDataSource = new CareerDataSource(localContext);
+        careerDataSource.open();
+
         user.setId(cursor.getInt(0));
 
         Date date = new Date();
         user.setFirstName(cursor.getString(1));
         user.setLastName(cursor.getString(2));
-        user.setGender(cursor.getString(3));
+        user.setGender(genderDataSource.getGenderObject(cursor.getInt(3)));
         //user.setBirthDate(cursor.getString(4));
         user.setBirthDate(date);
-        user.setLocation(cursor.getString(5));
+        user.setLocation(locationDataSource.getLocationObject(cursor.getInt(5)));
         user.setUsername(cursor.getString(6));
         user.setPassword(cursor.getString(7));
+        user.setUniversityChoice(universityDataSource.getUniversityObject(cursor.getInt(9)));
+        user.setCareerChoice(careerDataSource.getCareerObjecct(cursor.getInt(8)));
+
+        genderDataSource.close();
+        locationDataSource.close();
+        universityDataSource.close();
+        careerDataSource.close();
 
         return user;
     }
