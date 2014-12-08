@@ -169,6 +169,11 @@ public class CareerGuidance
         return user.getCareerChoice();
     }
 
+    public Date getUserBirthDate()
+    {
+        return user.getBirthDate();
+    }
+
     //User Setters
     public void setUserFirstName(String strFirstName)
     {

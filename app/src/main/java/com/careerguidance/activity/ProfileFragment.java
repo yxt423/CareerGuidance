@@ -43,11 +43,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Show user profile for editing. The "find me a career" button will
@@ -260,6 +262,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void createListView(View v) {
+        if (careerGuidance.getUserBirthDate() != null) {
+            optionList.set(0, getString(R.string.profile_func0) + ":  " + careerGuidance.getUserBirthDate());
+        }
         if (careerGuidance.getUserGender().getName() != null) {
             optionList.set(1, getString(R.string.profile_func1) + ":  " + careerGuidance.getUserGender().getName());
         }

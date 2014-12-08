@@ -25,6 +25,8 @@ public class UserDataSource
 
     private SQLiteHelperClass dbHelper;
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     private String[] allColumns = { SQLiteHelperClass.TBL_USER_COLS[0][0],
             SQLiteHelperClass.TBL_USER_COLS[1][0], SQLiteHelperClass.TBL_USER_COLS[2][0],
             SQLiteHelperClass.TBL_USER_COLS[3][0], SQLiteHelperClass.TBL_USER_COLS[4][0],
@@ -58,7 +60,7 @@ public class UserDataSource
         values.put(SQLiteHelperClass.TBL_USER_COLS[1][0], fName);
         values.put(SQLiteHelperClass.TBL_USER_COLS[2][0], lName);
         values.put(SQLiteHelperClass.TBL_USER_COLS[3][0], gndr);
-        values.put(SQLiteHelperClass.TBL_USER_COLS[4][0], dob.toString());
+        values.put(SQLiteHelperClass.TBL_USER_COLS[4][0], formatter.format(dob));
         values.put(SQLiteHelperClass.TBL_USER_COLS[5][0], location);
         values.put(SQLiteHelperClass.TBL_USER_COLS[6][0], username);
         values.put(SQLiteHelperClass.TBL_USER_COLS[7][0], password);
@@ -88,7 +90,7 @@ public class UserDataSource
         values.put(SQLiteHelperClass.TBL_USER_COLS[1][0], fName);
         values.put(SQLiteHelperClass.TBL_USER_COLS[2][0], lName);
         values.put(SQLiteHelperClass.TBL_USER_COLS[3][0], gndr);
-        values.put(SQLiteHelperClass.TBL_USER_COLS[4][0], dob.toString());
+        values.put(SQLiteHelperClass.TBL_USER_COLS[4][0], formatter.format(dob));
         values.put(SQLiteHelperClass.TBL_USER_COLS[5][0], location);
         values.put(SQLiteHelperClass.TBL_USER_COLS[6][0], username);
         values.put(SQLiteHelperClass.TBL_USER_COLS[7][0], password);
@@ -170,8 +172,6 @@ public class UserDataSource
     private User cursorToUser(Cursor cursor) {
         User user = new User();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
         GenderDataSource genderDataSource = new GenderDataSource(localContext);
         genderDataSource.open();
         LocationDataSource locationDataSource = new LocationDataSource(localContext);
@@ -183,21 +183,21 @@ public class UserDataSource
 
         user.setId(cursor.getInt(0));
 
-        Date date = new Date();
         user.setFirstName(cursor.getString(1));
         user.setLastName(cursor.getString(2));
         user.setGender(genderDataSource.getGenderObject(cursor.getInt(3)));
 
         try
         {
-            user.setBirthDate(formatter.parse(cursor.getString(4)));
+            String strBDate = cursor.getString(4);
+            Date bDate = formatter.parse(strBDate);
+            user.setBirthDate(bDate);
         }
         catch (Exception e)
         {
-
+            System.out.println(e);
         }
 
-        user.setBirthDate(date);
         user.setLocation(locationDataSource.getLocationObject(cursor.getInt(5)));
         user.setUsername(cursor.getString(6));
         user.setPassword(cursor.getString(7));
@@ -244,7 +244,7 @@ public class UserDataSource
 
         ContentValues values = new ContentValues();
 
-        values.put("birthdate", date.toString());
+        values.put("birthdate", formatter.format(date));
 
         rowsAffected = database.update("user", values,"_id = 1", null);
 
