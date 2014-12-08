@@ -99,7 +99,7 @@ public class Career_InterestDataSource
 
     public ArrayList<String> getCareer_InterestNames(int careerId)
     {
-        ArrayList<String> interestNames = null;
+        ArrayList<String> interestNames = new ArrayList<String>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_CAREER_INTEREST,
                 allColumns, "career_id = " + careerId, null, null, null, null);

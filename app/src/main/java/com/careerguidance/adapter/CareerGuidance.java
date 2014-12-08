@@ -103,7 +103,6 @@ public class CareerGuidance
         user_gradeDataSource = new User_GradeDataSource(context);
 
         user_interestDataSource = new User_InterestDataSource(context);
-
     }
 
     public void closeDataSources()
@@ -861,15 +860,23 @@ public class CareerGuidance
     {
         List<Interest> userInterests = user.getInterests();
 
+        List<Grade> userGrades = user.getGrades();
+
         ArrayList<Career> careers = getAllCareers();
 
-        HashMap<String,Double> careerMatch = null;
+        HashMap<String,Double> careerMatch = new HashMap<String, Double>();
 
         int careerMatchCounter;
 
         String careerName;
 
         ArrayList<String> careerInterests;
+
+        ArrayList<Grade> careerGrades;
+
+        career_interestDataSource.open();
+
+        university_gradeDataSource.open();
 
         for (int i = 0; i < careers.size(); i++)
         {
@@ -890,11 +897,16 @@ public class CareerGuidance
                 }
             }
 
-            double matchPercent = careerMatchCounter / careerInterests.size();
+            double matchPercent = 0;
+
+            if (careerInterests.size() > 0)
+                matchPercent = careerMatchCounter / careerInterests.size() * 100;
+
 
             careerMatch.put(careerName, matchPercent);
         }
 
+        System.out.println(careerMatch.toString());
         return careerMatch;
     }
 }
