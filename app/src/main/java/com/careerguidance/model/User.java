@@ -211,6 +211,14 @@ public class User {
         universityChoice = uni;
     }
 
+    public void setGrades(ArrayList<Grade> lstGrade) {
+        grades = lstGrade;
+    }
+
+    public void setInterests(ArrayList<Interest> lstInterest) {
+        interests = lstInterest;
+    }
+
     public ArrayList<Interest> getInterests()
     {
         ArrayList<Interest> tempInterests = (ArrayList<Interest>) interests.clone();

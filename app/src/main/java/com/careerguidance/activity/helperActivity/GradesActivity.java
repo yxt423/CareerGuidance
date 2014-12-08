@@ -43,9 +43,13 @@ public class GradesActivity extends Activity {
 
         final ListView listview = (ListView) findViewById(R.id.listview);
 //        Collections.addAll(courseNameList, courseNameStr);
+        courseCourses = careerGuidance.getUserGradeScores();
+
         Collections.addAll(scoreList, courseCourses);
 
-        courseNameList = (ArrayList<String>) careerGuidance.getAllSubjectNames();
+        //courseNameList = (ArrayList<String>) careerGuidance.getAllSubjectNames();
+
+        courseNameList = (ArrayList<String>) careerGuidance.getUserGradeNames();
 
         adapter = new GradesArrayAdapter(this, courseNameList, scoreList);
         listview.setAdapter(adapter);
@@ -108,10 +112,30 @@ public class GradesActivity extends Activity {
                     if (functionType == 1) { // add new course
                         courseNameList.add(courseName.getText().toString());
                         scoreList.set(position, score.getText().toString());
+
+                        int strCourse = careerGuidance.subjectNameToId(courseName.getText().toString());
+                        if (strCourse == -1)
+                        {
+                            //invalid course
+                        }
+
+                        double dblScore = Double.parseDouble(score.getText().toString());
+                        careerGuidance.addUserGrade(strCourse, dblScore);
+
                         adapter.notifyDataSetChanged();
                     } else if (functionType == 2) { // edit course
                         courseNameList.set(position, courseName.getText().toString());
                         scoreList.set(position, score.getText().toString());
+
+                        int strCourse = careerGuidance.subjectNameToId(courseName.getText().toString());
+                        if (strCourse == -1)
+                        {
+                            //invalid course
+                        }
+
+                        double dblScore = Double.parseDouble(score.getText().toString());
+                        careerGuidance.addUserGrade(strCourse, dblScore);
+
                         adapter.notifyDataSetChanged();
                     }
                 }

@@ -112,6 +112,53 @@ public class SubjectDataSource
         return subjectNameList;
     }
 
+    public String subjectIdToName(int subjectId)
+    {
+        String subjectName = "";
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_SUBJECT,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Subject subject = cursorToSubject(cursor);
+
+            if (subject.getId() == subjectId)
+                subjectName = subject.getName();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return subjectName;
+    }
+
+    public int subjectNameToId(String subjectName)
+    {
+        int subjectId = -1;
+
+        Cursor cursor = database.query(SQLiteHelperClass.TBL_SUBJECT,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            Subject subject = cursorToSubject(cursor);
+
+            if (subjectName.equals(subject.getName()))
+                subjectId = subject.getId();
+
+            cursor.moveToNext();
+        }
+
+        // make sure to close the cursor
+        cursor.close();
+
+        return subjectId;
+    }
 
     private Subject cursorToSubject(Cursor cursor) {
         Subject subject = new Subject();

@@ -77,9 +77,9 @@ public class User_InterestDataSource
                 + " = " + userId + " AND " + SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0] + " = " + interestId, null);
     }
 
-    public List<Interest> getAllUser_Interests()
+    public ArrayList<Interest> getAllUser_Interests()
     {
-        List<Interest> user_Interests = new ArrayList<Interest>();
+        ArrayList<Interest> user_Interests = new ArrayList<Interest>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
                 allColumns, null, null, null, null, null);

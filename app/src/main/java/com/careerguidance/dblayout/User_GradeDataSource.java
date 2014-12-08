@@ -24,11 +24,15 @@ public class User_GradeDataSource
 
     private SQLiteHelperClass dbHelper;
 
+    private Context localContext;
+
     private String[] allColumns = { SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0],
             SQLiteHelperClass.TBL_USER_GRADE_COLS[1][0], SQLiteHelperClass.TBL_USER_GRADE_COLS[2][0]};
 
     public User_GradeDataSource(Context context)
     {
+        localContext = context;
+
         dbHelper = new SQLiteHelperClass(context);
     }
 
@@ -138,9 +142,9 @@ public class User_GradeDataSource
     }
 
 
-    public List<Grade> getAllUser_Grades()
+    public ArrayList<Grade> getAllUser_Grades()
     {
-        List<Grade> user_Grades = new ArrayList<Grade>();
+        ArrayList<Grade> user_Grades = new ArrayList<Grade>();
 
         Cursor cursor = database.query(SQLiteHelperClass.TBL_USER_GRADE,
                 allColumns, null, null, null, null, null);
@@ -162,11 +166,16 @@ public class User_GradeDataSource
     private Grade cursorToUser_Grade(Cursor cursor) {
         Grade user_Grade = new Grade();
 
-        //user_Grade.setId(cursor.getLong(0));
+        SubjectDataSource subjectDataSource = new SubjectDataSource(localContext);
+        subjectDataSource.open();
 
-        user_Grade.setSubject(cursor.getString(1));
+        user_Grade.setId(cursor.getInt(0));
+
+        user_Grade.setSubject(subjectDataSource.subjectIdToName(Integer.parseInt(cursor.getString(1))));
 
         user_Grade.setGPA(cursor.getDouble(2));
+
+        subjectDataSource.close();
 
         return user_Grade;
     }

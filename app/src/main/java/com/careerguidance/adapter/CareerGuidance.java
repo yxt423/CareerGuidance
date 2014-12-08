@@ -154,6 +154,57 @@ public class CareerGuidance
         return gender;
     }
 
+    public ArrayList<Grade> getUserGrades()
+    {
+        return user.getGrades();
+    }
+
+    public ArrayList<Interest> getUserInterests()
+    {
+        return user.getInterests();
+    }
+
+    public ArrayList<String> getUserInterestNames()
+    {
+        ArrayList<String> interestNames = new ArrayList<String>();
+        ArrayList<Interest> interests = getUserInterests();
+
+        for (Interest interest: interests)
+        {
+            interestNames.add(interest.getName());
+        }
+
+        return interestNames;
+    }
+
+    public ArrayList<String> getUserGradeNames()
+    {
+        ArrayList<String> gradeNames = new ArrayList<String>();
+        ArrayList<Grade> grades = getUserGrades();
+
+        for (Grade grade: grades)
+        {
+            gradeNames.add(grade.getSubject().getName());
+        }
+
+        return gradeNames;
+    }
+
+    public String[] getUserGradeScores()
+    {
+        String [] gradeScores = new String [100];
+        ArrayList<Grade> grades = getUserGrades();
+        int count = 0;
+
+        for (int i = 0; i < grades.size(); i++)
+        {
+            gradeScores[i] = (Double.toString(grades.get(i).getGPA()));
+            count ++;
+        }
+
+        return gradeScores;
+    }
+
     public Location getUserLocation()
     {
         return user.getLocation();
@@ -431,6 +482,49 @@ public class CareerGuidance
         {
             user_gradeDataSource.close();
         }
+    }
+
+    public int subjectNameToId(String subjectName)
+    {
+        int subjectId = -1;
+        try
+        {
+            subjectDataSource.open();
+
+            subjectId = subjectDataSource.subjectNameToId(subjectName);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            subjectDataSource.close();
+        };
+
+        return subjectId;
+    }
+
+    public String subjectIdToName(int subjectId)
+    {
+        String subjectName = "";
+
+        try
+        {
+            subjectDataSource.open();
+
+            subjectName = subjectDataSource.subjectIdToName(subjectId);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            subjectDataSource.close();
+        };
+
+        return subjectName;
     }
 
     public void addUserInterest(int interestId)

@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.careerguidance.model.Career;
+import com.careerguidance.model.Interest;
 import com.careerguidance.model.Location;
 import com.careerguidance.model.User;
 
@@ -181,6 +182,13 @@ public class UserDataSource
         CareerDataSource careerDataSource = new CareerDataSource(localContext);
         careerDataSource.open();
 
+        User_InterestDataSource user_interestDataSource = new User_InterestDataSource(localContext);
+        user_interestDataSource.open();
+        User_GradeDataSource user_gradeDataSource = new User_GradeDataSource(localContext);
+        user_gradeDataSource.open();
+        SubjectDataSource subjectDataSource = new SubjectDataSource(localContext);
+        subjectDataSource.open();
+
         user.setId(cursor.getInt(0));
 
         user.setFirstName(cursor.getString(1));
@@ -203,11 +211,15 @@ public class UserDataSource
         user.setPassword(cursor.getString(7));
         user.setUniversityChoice(universityDataSource.getUniversityObject(cursor.getInt(9)));
         user.setCareerChoice(careerDataSource.getCareerObject(cursor.getInt(8)));
+        user.setInterests(user_interestDataSource.getAllUser_Interests());
+        user.setGrades(user_gradeDataSource.getAllUser_Grades());
 
         genderDataSource.close();
         locationDataSource.close();
         universityDataSource.close();
         careerDataSource.close();
+        user_gradeDataSource.close();
+        user_interestDataSource.close();
 
         return user;
     }
@@ -327,5 +339,7 @@ public class UserDataSource
         else
             return false;
     }
+
+
 
 }
