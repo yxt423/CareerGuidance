@@ -3,7 +3,9 @@ package com.careerguidance.model;
 /**
  * Created by yxt on 11/16/14.
  */
-public class Interest extends Target{
+public class Interest extends BaseObject {
+
+    // Interest has the same attributes as the Target class.
 
     public Interest()
     {
@@ -12,32 +14,6 @@ public class Interest extends Target{
 
     public Interest(String interestName) {
         name = interestName;
-    }
-
-    //Getters
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    //Setters
-    public void setId(int interestId) {
-        id = interestId;
-    }
-
-    public void setName(String interestName) {
-        name = interestName;
-    }
-
-    public void setDescription(String desc) {
-        description = desc;
     }
 
 }

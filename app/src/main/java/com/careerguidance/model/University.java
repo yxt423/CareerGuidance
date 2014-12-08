@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * University class, define university instance and attributes of universities,
  * and APIs for accessing university data.
  */
-public class University extends  Target {
+public class University extends BaseObject {
 
     String location;
 
@@ -25,18 +25,6 @@ public class University extends  Target {
     }
 
     //Getters
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -58,17 +46,6 @@ public class University extends  Target {
     }
 
     //Setters
-    public void setId(int uniId) {
-        id = uniId;
-    }
-
-    public void setName(String strName) {
-        name = strName;
-    }
-
-    public void setDescription(String desc) {
-        description = desc;
-    }
 
     public void setLocation(String locn) {
         location = locn;
