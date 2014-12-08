@@ -121,7 +121,7 @@ public class User_GradeDataSource
     public void deleteGrade(int userId, int subjectId)
     {
         database.delete(SQLiteHelperClass.TBL_USER_GRADE, SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0]
-                + " = " + userId + " AND " + SQLiteHelperClass.TBL_USER_GRADE_COLS[0][0] + " = " + subjectId, null);
+                + " = " + userId + " AND " + SQLiteHelperClass.TBL_USER_GRADE_COLS[1][0] + " = " + subjectId, null);
     }
 
     public boolean update(int userId, int subjectId, double gpa)

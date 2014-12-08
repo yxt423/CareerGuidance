@@ -127,14 +127,14 @@ public class GradesActivity extends Activity {
                         courseNameList.set(position, courseName.getText().toString());
                         scoreList.set(position, score.getText().toString());
 
-                        int strCourse = careerGuidance.subjectNameToId(courseName.getText().toString());
-                        if (strCourse == -1)
+                        int intCourse = careerGuidance.subjectNameToId(courseName.getText().toString());
+                        if (intCourse == -1)
                         {
                             //invalid course
                         }
 
                         double dblScore = Double.parseDouble(score.getText().toString());
-                        careerGuidance.addUserGrade(strCourse, dblScore);
+                        careerGuidance.updateUserGrade(intCourse, dblScore);
 
                         adapter.notifyDataSetChanged();
                     }

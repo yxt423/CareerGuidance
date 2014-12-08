@@ -148,7 +148,7 @@ public class SubjectDataSource
         {
             Subject subject = cursorToSubject(cursor);
 
-            if (subjectName.equals(subject.getName()))
+            if (subjectName.equalsIgnoreCase(subject.getName()))
                 subjectId = subject.getId();
 
             cursor.moveToNext();

@@ -484,6 +484,27 @@ public class CareerGuidance
         }
     }
 
+    public void updateUserGrade(int subjectId, double newGPA)
+    {
+        try
+        {
+            Grade grade = new Grade();
+            Subject subject = new Subject();
+            subject.setId(subjectId);
+
+            grade.setSubject(subject);
+
+            delUserGrade(grade);
+
+            addUserGrade(grade.getSubject().getId(), newGPA);
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
     public int subjectNameToId(String subjectName)
     {
         int subjectId = -1;
