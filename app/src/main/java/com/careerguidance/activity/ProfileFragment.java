@@ -46,6 +46,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -148,83 +149,9 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         createProfilePhotoView(v);
-
-        // user name
-        userName = (TextView) v.findViewById(R.id.user_name);
-        if (careerGuidance.userHasProfile()) {
-            userName.setText(careerGuidance.getUserFirstName());
-        }
-
-        // the pencil picture on click: show the edit name dialog
-        editName = (ImageView) v.findViewById(R.id.edit_name);
-        editName.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                showEditNameDialog(null);
-            }
-        });
-
-        if (careerGuidance.getUserGender().getName() != null) {
-            optionList.set(1, getString(R.string.profile_func1) + ":  " + careerGuidance.getUserGender().getName());
-        }
-        if (careerGuidance.getUserLocation().getName() != null) {
-            optionList.set(2, getString(R.string.profile_func2) + ":  " + careerGuidance.getUserLocation().getName());
-        }
-
-        // the personal information list.
-        listView = (ListView) v.findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, optionList);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = null;
-                switch (position) {
-                    case 0:
-                        showEditBirthdayDialog();
-                        break;
-                    case 1:
-                        intent = new Intent(getActivity(), SelectionActivity.class);
-                        startActivityForResult(intent, SELECT_GENDER_ACTIVITY);
-                        break;
-                    case 2:
-                        intent = new Intent(getActivity(), LocationActivity.class);
-                        startActivityForResult(intent, SELECT_LOCATION_ACTIVITY);
-                        break;
-                    case 3:
-                        intent = new Intent(getActivity(), GradesActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 4:
-                        intent = new Intent(getActivity(), InterestsActivity.class);
-                        startActivityForResult(intent, SELECT_INTERESTS_ACTIVITY);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-
-        // The "find me a career" button.
-        Button findCareerMatchButton = (Button) v.findViewById(R.id.find_career_match_button);
-        findCareerMatchButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // call the matching function....
-
-                user_career = careerGuidance.getCareer(3);
-                user_university = careerGuidance.getUniversityById(1);
-                careerGuidance.setUserCareer(user_career);
-                careerGuidance.setUserUniversity(user_university);
-
-                // switch tab
-                MainTabHost activity = (MainTabHost) getActivity();
-                FragmentTabHost mTabHost = activity.getFragmentTabHost();
-                mTabHost.setCurrentTab(1);
-            }
-        });
-
+        createNameView(v);
+        createListView(v);
+        createFindCareerButton(v);
         return v;
     }
 
@@ -284,6 +211,23 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void createNameView(View v) {
+        // user name
+        userName = (TextView) v.findViewById(R.id.user_name);
+        if (careerGuidance.userHasProfile()) {
+            userName.setText(careerGuidance.getUserFirstName());
+        }
+
+        // the pencil picture on click: show the edit name dialog
+        editName = (ImageView) v.findViewById(R.id.edit_name);
+        editName.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                showEditNameDialog(null);
+            }
+        });
+    }
+
     // show the edit user name dialog once.
     public void showEditNameDialog(String message) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -315,12 +259,56 @@ public class ProfileFragment extends Fragment {
         alert.show();
     }
 
+    private void createListView(View v) {
+        if (careerGuidance.getUserGender().getName() != null) {
+            optionList.set(1, getString(R.string.profile_func1) + ":  " + careerGuidance.getUserGender().getName());
+        }
+        if (careerGuidance.getUserLocation().getName() != null) {
+            optionList.set(2, getString(R.string.profile_func2) + ":  " + careerGuidance.getUserLocation().getName());
+        }
+
+        // the personal information list.
+        listView = (ListView) v.findViewById(R.id.listview);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, optionList);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = null;
+                switch (position) {
+                    case 0:
+                        showEditBirthdayDialog();
+                        break;
+                    case 1:
+                        intent = new Intent(getActivity(), SelectionActivity.class);
+                        startActivityForResult(intent, SELECT_GENDER_ACTIVITY);
+                        break;
+                    case 2:
+                        intent = new Intent(getActivity(), LocationActivity.class);
+                        startActivityForResult(intent, SELECT_LOCATION_ACTIVITY);
+                        break;
+                    case 3:
+                        intent = new Intent(getActivity(), GradesActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        intent = new Intent(getActivity(), InterestsActivity.class);
+                        startActivityForResult(intent, SELECT_INTERESTS_ACTIVITY);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
     public void showEditBirthdayDialog() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle(getString(R.string.profile_func0));
 
         final DatePicker datePicker = new DatePicker(getActivity());
-        //datePicker.setCalendarViewShown(false);
+        //datePicker.setCalendarViewShown(false);  uncomment this line for API level 10.
         datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                 new DatePicker.OnDateChangedListener() {
             @Override
@@ -332,10 +320,16 @@ public class ProfileFragment extends Fragment {
 
         alert.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                // save user's birthday.
+                Date date = new Date();
+                date.setTime(calendar.getTimeInMillis());
+                careerGuidance.setUserBirthDate(date);
+
                 birthday = String.valueOf(calendar.get(Calendar.MONTH) + 1) + "/" +
                         calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
                 optionList.set(0, getString(R.string.profile_func0) + ":   " + birthday);
                 adapter.notifyDataSetChanged();
+
             }
         });
 
@@ -343,6 +337,27 @@ public class ProfileFragment extends Fragment {
             public void onClick(DialogInterface dialog, int whichButton) { }
         });
         alert.show();
+    }
+
+    // The "find me a career" button.
+    private void createFindCareerButton(View v) {
+        Button findCareerMatchButton = (Button) v.findViewById(R.id.find_career_match_button);
+        findCareerMatchButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // call the matching function....
+
+                user_career = careerGuidance.getCareer(3);
+                user_university = careerGuidance.getUniversityById(1);
+                careerGuidance.setUserCareer(user_career);
+                careerGuidance.setUserUniversity(user_university);
+
+                // switch tab
+                MainTabHost activity = (MainTabHost) getActivity();
+                FragmentTabHost mTabHost = activity.getFragmentTabHost();
+                mTabHost.setCurrentTab(1);
+            }
+        });
     }
 
     public void onButtonPressed(Uri uri) {
